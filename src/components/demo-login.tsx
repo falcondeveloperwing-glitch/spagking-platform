@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SpagKingLogo } from "@/components/brand";
 import { useStore } from "@/lib/store";
 import type { Role } from "@/lib/data";
 import { Button } from "@/components/ui/button";
@@ -86,7 +85,10 @@ export function DemoLogin() {
         {/* Left — brand showcase */}
         <div className="hidden lg:flex flex-col justify-between p-12 xl:p-16 border-r border-border/40">
           <div className="flex items-center justify-between">
-            <SpagKingLogo size={44} />
+            <div className="flex items-center gap-3">
+              <img src="/spagking-logo.svg" alt="SpagKing" className="w-11 h-11" />
+              <span className="wordmark text-2xl">SpagKing</span>
+            </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--success)] pulse-dot text-[var(--success)]" />
               All systems operational
@@ -102,7 +104,7 @@ export function DemoLogin() {
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }}
               className="font-display text-5xl xl:text-6xl font-semibold tracking-tight leading-[1.05]">
               Royalty in <br/>
-              <span className="text-gold-gradient">every plate.</span>
+              <span className="text-gold-neon">every bowl.</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45, duration: 0.7 }}
               className="mt-5 text-muted-foreground text-base leading-relaxed">
@@ -135,8 +137,9 @@ export function DemoLogin() {
         <div className="flex items-center justify-center p-6 sm:p-10">
           <div className="w-full max-w-md">
             {/* Mobile logo */}
-            <div className="lg:hidden flex justify-center mb-8">
-              <SpagKingLogo size={48} />
+            <div className="lg:hidden flex flex-col items-center mb-8">
+              <img src="/spagking-logo.svg" alt="SpagKing" className="w-16 h-16 mb-2" />
+              <span className="wordmark text-2xl">SpagKing</span>
             </div>
 
             <AnimatePresence mode="wait">

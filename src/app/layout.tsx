@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Poppins, Pacifico } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
@@ -14,6 +14,13 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const pacifico = Pacifico({
+  variable: "--font-pacifico",
+  subsets: ["latin"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -41,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <body
-        className={`${inter.variable} ${poppins.variable} antialiased bg-background text-foreground`}
+        className={`${inter.variable} ${poppins.variable} ${pacifico.variable} antialiased bg-background text-foreground`}
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
       >
         {children}

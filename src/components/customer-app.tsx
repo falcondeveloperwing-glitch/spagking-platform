@@ -1,6 +1,5 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { SpagKingLogo } from "@/components/brand";
 import { useStore } from "@/lib/store";
 import { CustomerHome } from "@/components/customer/home";
 import { CustomerMenu } from "@/components/customer/menu";
@@ -45,11 +44,9 @@ export function CustomerApp() {
       {/* Top bar — frosted, slim, premium */}
       <header className="sticky top-0 z-40 px-4 sm:px-6 py-2.5 glass border-b border-border/40">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
-          <button onClick={() => setView("home")} className="flex items-center gap-2 group">
-            <div className="transition-transform group-hover:scale-105"><SpagKingLogo size={30} showText={false} /></div>
-            <span className="hidden sm:block font-display font-semibold tracking-tight">
-              <span className="text-gold-gradient">Spag</span><span className="text-foreground">King</span>
-            </span>
+          <button onClick={() => setView("home")} className="flex items-center gap-2.5 group">
+            <img src="/spagking-logo.svg" alt="SpagKing" className="w-8 h-8 transition-transform group-hover:scale-105" />
+            <span className="hidden sm:block wordmark text-xl">SpagKing</span>
           </button>
 
           <button onClick={() => setSearchOpen(true)}

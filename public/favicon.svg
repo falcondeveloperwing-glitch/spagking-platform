@@ -1,18 +1,10 @@
-<svg width="32" height="32" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="favCrown" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FCE9B0"/>
-      <stop offset="100%" stop-color="#9C7416"/>
-    </linearGradient>
-    <linearGradient id="favBowl" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#F5D780"/>
-      <stop offset="100%" stop-color="#B8901E"/>
-    </linearGradient>
-  </defs>
-  <rect width="140" height="140" rx="28" fill="#161310"/>
-  <rect x="44" y="58" width="52" height="6" rx="2" fill="url(#favCrown)"/>
-  <path d="M 44 58 L 52 42 L 60 54 L 70 38 L 80 54 L 88 42 L 96 58 Z" fill="url(#favCrown)"/>
-  <circle cx="70" cy="36" r="3.4" fill="#FFFFFF" opacity="0.95"/>
-  <ellipse cx="70" cy="74" rx="38" ry="7" fill="url(#favBowl)"/>
-  <path d="M 32 74 Q 32 100 70 104 Q 108 100 108 74 Z" fill="url(#favBowl)"/>
+<svg width="32" height="32" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="40" fill="#000000"/>
+  <circle cx="100" cy="100" r="92" stroke="#FFD700" stroke-width="3" fill="none"/>
+  <circle cx="100" cy="100" r="84" stroke="#FFD700" stroke-width="1.5" fill="none" opacity="0.85"/>
+  <path d="M 62 88 Q 62 112 100 116 Q 138 112 138 88 Z" fill="none" stroke="#FFD700" stroke-width="3" stroke-linejoin="round"/>
+  <ellipse cx="100" cy="88" rx="38" ry="6" fill="none" stroke="#FFD700" stroke-width="3"/>
+  <line x1="58" y1="70" x2="142" y2="102" stroke="#FFD700" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="60" y1="64" x2="144" y2="96" stroke="#FFD700" stroke-width="2.8" stroke-linecap="round"/>
+  <text x="100" y="160" text-anchor="middle" fill="#FFD700" font-family="'Pacifico',cursive" font-size="24" font-weight="700">SpagKing</text>
 </svg>

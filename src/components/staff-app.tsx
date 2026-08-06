@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { SpagKingLogo } from "@/components/brand";
 import { useStore } from "@/lib/store";
 import { ExecutiveDashboard } from "@/components/staff/executive";
 import { POSDashboard } from "@/components/staff/pos";
@@ -48,7 +47,10 @@ export function StaffApp() {
       {/* Sidebar (desktop) — refined, breathing */}
       <aside className="hidden lg:flex flex-col w-64 shrink-0 glass border-r border-border/40 fixed inset-y-0 left-0 z-30">
         <div className="px-5 py-5 border-b border-border/40">
-          <SpagKingLogo size={34} />
+          <div className="flex items-center gap-2.5">
+            <img src="/spagking-logo.svg" alt="SpagKing" className="w-9 h-9" />
+            <span className="wordmark text-xl">SpagKing</span>
+          </div>
         </div>
         <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
           <div className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">Workspace</div>
@@ -80,7 +82,10 @@ export function StaffApp() {
             <motion.aside initial={{ x: -280 }} animate={{ x: 0 }} exit={{ x: -280 }}
               className="fixed inset-y-0 left-0 w-64 glass border-r border-border/50 z-50 lg:hidden flex flex-col">
               <div className="p-4 border-b border-border/50 flex items-center justify-between">
-                <SpagKingLogo size={32} />
+                <div className="flex items-center gap-2">
+                  <img src="/spagking-logo.svg" alt="SpagKing" className="w-8 h-8" />
+                  <span className="wordmark text-lg">SpagKing</span>
+                </div>
                 <button onClick={() => setMobileNav(false)}><X className="w-5 h-5" /></button>
               </div>
               <nav className="flex-1 p-3 space-y-1 overflow-y-auto">

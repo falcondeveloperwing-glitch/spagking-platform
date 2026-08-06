@@ -48,7 +48,7 @@ export function CustomerHome() {
 
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.7 }}
             className="font-display text-4xl sm:text-6xl font-semibold tracking-tight leading-[1.02] mb-4">
-            Royalty in <br/><span className="text-gold-gradient">every plate.</span>
+            Royalty in <br/><span className="text-gold-neon">every bowl.</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.7 }}
