@@ -36,6 +36,7 @@ export function CustomerLoyalty() {
   const dailyCheckIn = useStore(s => s.dailyCheckIn);
   const spinWheel = useStore(s => s.spinWheel);
   const scratchCard = useStore(s => s.scratchCard);
+  const unlockedBadges = useStore(s => s.unlockedBadges);
 
   const [spinModal, setSpinModal] = useState<{ open: boolean; spinning: boolean; result?: { label: string; points: number; type: string } }>({ open: false, spinning: false });
   const [scratchModal, setScratchModal] = useState<{ open: boolean; revealed: boolean; result?: { label: string; points: number } }>({ open: false, revealed: false });
@@ -231,6 +232,32 @@ export function CustomerLoyalty() {
                 <span className="text-xs">{d}</span>
                 {checked && <Check className="w-3 h-3 mt-0.5" />}
               </div>
+            );
+          })}
+        </div>
+      </motion.div>
+
+      {/* Achievement badges */}
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+        className="glass-card rounded-2xl p-5">
+        <h3 className="font-display font-semibold flex items-center gap-2 mb-4"><Award className="w-4 h-4 text-[var(--gold)]" /> Achievement badges</h3>
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+          {[
+            { id: "first-order", icon: "🎯", name: "First Order", desc: "Placed your first order" },
+            { id: "spicy-lover", icon: "🌶️", name: "Spicy Lover", desc: "Ordered 5 spicy meals" },
+            { id: "weekend-warrior", icon: "🎉", name: "Weekend Warrior", desc: "Ordered 3 weekends in a row" },
+            { id: "foodie-explorer", icon: "🍜", name: "Foodie Explorer", desc: "Tried 10 different meals" },
+            { id: "social-butterfly", icon: "💬", name: "Social Butterfly", desc: "Shared 5 posts" },
+            { id: "king-vip", icon: "👑", name: "King VIP", desc: "Reached King tier" },
+          ].map((b, i) => {
+            const unlocked = unlockedBadges.includes(b.id);
+            return (
+              <motion.div key={b.id} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 }}
+                className={`text-center p-3 rounded-xl ${unlocked ? "glass-gold" : "bg-foreground/[0.03] opacity-50"}`}>
+                <div className={`text-3xl mb-1 ${unlocked ? "" : "grayscale"}`}>{b.icon}</div>
+                <div className="text-[10px] font-semibold leading-tight">{b.name}</div>
+                {!unlocked && <div className="text-[8px] text-muted-foreground mt-0.5">Locked</div>}
+              </motion.div>
             );
           })}
         </div>

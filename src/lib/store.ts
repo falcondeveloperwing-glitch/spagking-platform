@@ -16,7 +16,7 @@ export interface CartItem {
 }
 
 export type CustomerView =
-  | "home" | "menu" | "meal" | "cart" | "checkout" | "tracking" | "history" | "profile" | "qr" | "loyalty" | "community";
+  | "home" | "menu" | "meal" | "cart" | "checkout" | "tracking" | "history" | "profile" | "qr" | "loyalty" | "community" | "kitchen";
 
 export type StaffView =
   | "executive" | "pos" | "inventory" | "staff" | "reports" | "crm"
@@ -103,6 +103,45 @@ interface AppState {
   dailyCheckIn: () => void;
   spinWheel: () => { label: string; points: number; type: "points" | "coupon" | "nothing" };
   scratchCard: () => { label: string; points: number } | null;
+
+  // Community & social
+  communityPosts: CommunityPost[];
+  addCommunityPost: (post: Omit<CommunityPost, "id" | "time" | "likes" | "comments" | "liked" | "saved">) => void;
+  togglePostLike: (id: string) => void;
+  togglePostSave: (id: string) => void;
+  mealOfWeekVotes: Record<string, number>;
+  voteMealOfWeek: (mealId: string) => void;
+  votedMealOfWeek: string | null;
+
+  // Recent searches
+  recentSearches: string[];
+  addRecentSearch: (q: string) => void;
+  clearRecentSearches: () => void;
+
+  // Achievement badges
+  unlockedBadges: string[];
+  unlockBadge: (id: string) => void;
+
+  // Reward celebration (confetti trigger)
+  celebration: { title: string; subtitle: string; emoji: string } | null;
+  triggerCelebration: (c: { title: string; subtitle: string; emoji: string }) => void;
+  clearCelebration: () => void;
+}
+
+export interface CommunityPost {
+  id: string;
+  author: string;
+  avatar: string;
+  mealName: string;
+  mealEmoji: string;
+  caption: string;
+  image: string;
+  time: string;
+  likes: number;
+  comments: number;
+  liked: boolean;
+  saved: boolean;
+  tag?: string;
 }
 
 export const useStore = create<AppState>()(
@@ -276,6 +315,59 @@ export const useStore = create<AppState>()(
         set({ scratchAvailable: false });
         return result;
       },
+
+      // Community & social
+      communityPosts: [
+        { id: "P1", author: "Adaobi N.", avatar: "AN", mealName: "SpagKing Royal Bolognese", mealEmoji: "🍝", caption: "Just had the Royal Bolognese and I'm in heaven! The gold garnish is everything ✨", image: meals[0].image, time: "2h ago", likes: 248, comments: 32, liked: false, saved: false, tag: "5★ review" },
+        { id: "P2", author: "Tunde A.", avatar: "TA", mealName: "Spicy Suya Shawarma", mealEmoji: "🌯", caption: "Suya Shawarma hits different at 2am 🔥 SpagKing never misses", image: meals[14].image, time: "5h ago", likes: 412, comments: 58, liked: true, saved: false, tag: "Trending" },
+        { id: "P3", author: "Fatima B.", avatar: "FB", mealName: "Jollof Rice Special", mealEmoji: "🍛", caption: "Family dinner sorted! Jollof + plantain + chicken. The kids approved 🥰", image: meals[10].image, time: "8h ago", likes: 189, comments: 24, liked: false, saved: true, tag: "Family" },
+        { id: "P4", author: "Emeka O.", avatar: "EO", mealName: "Seafood Spaghetti", mealEmoji: "🍝", caption: "Date night at SpagKing VI. The ambience + this seafood pasta = perfection 💕", image: meals[3].image, time: "1d ago", likes: 367, comments: 41, liked: false, saved: false, tag: "Date night" },
+        { id: "P5", author: "Grace S.", avatar: "GS", mealName: "Chocolate Lava Cake", mealEmoji: "🍫", caption: "Molten centre cake with ice cream. Best dessert in Lagos, hands down 🤤", image: meals[51].image, time: "1d ago", likes: 524, comments: 67, liked: true, saved: true, tag: "Dessert" },
+      ],
+      addCommunityPost: (post) => set(s => ({
+        communityPosts: [{
+          ...post,
+          id: `P-${Date.now()}`,
+          time: "Just now",
+          likes: 0,
+          comments: 0,
+          liked: false,
+          saved: false,
+        }, ...s.communityPosts],
+      })),
+      togglePostLike: (id) => set(s => ({
+        communityPosts: s.communityPosts.map(p => p.id === id ? { ...p, liked: !p.liked, likes: p.likes + (p.liked ? -1 : 1) } : p),
+      })),
+      togglePostSave: (id) => set(s => ({
+        communityPosts: s.communityPosts.map(p => p.id === id ? { ...p, saved: !p.saved } : p),
+      })),
+      mealOfWeekVotes: { "M-001": 342, "M-011": 218, "M-021": 156, "M-031": 89 },
+      votedMealOfWeek: null,
+      voteMealOfWeek: (mealId) => {
+        if (get().votedMealOfWeek) return;
+        set(s => ({
+          mealOfWeekVotes: { ...s.mealOfWeekVotes, [mealId]: (s.mealOfWeekVotes[mealId] || 0) + 1 },
+          votedMealOfWeek: mealId,
+        }));
+        get().addPoints(100);
+        get().triggerCelebration({ title: "Vote counted!", subtitle: "+100 points for voting · Meal of the Week", emoji: "🗳️" });
+      },
+
+      // Recent searches
+      recentSearches: ["Spaghetti", "Shawarma", "Jollof"],
+      addRecentSearch: (q) => set(s => ({
+        recentSearches: [q, ...s.recentSearches.filter(r => r !== q)].slice(0, 6),
+      })),
+      clearRecentSearches: () => set({ recentSearches: [] }),
+
+      // Achievement badges
+      unlockedBadges: ["first-order", "spicy-lover", "weekend-warrior"],
+      unlockBadge: (id) => set(s => s.unlockedBadges.includes(id) ? s : ({ unlockedBadges: [...s.unlockedBadges, id] })),
+
+      // Reward celebration
+      celebration: null,
+      triggerCelebration: (c) => set({ celebration: c }),
+      clearCelebration: () => set({ celebration: null }),
     }),
     {
       name: "spagking-store",
@@ -293,6 +385,11 @@ export const useStore = create<AppState>()(
         spinAvailable: s.spinAvailable,
         scratchAvailable: s.scratchAvailable,
         referralsCount: s.referralsCount,
+        communityPosts: s.communityPosts,
+        mealOfWeekVotes: s.mealOfWeekVotes,
+        votedMealOfWeek: s.votedMealOfWeek,
+        recentSearches: s.recentSearches,
+        unlockedBadges: s.unlockedBadges,
       }),
     }
   )

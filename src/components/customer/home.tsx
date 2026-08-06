@@ -98,6 +98,26 @@ export function CustomerHome() {
         <ArrowRight className="w-4 h-4 text-muted-foreground shrink-0" />
       </motion.button>
 
+      {/* === Kitchen Live teaser === */}
+      <motion.button onClick={() => setView("kitchen")} whileHover={{ y: -2 }}
+        initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+        className="w-full glass-card rounded-2xl p-4 flex items-center gap-4 text-left card-hover relative overflow-hidden">
+        <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-[var(--error)]/10 blur-2xl" />
+        <div className="relative w-12 h-12 rounded-xl bg-[var(--error)]/15 flex items-center justify-center shrink-0">
+          <span className="text-2xl">🔥</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-0.5">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[var(--error)]/15 text-[var(--error)] text-[9px] font-bold">
+              <span className="w-1 h-1 rounded-full bg-[var(--error)] pulse-dot text-[var(--error)]" /> LIVE
+            </span>
+            <span className="text-xs font-semibold">Kitchen Live</span>
+          </div>
+          <p className="text-sm">👨‍🍳 Chef Ibrahim is preparing <span className="text-[var(--gold)] font-medium">42 bowls</span> today · 8 min wait · 98% 5★ ratings</p>
+        </div>
+        <ArrowRight className="w-4 h-4 text-muted-foreground shrink-0" />
+      </motion.button>
+
       {/* === Categories === */}
       <section>
         <SectionHeader title="Categories" subtitle="Pick your craving" onSeeAll={() => setView("menu")} />

@@ -75,7 +75,7 @@ export function AIAssistant() {
   const open = useStore(s => s.aiOpen);
   const setOpen = useStore(s => s.setAiOpen);
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "ai", content: "Hi! I'm SpagKing AI — your restaurant intelligence assistant. I can recommend meals, predict low stock, forecast sales, and surface customer insights. How can I help today?", suggestions: SUGGESTIONS.slice(0, 3).map(s => s.text) },
+    { role: "ai", content: "Welcome back! 👋 I noticed you usually enjoy spicy meals — and your favourite, the SpagKing Royal Bolognese, is available with 20% off today. Want me to suggest something new you'd love?", suggestions: ["Recommend something spicy", "What's the chef's special today?", "Show me combos for two", "Surprise me!"] },
   ]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);

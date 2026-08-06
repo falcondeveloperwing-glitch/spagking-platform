@@ -7,14 +7,14 @@ import { orders as allOrders, riders, formatNaira, type Order } from "@/lib/data
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-const STEPS: { key: Order["status"]; label: string; desc: string }[] = [
-  { key: "received", label: "Order Received", desc: "We've got your order" },
-  { key: "preparing", label: "Preparing", desc: "Chef is gathering ingredients" },
-  { key: "cooking", label: "Cooking", desc: "Your meal is on the fire" },
-  { key: "ready", label: "Ready", desc: "Packed and waiting" },
-  { key: "picked_up", label: "Picked Up", desc: "Rider has collected" },
-  { key: "on_the_way", label: "On The Way", desc: "Heading to you now" },
-  { key: "delivered", label: "Delivered", desc: "Enjoy your meal!" },
+const STEPS: { key: Order["status"]; label: string; desc: string; icon: string }[] = [
+  { key: "received", label: "Order Received", desc: "We've got your order", icon: "📥" },
+  { key: "preparing", label: "Kitchen Accepted", desc: "Chef is gathering ingredients", icon: "👨‍🍳" },
+  { key: "cooking", label: "Chef Preparing", desc: "Your meal is on the fire", icon: "🔥" },
+  { key: "ready", label: "Quality Check", desc: "Packed and verified", icon: "✅" },
+  { key: "picked_up", label: "Rider Assigned", desc: "Rider has collected", icon: "🛵" },
+  { key: "on_the_way", label: "On The Way", desc: "Heading to you now", icon: "📍" },
+  { key: "delivered", label: "Delivered", desc: "Enjoy your meal!", icon: "🎉" },
 ];
 
 export function CustomerTracking() {
@@ -107,10 +107,10 @@ function TrackingContent({ order }: { order: Order }) {
                   <div key={step.key} className="flex gap-3 pb-5 last:pb-0 relative">
                     {/* Connector */}
                     {i < STEPS.length - 1 && (
-                      <div className={`absolute left-[11px] top-6 w-0.5 h-[calc(100%-12px)] ${i < currentStep || isDelivered ? "bg-[var(--gold)]" : "bg-border"}`} />
+                      <div className={`absolute left-[18px] top-9 w-0.5 h-[calc(100%-18px)] ${i < currentStep || isDelivered ? "bg-[var(--gold)]" : "bg-border"}`} />
                     )}
-                    <div className={`relative w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all ${done ? "bg-gold-gradient" : "bg-muted"} ${active ? "ring-4 ring-[var(--gold)]/20" : ""}`}>
-                      {done ? <CheckCircle2 className="w-4 h-4 text-black" /> : <Circle className="w-3 h-3 text-muted-foreground" />}
+                    <div className={`relative w-9 h-9 rounded-full flex items-center justify-center shrink-0 transition-all ${done ? "bg-gold-gradient" : "bg-muted"} ${active ? "ring-4 ring-[var(--gold)]/20" : ""}`}>
+                      <span className="text-sm">{done ? step.icon : "○"}</span>
                       {active && <motion.div className="absolute inset-0 rounded-full bg-[var(--gold)]" animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }} transition={{ duration: 1.5, repeat: Infinity }} />}
                     </div>
                     <div className={`flex-1 ${done ? "opacity-100" : "opacity-50"}`}>

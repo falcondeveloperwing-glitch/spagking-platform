@@ -2,14 +2,18 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Search, X, Utensils, Receipt, Users, Boxes, Truck, BarChart3, ArrowRight, TrendingUp } from "lucide-react";
+import { Search, X, Utensils, Receipt, Users, Boxes, Truck, BarChart3, ArrowRight, TrendingUp, Mic, Flame, Clock3 } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { meals, orders, customers, employees, suppliers, branches, formatNaira } from "@/lib/data";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 export function GlobalSearch() {
   const open = useStore(s => s.searchOpen);
   const setOpen = useStore(s => s.setSearchOpen);
+  const recentSearches = useStore(s => s.recentSearches);
+  const addRecentSearch = useStore(s => s.addRecentSearch);
+  const clearRecentSearches = useStore(s => s.clearRecentSearches);
   const [q, setQ] = useState("");
 
   const results = useMemo(() => {
@@ -34,11 +38,15 @@ export function GlobalSearch() {
         <div className="p-4 border-b border-border/50">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search meals, orders, customers, staff, suppliers, branches…"
+            <Input autoFocus value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && q.trim()) addRecentSearch(q.trim()); }} placeholder="Search meals, categories, ingredients, offers…"
               className="pl-10 h-11 bg-input/50 border-border/50 text-base" />
-            {q && (
+            {q ? (
               <button onClick={() => setQ("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                 <X className="w-4 h-4" />
+              </button>
+            ) : (
+              <button onClick={() => toast.success("Voice search activated 🎤")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-[var(--gold)] transition-colors">
+                <Mic className="w-4 h-4" />
               </button>
             )}
           </div>
@@ -47,14 +55,38 @@ export function GlobalSearch() {
         <div className="max-h-[55vh] overflow-y-auto p-2">
           {!q.trim() ? (
             <div className="p-6">
-              <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">Quick searches</div>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {["Spaghetti", "Jollof", "Shawarma", "Flash sale", "Best sellers", "Low stock", "Today's orders"].map(s => (
-                  <button key={s} onClick={() => setQ(s)} className="px-3 py-1.5 rounded-full glass text-xs hover:glass-gold transition-all">
-                    {s}
-                  </button>
-                ))}
+              {/* Recent searches */}
+              {recentSearches.length > 0 && (
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Recent</div>
+                    <button onClick={clearRecentSearches} className="text-[10px] text-muted-foreground hover:text-foreground">Clear</button>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {recentSearches.map(s => (
+                      <button key={s} onClick={() => { setQ(s); addRecentSearch(s); }} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full glass text-xs hover:glass-gold transition-all">
+                        <Clock3 className="w-3 h-3 text-muted-foreground" /> {s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Trending searches */}
+              <div className="mb-6">
+                <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2 flex items-center gap-1.5">
+                  <Flame className="w-3 h-3 text-[var(--warning)]" /> Trending now
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {["SpagKing Royal Bolognese", "Suya Shawarma", "Flash sale", "Family combo", "Jollof rice", "Free delivery"].map(s => (
+                    <button key={s} onClick={() => { setQ(s); addRecentSearch(s); }} className="px-3 py-1.5 rounded-full glass-gold text-[var(--gold)] text-xs hover:scale-105 transition-transform">
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
+
+              {/* Quick categories */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {[
                   { icon: Utensils, label: "Meals", count: meals.length },
@@ -64,13 +96,13 @@ export function GlobalSearch() {
                   { icon: Boxes, label: "Suppliers", count: suppliers.length },
                   { icon: TrendingUp, label: "Reports", count: 12 },
                 ].map(c => (
-                  <div key={c.label} className="glass-card rounded-xl p-3 flex items-center gap-2.5">
+                  <button key={c.label} onClick={() => setQ(c.label)} className="glass-card rounded-xl p-3 flex items-center gap-2.5 hover:glass-gold transition-all text-left">
                     <c.icon className="w-4 h-4 text-[var(--gold)]" />
                     <div>
                       <div className="text-xs font-semibold">{c.label}</div>
                       <div className="text-[10px] text-muted-foreground">{c.count} records</div>
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

@@ -577,14 +577,21 @@ export interface AppNotification {
   level: "info" | "success" | "warning" | "error";
 }
 const notifSeed: Omit<AppNotification, "id" | "time" | "read">[] = [
+  // Customer-emotional notifications first
+  { type: "system", title: "🎉 You earned 150 points!", body: "Thanks for your last order. You're 750 points from King VIP 👑", level: "success" },
+  { type: "order", title: "🔥 Your favourite meal is back", body: "SpagKing Royal Bolognese is freshly restocked and 20% off today", level: "info" },
+  { type: "order", title: "🍜 Chef has started preparing your order", body: "Chef Ibrahim is on it — est. 12 min to perfection", level: "info" },
+  { type: "delivery", title: "🛵 Rider is nearby", body: "Tunde is 4 minutes away. Get ready to dig in!", level: "success" },
+  { type: "system", title: "🎁 New reward unlocked!", body: "You've unlocked the Spicy Lover badge. Tap to view your rewards.", level: "success" },
+  { type: "feedback", title: "⭐ How was your meal?", body: "Rate your last order in 10 seconds and earn 50 points", level: "info" },
+  { type: "system", title: "🎂 Birthday month surprise", body: "As a Gold member, enjoy 25% off all of August. Tap to claim.", level: "success" },
+  { type: "order", title: "🔥 Flash sale live now", body: "Spicy Arrabbiata is 25% off for the next 2 hours — don't miss it!", level: "warning" },
+  // Staff/system notifications
   { type: "order", title: "New order received", body: `Order SK${int(10000,99999)} placed by ${pick(customers).name}`, level: "info" },
   { type: "stock", title: "Low stock alert", body: `${pick(meals).name} is below reorder level (8 left)`, level: "warning" },
   { type: "delivery", title: "Delivery completed", body: `Rider ${pick(riders).name} delivered order SK${int(10000,99999)}`, level: "success" },
-  { type: "refund", title: "Refund requested", body: `Order SK${int(10000,99999)} — ₦${money(2000,9000).toLocaleString()} refund pending approval`, level: "error" },
   { type: "feedback", title: "New customer feedback", body: `${pick(customers).name} rated their order 5★`, level: "info" },
-  { type: "staff", title: "Staff check-in", body: `${pick(employees).name} clocked in at ${pick(branches).name}`, level: "info" },
   { type: "system", title: "End-of-day reconciliation ready", body: "Cash drawer closing balance is ready for review", level: "info" },
-  { type: "order", title: "Flash sale started", body: "Spicy Arrabbiata is now 25% off for the next 2 hours", level: "warning" },
 ];
 export const seedNotifications: AppNotification[] = notifSeed.map((n, i) => ({
   ...n,

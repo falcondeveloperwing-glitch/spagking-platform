@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Music2, Instagram, Facebook, Youtube, Play, Heart, MessageCircle, Share2, Bookmark, ThumbsUp, ArrowRight, Sparkles } from "lucide-react";
+import { Music2, Instagram, Facebook, Youtube, Play, Heart, MessageCircle, Share2, Bookmark, ThumbsUp, ArrowRight, Sparkles, Crown } from "lucide-react";
 import { useStore } from "@/lib/store";
+import { meals } from "@/lib/data";
 import { toast } from "sonner";
 
 const TIKTOK_VIDEOS = [
@@ -40,8 +41,15 @@ const YOUTUBE_VIDEOS = [
 ];
 
 export function CustomerCommunity() {
-  const [tab, setTab] = useState<"tiktok" | "instagram" | "facebook" | "youtube">("tiktok");
+  const [tab, setTab] = useState<"feed" | "tiktok" | "instagram" | "facebook" | "youtube" | "vote">("feed");
   const [liked, setLiked] = useState<Set<string>>(new Set());
+  const communityPosts = useStore(s => s.communityPosts);
+  const togglePostLike = useStore(s => s.togglePostLike);
+  const togglePostSave = useStore(s => s.togglePostSave);
+  const addCommunityPost = useStore(s => s.addCommunityPost);
+  const mealOfWeekVotes = useStore(s => s.mealOfWeekVotes);
+  const votedMealOfWeek = useStore(s => s.votedMealOfWeek);
+  const voteMealOfWeek = useStore(s => s.voteMealOfWeek);
 
   const toggleLike = (id: string) => {
     setLiked(prev => {
@@ -85,6 +93,8 @@ export function CustomerCommunity() {
       {/* Platform tabs */}
       <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
         {[
+          { id: "feed", label: "Feed", icon: Heart },
+          { id: "vote", label: "Meal of the Week", icon: Crown },
           { id: "tiktok", label: "TikTok", icon: Music2 },
           { id: "instagram", label: "Instagram", icon: Instagram },
           { id: "facebook", label: "Facebook", icon: Facebook },
@@ -96,6 +106,118 @@ export function CustomerCommunity() {
           </button>
         ))}
       </div>
+
+      {/* === Community Feed (social posts) === */}
+      {tab === "feed" && (
+        <div className="max-w-2xl mx-auto space-y-4">
+          {/* Upload card */}
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            className="glass-card rounded-2xl p-4">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center text-black font-bold text-sm">CO</div>
+              <input placeholder="Share your SpagKing moment…" readOnly
+                onClick={() => toast.success("Photo upload opened — pick a meal photo to share")}
+                className="flex-1 bg-foreground/[0.04] border border-border/50 rounded-full px-4 py-2 text-sm cursor-pointer focus:outline-none focus:border-[var(--gold)]/40" />
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => toast.success("Camera opened 📷")} className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg bg-foreground/[0.04] text-xs hover:bg-foreground/[0.08] transition-colors">
+                📷 Photo
+              </button>
+              <button onClick={() => {
+                addCommunityPost({ author: "Chidi Okafor", avatar: "CO", mealName: "SpagKing Royal Bolognese", mealEmoji: "🍝", caption: "Just had an amazing meal at SpagKing! The gold garnish is everything ✨", image: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=600&q=80" });
+                toast.success("Your post is live! +50 points");
+                useStore.getState().addPoints(50);
+              }} className="flex-1 btn-gold py-2 rounded-lg text-xs font-semibold">Post</button>
+            </div>
+          </motion.div>
+
+          {/* Posts */}
+          {communityPosts.map((p, i) => (
+            <motion.div key={p.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
+              className="glass-card rounded-2xl overflow-hidden">
+              <div className="flex items-center gap-3 p-4 pb-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-white text-xs font-bold">{p.avatar}</div>
+                <div className="flex-1">
+                  <div className="text-sm font-semibold">{p.author}</div>
+                  <div className="text-[10px] text-muted-foreground">{p.time} · {p.mealEmoji} {p.mealName}</div>
+                </div>
+                {p.tag && <span className="px-2 py-0.5 rounded-full text-[9px] font-bold glass-gold text-[var(--gold)]">{p.tag}</span>}
+              </div>
+              <div className="relative aspect-[4/3] bg-foreground/[0.04] cursor-pointer" onClick={() => toast.success("Viewing photo")}>
+                <img src={p.image} alt={p.caption} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="p-4">
+                <p className="text-sm mb-3">{p.caption}</p>
+                <div className="flex items-center gap-4">
+                  <button onClick={() => togglePostLike(p.id)} className={`flex items-center gap-1.5 text-xs transition-colors ${p.liked ? "text-[var(--error)]" : "text-muted-foreground hover:text-foreground"}`}>
+                    <Heart className={`w-4 h-4 ${p.liked ? "fill-[var(--error)]" : ""}`} /> <span className="num">{p.likes.toLocaleString()}</span>
+                  </button>
+                  <button onClick={() => toast.success("Comments opened")} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                    <MessageCircle className="w-4 h-4" /> <span className="num">{p.comments}</span>
+                  </button>
+                  <button onClick={() => { togglePostSave(p.id); toast.success(p.saved ? "Removed from saved" : "Saved!"); }} className={`flex items-center gap-1.5 text-xs transition-colors ${p.saved ? "text-[var(--gold)]" : "text-muted-foreground hover:text-foreground"}`}>
+                    <Bookmark className={`w-4 h-4 ${p.saved ? "fill-[var(--gold)]" : ""}`} /> {p.saved ? "Saved" : "Save"}
+                  </button>
+                  <button onClick={() => toast.success("Shared!")} className="ml-auto flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                    <Share2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* === Meal of the Week vote === */}
+      {tab === "vote" && (
+        <div className="max-w-2xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            className="glass-card rounded-2xl p-5 mb-4 text-center">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-gold text-[11px] font-bold mb-3">
+              <Crown className="w-3 h-3 text-[var(--gold)]" /> WEEKLY VOTE · ENDS SUNDAY
+            </div>
+            <h2 className="font-display text-xl font-semibold mb-1">Vote for Meal of the Week</h2>
+            <p className="text-xs text-muted-foreground">Pick your favourite — earn <span className="text-[var(--gold)] font-medium">100 points</span> for voting. Winner gets featured all next week!</p>
+          </motion.div>
+
+          <div className="space-y-3">
+            {Object.entries(mealOfWeekVotes)
+              .sort(([,a],[,b]) => b - a)
+              .map(([mealId, votes], i) => {
+                const meal = meals.find(m => m.id === mealId)!;
+                if (!meal) return null;
+                const totalVotes = Object.values(mealOfWeekVotes).reduce((s, v) => s + v, 0);
+                const pct = Math.round((votes / totalVotes) * 100);
+                const voted = votedMealOfWeek === mealId;
+                return (
+                  <motion.div key={mealId} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}
+                    className={`glass-card rounded-2xl p-4 ${voted ? "ring-2 ring-[var(--gold)]" : ""}`}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${i === 0 ? "bg-gold-gradient text-black" : "bg-foreground/10"}`}>
+                        {i === 0 ? "👑" : i + 1}
+                      </span>
+                      <div className="text-3xl">{meal.emoji}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-semibold">{meal.name}</div>
+                        <div className="text-[10px] text-muted-foreground num">{votes} votes · {pct}%</div>
+                      </div>
+                      <button
+                        onClick={() => voteMealOfWeek(mealId)}
+                        disabled={!!votedMealOfWeek}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${voted ? "bg-gold-gradient text-black" : votedMealOfWeek ? "bg-muted text-muted-foreground" : "btn-gold"}`}>
+                        {voted ? "✓ Voted" : votedMealOfWeek ? "Closed" : "Vote"}
+                      </button>
+                    </div>
+                    <div className="h-2 rounded-full bg-muted overflow-hidden">
+                      <motion.div initial={{ width: 0 }} animate={{ width: `${pct}%` }} transition={{ duration: 0.8, delay: i * 0.1 }}
+                        className={`h-full rounded-full ${i === 0 ? "bg-gold-gradient" : "bg-foreground/30"}`} />
+                    </div>
+                  </motion.div>
+                );
+              })}
+          </div>
+        </div>
+      )}
 
       {/* TikTok feed */}
       {tab === "tiktok" && (

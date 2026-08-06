@@ -11,10 +11,12 @@ import { CustomerProfile } from "@/components/customer/profile";
 import { CustomerQROrdering } from "@/components/customer/qr-ordering";
 import { CustomerLoyalty } from "@/components/customer/loyalty";
 import { CustomerCommunity } from "@/components/customer/community";
+import { CustomerKitchenLive } from "@/components/customer/kitchen-live";
 import { CartSheet } from "@/components/customer/cart-sheet";
 import { GlobalSearch } from "@/components/shared/search";
 import { NotificationBell } from "@/components/shared/notifications";
 import { AIAssistant } from "@/components/shared/ai-assistant";
+import { Celebration } from "@/components/shared/celebration";
 import { Bell, Search, ShoppingCart, Home, Menu as MenuIcon, Receipt, User, Sparkles, Crown, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -109,6 +111,7 @@ export function CustomerApp() {
             {view === "qr" && <CustomerQROrdering />}
             {view === "loyalty" && <CustomerLoyalty />}
             {view === "community" && <CustomerCommunity />}
+            {view === "kitchen" && <CustomerKitchenLive />}
           </motion.div>
         </AnimatePresence>
       </main>
@@ -153,6 +156,7 @@ export function CustomerApp() {
         <Sparkles className="w-5 h-5 relative" />
       </motion.button>
       <AIAssistant />
+      <Celebration />
     </div>
   );
 }
