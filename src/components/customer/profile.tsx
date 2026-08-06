@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, CreditCard, Heart, Bell, Moon, Settings, LogOut, ChevronRight, Star, Award, Gift, Crown, Smartphone } from "lucide-react";
+import { MapPin, CreditCard, Heart, Bell, Moon, Settings, LogOut, ChevronRight, Star, Award, Gift, Crown, Smartphone, Sparkles } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { meals, formatNaira } from "@/lib/data";
 import { MealImage } from "@/components/brand";
@@ -20,7 +20,8 @@ export function CustomerProfile() {
 
   const favMeals = meals.filter(m => favorites.includes(m.id));
   const totalSpent = myOrders.reduce((s, o) => s + o.total, 0);
-  const loyaltyPoints = Math.floor(totalSpent / 100) + 1250;
+  const loyaltyPoints = useStore(s => s.loyaltyPoints);
+  const loyaltyTier = useStore(s => s.loyaltyTier);
 
   return (
     <div className="space-y-5">
@@ -39,35 +40,40 @@ export function CustomerProfile() {
       </div>
 
       {/* Loyalty card */}
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-        className="relative rounded-2xl p-5 bg-gold-shimmer text-black overflow-hidden">
+      <motion.button onClick={() => useStore.getState().setCustomerView("loyalty")}
+        initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+        whileHover={{ y: -2 }}
+        className="relative w-full rounded-2xl p-5 bg-gold-shimmer text-black overflow-hidden text-left">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.4),transparent_50%)]" />
         <div className="relative flex items-center justify-between">
           <div>
-            <div className="text-xs font-bold opacity-70 mb-1">SPAGKING ROYALTY</div>
-            <div className="font-display text-3xl font-extrabold">{loyaltyPoints.toLocaleString()} pts</div>
-            <div className="text-xs opacity-70 mt-1">750 pts to Platinum tier</div>
+            <div className="text-xs font-bold opacity-70 mb-1">SPAGKING REWARDS</div>
+            <div className="font-display text-3xl font-extrabold num">{loyaltyPoints.toLocaleString()} pts</div>
+            <div className="text-xs opacity-70 mt-1">{2500 - loyaltyPoints > 0 ? `${2500 - loyaltyPoints} pts to King VIP` : "You're King VIP! 👑"}</div>
           </div>
           <Award className="w-14 h-14 opacity-80" />
         </div>
         <div className="relative mt-3 h-2 rounded-full bg-black/20 overflow-hidden">
-          <motion.div initial={{ width: 0 }} animate={{ width: "65%" }} transition={{ delay: 0.3, duration: 0.8 }}
+          <motion.div initial={{ width: 0 }} animate={{ width: `${Math.min(100, (loyaltyPoints / 2500) * 100)}%` }} transition={{ delay: 0.3, duration: 0.8 }}
             className="h-full bg-black rounded-full" />
         </div>
-      </motion.div>
+        <div className="relative mt-2 text-[10px] opacity-70">Tap to view rewards & daily bonuses →</div>
+      </motion.button>
 
       {/* Quick stats */}
       <div className="grid grid-cols-3 gap-3">
         <Stat icon={Star} label="Orders" value={myOrders.length.toString()} color="text-amber-400" />
         <Stat icon={Gift} label="Rewards" value="3" color="text-emerald-400" />
-        <Stat icon={Crown} label="Tier" value="Gold" color="text-[var(--gold)]" />
+        <Stat icon={Crown} label="Tier" value={loyaltyTier} color="text-[var(--gold)]" />
       </div>
 
       {/* Menu */}
       <div className="glass-card rounded-2xl overflow-hidden divide-y divide-border/50">
-        <Row icon={MapPin} label="Saved addresses" desc="2 saved · Victoria Island, Lekki" onClick={() => setSection("addresses")} />
+        <Row icon={Crown} label="SpagKing Rewards" desc={`${loyaltyPoints.toLocaleString()} pts · ${loyaltyTier} tier`} onClick={() => useStore.getState().setCustomerView("loyalty")} />
         <Row icon={Heart} label="Favorite meals" desc={`${favMeals.length} meals`} onClick={() => setSection("favorites")} />
+        <Row icon={MapPin} label="Saved addresses" desc="2 saved · Victoria Island, Lekki" onClick={() => setSection("addresses")} />
         <Row icon={CreditCard} label="Payment methods" desc="2 cards · Paystack · Flutterwave" onClick={() => setSection("payments")} />
+        <Row icon={Sparkles} label="SpagKing Community" desc="TikTok · Instagram · Facebook · YouTube" onClick={() => useStore.getState().setCustomerView("community")} />
         <Row icon={Bell} label="Notifications" desc="Push, email & SMS" onClick={() => setSection("notifications")} />
         <Row icon={Settings} label="Settings" desc="Privacy, language, currency" onClick={() => setSection("settings")} />
         <Row icon={Moon} label="Dark mode" desc="Toggle theme" right={<Switch checked={darkMode} onCheckedChange={toggleDarkMode} />} />
@@ -103,7 +109,12 @@ export function CustomerProfile() {
       {section === "favorites" && (
         <Section title="Favorite meals" onClose={() => setSection("overview")}>
           {favMeals.length === 0 ? (
-            <div className="text-center py-8 text-sm text-muted-foreground">No favorites yet. Tap the heart on any meal!</div>
+            <div className="text-center py-10">
+              <div className="text-5xl mb-3 animate-float">🍜</div>
+              <h4 className="font-display font-semibold text-sm mb-1">No favourites yet</h4>
+              <p className="text-xs text-muted-foreground mb-4">Let's find your next favourite meal.</p>
+              <Button size="sm" className="btn-gold" onClick={() => useStore.getState().setCustomerView("menu")}>Browse menu</Button>
+            </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {favMeals.map(m => (

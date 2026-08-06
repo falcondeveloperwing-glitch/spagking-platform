@@ -73,11 +73,40 @@ export function CustomerCheckout() {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center text-center">
         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200 }}
-          className="w-24 h-24 rounded-full bg-emerald-500/20 flex items-center justify-center mb-6">
-          <CheckCircle2 className="w-14 h-14 text-emerald-400" />
+          className="w-24 h-24 rounded-full bg-[var(--success)]/20 flex items-center justify-center mb-6 relative">
+          <span className="absolute inset-0 rounded-full bg-[var(--success)]/20 animate-ping" />
+          <CheckCircle2 className="w-14 h-14 text-[var(--success)] relative" />
         </motion.div>
-        <h2 className="font-display text-3xl font-bold mb-2">Order placed!</h2>
-        <p className="text-muted-foreground">Your order is now being prepared. Track it in real time.</p>
+        <motion.h2 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="font-display text-3xl font-bold mb-2">Order placed!</motion.h2>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+          className="text-muted-foreground mb-6">Your order is now being prepared. Track it in real time.</motion.p>
+
+        {/* Order assignment preview */}
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+          className="glass-card rounded-2xl p-5 max-w-md w-full">
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div>
+              <div className="w-12 h-12 mx-auto rounded-full bg-gold-gradient flex items-center justify-center mb-2 text-xl">👨‍🍳</div>
+              <div className="text-[10px] text-muted-foreground">Assigned chef</div>
+              <div className="text-xs font-semibold">Chef Ade</div>
+            </div>
+            <div>
+              <div className="w-12 h-12 mx-auto rounded-full bg-gold-gradient flex items-center justify-center mb-2 text-xl">🛵</div>
+              <div className="text-[10px] text-muted-foreground">Assigned rider</div>
+              <div className="text-xs font-semibold">Tunde A.</div>
+            </div>
+            <div>
+              <div className="w-12 h-12 mx-auto rounded-full bg-gold-gradient flex items-center justify-center mb-2 text-xl">⏱️</div>
+              <div className="text-[10px] text-muted-foreground">Est. delivery</div>
+              <div className="text-xs font-semibold">32 min</div>
+            </div>
+          </div>
+          <div className="mt-4 pt-4 border-t border-border/40 text-xs text-muted-foreground">
+            <div className="flex justify-between mb-1"><span>🍳 Cooking time</span><span className="font-medium text-foreground">~12 min</span></div>
+            <div className="flex justify-between"><span>🛵 Delivery time</span><span className="font-medium text-foreground">~20 min</span></div>
+          </div>
+        </motion.div>
       </div>
     );
   }

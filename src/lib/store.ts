@@ -16,7 +16,7 @@ export interface CartItem {
 }
 
 export type CustomerView =
-  | "home" | "menu" | "meal" | "cart" | "checkout" | "tracking" | "history" | "profile" | "qr";
+  | "home" | "menu" | "meal" | "cart" | "checkout" | "tracking" | "history" | "profile" | "qr" | "loyalty" | "community";
 
 export type StaffView =
   | "executive" | "pos" | "inventory" | "staff" | "reports" | "crm"
@@ -89,6 +89,20 @@ interface AppState {
   coupon: { code: string; discount: number } | null;
   applyCoupon: (code: string) => boolean;
   removeCoupon: () => void;
+
+  // Loyalty & gamification
+  loyaltyPoints: number;
+  loyaltyTier: "Bronze" | "Silver" | "Gold" | "King";
+  checkInStreak: number;
+  lastCheckIn: string | null;
+  spinAvailable: boolean;
+  scratchAvailable: boolean;
+  referralCode: string;
+  referralsCount: number;
+  addPoints: (n: number) => void;
+  dailyCheckIn: () => void;
+  spinWheel: () => { label: string; points: number; type: "points" | "coupon" | "nothing" };
+  scratchCard: () => { label: string; points: number } | null;
 }
 
 export const useStore = create<AppState>()(
@@ -207,6 +221,61 @@ export const useStore = create<AppState>()(
         return false;
       },
       removeCoupon: () => set({ coupon: null }),
+
+      // Loyalty & gamification
+      loyaltyPoints: 1250,
+      loyaltyTier: "Gold",
+      checkInStreak: 4,
+      lastCheckIn: null,
+      spinAvailable: true,
+      scratchAvailable: true,
+      referralCode: "SPAG-CHIDI-2026",
+      referralsCount: 7,
+      addPoints: (n) => {
+        const points = get().loyaltyPoints + n;
+        const tier = points > 5000 ? "King" : points > 2500 ? "Gold" : points > 1000 ? "Silver" : "Bronze";
+        set({ loyaltyPoints: points, loyaltyTier: tier });
+      },
+      dailyCheckIn: () => {
+        const today = new Date().toDateString();
+        const last = get().lastCheckIn;
+        if (last === today) return;
+        const yesterday = new Date(Date.now() - 86400000).toDateString();
+        const streak = last === yesterday ? get().checkInStreak + 1 : 1;
+        const reward = 50 + (streak >= 7 ? 100 : streak * 10);
+        get().addPoints(reward);
+        set({ lastCheckIn: today, checkInStreak: streak });
+        get().pushNotification({ type: "system", title: "Daily check-in complete!", body: `+${reward} points · ${streak}-day streak`, level: "success" });
+      },
+      spinWheel: () => {
+        if (!get().spinAvailable) return { label: "Come back tomorrow", points: 0, type: "nothing" };
+        const outcomes = [
+          { label: "50 points", points: 50, type: "points" as const },
+          { label: "100 points", points: 100, type: "points" as const },
+          { label: "200 points", points: 200, type: "points" as const },
+          { label: "Free delivery coupon", points: 0, type: "coupon" as const },
+          { label: "10% off coupon", points: 0, type: "coupon" as const },
+          { label: "Try again tomorrow", points: 0, type: "nothing" as const },
+        ];
+        const result = outcomes[Math.floor(Math.random() * outcomes.length)];
+        if (result.type === "points") get().addPoints(result.points);
+        set({ spinAvailable: false });
+        return result;
+      },
+      scratchCard: () => {
+        if (!get().scratchAvailable) return null;
+        const outcomes = [
+          { label: "25 points", points: 25 },
+          { label: "75 points", points: 75 },
+          { label: "150 points", points: 150 },
+          { label: "300 points", points: 300 },
+          { label: "Better luck next time", points: 0 },
+        ];
+        const result = outcomes[Math.floor(Math.random() * outcomes.length)];
+        if (result.points > 0) get().addPoints(result.points);
+        set({ scratchAvailable: false });
+        return result;
+      },
     }),
     {
       name: "spagking-store",
@@ -217,6 +286,13 @@ export const useStore = create<AppState>()(
         myOrders: s.myOrders,
         notifications: s.notifications,
         darkMode: s.darkMode,
+        loyaltyPoints: s.loyaltyPoints,
+        loyaltyTier: s.loyaltyTier,
+        checkInStreak: s.checkInStreak,
+        lastCheckIn: s.lastCheckIn,
+        spinAvailable: s.spinAvailable,
+        scratchAvailable: s.scratchAvailable,
+        referralsCount: s.referralsCount,
       }),
     }
   )

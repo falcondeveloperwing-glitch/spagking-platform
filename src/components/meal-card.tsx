@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Heart, Star, Clock, Plus, Flame, Leaf, Zap } from "lucide-react";
+import { Heart, Star, Clock, Plus, Flame, Leaf, Zap, ChefHat } from "lucide-react";
 import { MealImage } from "./brand";
 import { useStore } from "@/lib/store";
 import { formatNaira, type Meal } from "@/lib/data";
@@ -64,6 +64,11 @@ export function MealCard({ meal, index = 0 }: { meal: Meal; index?: number }) {
               COMBO
             </span>
           )}
+          {meal.tags.includes("recommended") && (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-[var(--gold)] text-black shadow-lg backdrop-blur-sm">
+              <ChefHat className="w-2.5 h-2.5" /> CHEF'S PICK
+            </span>
+          )}
         </div>
 
         {/* Favorite button */}
@@ -93,6 +98,14 @@ export function MealCard({ meal, index = 0 }: { meal: Meal; index?: number }) {
             {meal.spicy && <Flame className="w-3 h-3 text-[#E5586E]" />}
             {meal.vegetarian && <Leaf className="w-3 h-3 text-[var(--success)]" />}
           </div>
+        </div>
+
+        <div className="flex items-center gap-2 mb-2 text-[10px] text-muted-foreground">
+          <span className="inline-flex items-center gap-0.5"><Flame className="w-2.5 h-2.5" /> {meal.calories} cal</span>
+          <span className="opacity-40">·</span>
+          <span className="inline-flex items-center gap-0.5"><Clock className="w-2.5 h-2.5" /> {meal.prepTime} min</span>
+          <span className="opacity-40">·</span>
+          <span className="num">{meal.sold.toLocaleString()} sold</span>
         </div>
 
         <div className="flex items-end justify-between gap-2 mt-2.5">

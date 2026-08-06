@@ -57,11 +57,12 @@ export function CustomerHistory() {
 
       {filtered.length === 0 ? (
         <div className="text-center py-20">
-          <div className="text-6xl mb-4">🧾</div>
+          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 200 }}
+            className="text-7xl mb-4 animate-float">🧾</motion.div>
           <h3 className="font-display font-bold text-lg mb-1">No orders yet</h3>
-          <p className="text-sm text-muted-foreground mb-4">Your past orders will appear here</p>
+          <p className="text-sm text-muted-foreground mb-5 max-w-xs mx-auto">Your delicious journey starts here. Let's find your next favourite meal.</p>
           <Button onClick={() => useStore.getState().setCustomerView("menu")} className="btn-gold">
-            <ShoppingBag className="w-4 h-4" /> Start ordering
+            <ShoppingBag className="w-4 h-4" /> Browse the menu
           </Button>
         </div>
       ) : (

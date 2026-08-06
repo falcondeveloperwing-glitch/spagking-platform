@@ -9,11 +9,13 @@ import { CustomerTracking } from "@/components/customer/tracking";
 import { CustomerHistory } from "@/components/customer/history";
 import { CustomerProfile } from "@/components/customer/profile";
 import { CustomerQROrdering } from "@/components/customer/qr-ordering";
+import { CustomerLoyalty } from "@/components/customer/loyalty";
+import { CustomerCommunity } from "@/components/customer/community";
 import { CartSheet } from "@/components/customer/cart-sheet";
 import { GlobalSearch } from "@/components/shared/search";
 import { NotificationBell } from "@/components/shared/notifications";
 import { AIAssistant } from "@/components/shared/ai-assistant";
-import { Bell, Search, ShoppingCart, Home, Menu as MenuIcon, Receipt, User, Sparkles, LogOut } from "lucide-react";
+import { Bell, Search, ShoppingCart, Home, Menu as MenuIcon, Receipt, User, Sparkles, Crown, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
@@ -35,12 +37,31 @@ export function CustomerApp() {
     { id: "home", label: "Home", icon: Home },
     { id: "menu", label: "Menu", icon: MenuIcon },
     { id: "cart", label: "Cart", icon: ShoppingCart, badge: cart.length },
-    { id: "history", label: "Orders", icon: Receipt },
+    { id: "loyalty", label: "Rewards", icon: Crown },
     { id: "profile", label: "Profile", icon: User },
   ] as const;
 
   return (
-    <div className="min-h-screen bg-brand text-foreground">
+    <div className="min-h-screen bg-brand text-foreground relative">
+      {/* Ambient floating gold particles */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
+        {[
+          { left: "10%", top: "20%", delay: 0, size: 2 },
+          { left: "80%", top: "30%", delay: 1.5, size: 3 },
+          { left: "40%", top: "60%", delay: 0.8, size: 2 },
+          { left: "65%", top: "75%", delay: 2.2, size: 2.5 },
+          { left: "25%", top: "80%", delay: 1.2, size: 2 },
+          { left: "90%", top: "55%", delay: 2.8, size: 2 },
+        ].map((p, i) => (
+          <motion.div key={i}
+            className="absolute rounded-full bg-[var(--gold)]"
+            style={{ left: p.left, top: p.top, width: p.size, height: p.size, boxShadow: "0 0 8px rgba(255,215,0,0.6)" }}
+            animate={{ y: [0, -30, 0], opacity: [0, 0.7, 0] }}
+            transition={{ duration: 8, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
+          />
+        ))}
+      </div>
+
       {/* Top bar — frosted, slim, premium */}
       <header className="sticky top-0 z-40 px-4 sm:px-6 py-2.5 glass border-b border-border/40">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
@@ -86,6 +107,8 @@ export function CustomerApp() {
             {view === "history" && <CustomerHistory />}
             {view === "profile" && <CustomerProfile />}
             {view === "qr" && <CustomerQROrdering />}
+            {view === "loyalty" && <CustomerLoyalty />}
+            {view === "community" && <CustomerCommunity />}
           </motion.div>
         </AnimatePresence>
       </main>
