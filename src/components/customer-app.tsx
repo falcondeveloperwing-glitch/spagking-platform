@@ -17,6 +17,7 @@ import { GlobalSearch } from "@/components/shared/search";
 import { NotificationBell } from "@/components/shared/notifications";
 import { AIAssistant } from "@/components/shared/ai-assistant";
 import { Celebration } from "@/components/shared/celebration";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { Bell, Search, ShoppingCart, Home, Menu as MenuIcon, Receipt, User, Sparkles, Crown, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -82,6 +83,7 @@ export function CustomerApp() {
             <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} className="sm:hidden rounded-full h-9 w-9">
               <Search className="w-4.5 h-4.5" />
             </Button>
+            <ThemeToggle compact />
             <NotificationBell />
             <Button variant="ghost" size="icon" onClick={() => setCartOpen(true)} className="relative rounded-full">
               <ShoppingCart className="w-5 h-5" />

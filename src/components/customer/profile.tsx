@@ -6,7 +6,7 @@ import { useStore } from "@/lib/store";
 import { meals, formatNaira } from "@/lib/data";
 import { MealImage } from "@/components/brand";
 import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { toast } from "sonner";
 
 export function CustomerProfile() {
@@ -14,8 +14,7 @@ export function CustomerProfile() {
   const favorites = useStore(s => s.favorites);
   const myOrders = useStore(s => s.myOrders);
   const logout = useStore(s => s.logout);
-  const darkMode = useStore(s => s.darkMode);
-  const toggleDarkMode = useStore(s => s.toggleDarkMode);
+  const themeMode = useStore(s => s.themeMode);
   const [section, setSection] = useState<"overview" | "addresses" | "favorites" | "payments" | "notifications" | "settings">("overview");
 
   const favMeals = meals.filter(m => favorites.includes(m.id));
@@ -76,7 +75,7 @@ export function CustomerProfile() {
         <Row icon={Sparkles} label="SpagKing Community" desc="TikTok · Instagram · Facebook · YouTube" onClick={() => useStore.getState().setCustomerView("community")} />
         <Row icon={Bell} label="Notifications" desc="Push, email & SMS" onClick={() => setSection("notifications")} />
         <Row icon={Settings} label="Settings" desc="Privacy, language, currency" onClick={() => setSection("settings")} />
-        <Row icon={Moon} label="Dark mode" desc="Toggle theme" right={<Switch checked={darkMode} onCheckedChange={toggleDarkMode} />} />
+        <Row icon={Moon} label="Appearance" desc={`${themeMode === "system" ? "System" : themeMode === "dark" ? "Dark" : "Light"} theme`} right={<ThemeToggle />} />
         <Row icon={Smartphone} label="App version" desc="SpagKing v2.6.0 · Demo build" />
         <button onClick={logout} className="w-full flex items-center gap-3 p-4 text-left hover:bg-red-500/10 transition-colors text-red-400">
           <LogOut className="w-5 h-5" /> Sign out

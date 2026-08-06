@@ -81,9 +81,12 @@ interface AppState {
   aiOpen: boolean;
   setAiOpen: (v: boolean) => void;
 
-  // Customer preferences
+  // Customer preferences — theme system
   darkMode: boolean;
+  themeMode: "light" | "dark" | "system";
+  setThemeMode: (mode: "light" | "dark" | "system") => void;
   toggleDarkMode: () => void;
+  applyTheme: () => void;
 
   // Applied coupon
   coupon: { code: string; discount: number } | null;
@@ -245,7 +248,28 @@ export const useStore = create<AppState>()(
       setAiOpen: (v) => set({ aiOpen: v }),
 
       darkMode: true,
-      toggleDarkMode: () => set({ darkMode: !get().darkMode }),
+      themeMode: "dark",
+      setThemeMode: (mode) => {
+        const isDark = mode === "dark" || (mode === "system" && (typeof window === "undefined" || window.matchMedia("(prefers-color-scheme: dark)").matches));
+        set({ themeMode: mode, darkMode: isDark });
+        if (typeof document !== "undefined") {
+          const root = document.documentElement;
+          root.classList.remove("dark", "light");
+          root.classList.add(isDark ? "dark" : "light");
+          root.style.colorScheme = isDark ? "dark" : "light";
+        }
+      },
+      toggleDarkMode: () => get().setThemeMode(get().darkMode ? "light" : "dark"),
+      applyTheme: () => {
+        const { themeMode } = get();
+        const isDark = themeMode === "dark" || (themeMode === "system" && (typeof window === "undefined" || window.matchMedia("(prefers-color-scheme: dark)").matches));
+        if (typeof document !== "undefined") {
+          const root = document.documentElement;
+          root.classList.remove("dark", "light");
+          root.classList.add(isDark ? "dark" : "light");
+          root.style.colorScheme = isDark ? "dark" : "light";
+        }
+      },
 
       coupon: null,
       applyCoupon: (code) => {
@@ -378,6 +402,7 @@ export const useStore = create<AppState>()(
         myOrders: s.myOrders,
         notifications: s.notifications,
         darkMode: s.darkMode,
+        themeMode: s.themeMode,
         loyaltyPoints: s.loyaltyPoints,
         loyaltyTier: s.loyaltyTier,
         checkInStreak: s.checkInStreak,

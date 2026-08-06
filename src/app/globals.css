@@ -168,6 +168,12 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     letter-spacing: -0.011em;
+    /* Smooth theme transition */
+    transition: background-color 0.4s ease, color 0.3s ease;
+  }
+  /* Theme transition for surfaces — subtle, not jarring */
+  .glass, .glass-card, .glass-gold, header, aside, [class*="bg-card"] {
+    transition: background-color 0.4s ease, border-color 0.3s ease, color 0.3s ease;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
@@ -254,6 +260,20 @@
       radial-gradient(circle at 80% 80%, rgba(255,215,0,0.03), transparent 45%),
       #050505;
   }
+  /* Light mode brand background — soft warm cream */
+  .light .bg-brand {
+    background:
+      radial-gradient(900px 500px at 12% -8%, rgba(212,160,23,0.10), transparent 55%),
+      radial-gradient(800px 400px at 88% 8%, rgba(212,160,23,0.06), transparent 50%),
+      radial-gradient(600px 800px at 50% 100%, rgba(212,160,23,0.04), transparent 60%),
+      #FAF7F2;
+  }
+  .light .bg-brand-radial {
+    background:
+      radial-gradient(circle at 20% 20%, rgba(212,160,23,0.08), transparent 45%),
+      radial-gradient(circle at 80% 80%, rgba(212,160,23,0.05), transparent 45%),
+      #FAF7F2;
+  }
   .bg-cream {
     background:
       radial-gradient(900px 500px at 12% -8%, rgba(212,160,23,0.10), transparent 55%),
@@ -276,6 +296,11 @@
       0 0 8px rgba(255, 215, 0, 0.6),
       0 0 16px rgba(255, 215, 0, 0.4),
       0 0 24px rgba(255, 215, 0, 0.2);
+  }
+  /* Light mode — soften the neon glow to elegant gold */
+  .light .text-gold-neon {
+    color: #B8901E;
+    text-shadow: none;
   }
   .bg-gold-gradient {
     background: linear-gradient(135deg, #FFF099 0%, #FFD700 50%, #D4A017 100%);
@@ -403,6 +428,84 @@
     letter-spacing: 0;
     font-weight: 400;
   }
+  /* Light mode softens the wordmark glow for elegance */
+  .light .wordmark {
+    color: #B8901E;
+    text-shadow: 0 0 8px rgba(184, 144, 30, 0.2);
+  }
+
+  /* === Unified state system — consistent across the app === */
+  /* Success state */
+  .state-success { color: var(--success); }
+  .state-success-bg { background: color-mix(in srgb, var(--success) 15%, transparent); color: var(--success); }
+  /* Warning state */
+  .state-warning { color: var(--warning); }
+  .state-warning-bg { background: color-mix(in srgb, var(--warning) 15%, transparent); color: var(--warning); }
+  /* Error state */
+  .state-error { color: var(--error); }
+  .state-error-bg { background: color-mix(in srgb, var(--error) 15%, transparent); color: var(--error); }
+  /* Info state */
+  .state-info { color: var(--chart-3); }
+  .state-info-bg { background: color-mix(in srgb, var(--chart-3) 15%, transparent); color: var(--chart-3); }
+
+  /* === Focus-visible ring — accessible, consistent === */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: inherit;
+  }
+
+  /* === Disabled state === */
+  .state-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* === Loading shimmer button === */
+  .btn-loading {
+    position: relative;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .btn-loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s linear infinite;
+  }
+
+  /* === Skeleton — premium shimmer === */
+  .skeleton-card {
+    background: linear-gradient(90deg, var(--muted) 25%, color-mix(in srgb, var(--muted) 50%, transparent) 37%, var(--muted) 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.6s ease infinite;
+    border-radius: var(--radius-2xl);
+  }
+
+  /* === Reduced motion — accessibility first-class === */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* === High contrast compatibility === */
+@media (prefers-contrast: high) {
+  :root {
+    --border: rgba(250, 250, 250, 0.25);
+    --input: rgba(250, 250, 250, 0.25);
+  }
+  .light {
+    --border: rgba(28, 24, 20, 0.25);
+    --input: rgba(28, 24, 20, 0.25);
+  }
 }
 
 /* === Keyframe animations === */
@@ -480,11 +583,3 @@
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-page-enter { animation: pageEnter 0.45s cubic-bezier(0.22,1,0.36,1) both; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}

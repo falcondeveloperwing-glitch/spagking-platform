@@ -13,6 +13,7 @@ import { AdminDashboard } from "@/components/staff/admin";
 import { GlobalSearch } from "@/components/shared/search";
 import { NotificationBell } from "@/components/shared/notifications";
 import { AIAssistant } from "@/components/shared/ai-assistant";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import {
   LayoutDashboard, ShoppingCart, Boxes, Users, BarChart3, Heart,
   Truck, ShieldCheck, Search, Sparkles, LogOut, Menu as MenuIcon, X, Bell,
@@ -129,6 +130,7 @@ export function StaffApp() {
               <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} className="rounded-full h-9 w-9">
                 <Search className="w-4.5 h-4.5" />
               </Button>
+              <ThemeToggle />
               <NotificationBell />
               <div className="hidden sm:flex items-center gap-2.5 ml-2 pl-3 border-l border-border/40">
                 <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-lg bg-foreground/10" />

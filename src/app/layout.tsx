@@ -3,6 +3,7 @@ import { Inter, Poppins, Pacifico } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/shared/theme-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,18 +41,38 @@ export const metadata: Metadata = {
   },
 };
 
+// Inline script to prevent theme flash — runs before paint
+const themeInitScript = `
+(function() {
+  try {
+    var stored = JSON.parse(localStorage.getItem('spagking-store') || '{}');
+    var mode = stored.state && stored.state.themeMode || 'dark';
+    var isDark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var root = document.documentElement;
+    root.classList.remove('dark', 'light');
+    root.classList.add(isDark ? 'dark' : 'light');
+    root.style.colorScheme = isDark ? 'dark' : 'light';
+  } catch (e) {
+    document.documentElement.classList.add('dark');
+  }
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="dark">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body
         className={`${inter.variable} ${poppins.variable} ${pacifico.variable} antialiased bg-background text-foreground`}
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
         <Toaster />
         <SonnerToaster />
       </body>
