@@ -1,0 +1,130 @@
+"use client";
+import { motion, AnimatePresence } from "framer-motion";
+import { SpagKingLogo } from "@/components/brand";
+import { useStore } from "@/lib/store";
+import { CustomerHome } from "@/components/customer/home";
+import { CustomerMenu } from "@/components/customer/menu";
+import { CustomerMealDetails } from "@/components/customer/meal-details";
+import { CustomerCheckout } from "@/components/customer/checkout";
+import { CustomerTracking } from "@/components/customer/tracking";
+import { CustomerHistory } from "@/components/customer/history";
+import { CustomerProfile } from "@/components/customer/profile";
+import { CustomerQROrdering } from "@/components/customer/qr-ordering";
+import { CartSheet } from "@/components/customer/cart-sheet";
+import { GlobalSearch } from "@/components/shared/search";
+import { NotificationBell } from "@/components/shared/notifications";
+import { AIAssistant } from "@/components/shared/ai-assistant";
+import { Bell, Search, ShoppingCart, Home, Menu as MenuIcon, Receipt, User, Sparkles, LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
+export function CustomerApp() {
+  const user = useStore(s => s.user);
+  const view = useStore(s => s.customerView);
+  const setView = useStore(s => s.setCustomerView);
+  const cart = useStore(s => s.cart);
+  const cartOpen = useStore(s => s.cartOpen);
+  const setCartOpen = useStore(s => s.setCartOpen);
+  const setSearchOpen = useStore(s => s.setSearchOpen);
+  const aiOpen = useStore(s => s.aiOpen);
+  const setAiOpen = useStore(s => s.setAiOpen);
+  const logout = useStore(s => s.logout);
+  const notifications = useStore(s => s.notifications);
+  const unread = notifications.filter(n => !n.read).length;
+
+  const navItems = [
+    { id: "home", label: "Home", icon: Home },
+    { id: "menu", label: "Menu", icon: MenuIcon },
+    { id: "cart", label: "Cart", icon: ShoppingCart, badge: cart.length },
+    { id: "history", label: "Orders", icon: Receipt },
+    { id: "profile", label: "Profile", icon: User },
+  ] as const;
+
+  return (
+    <div className="min-h-screen bg-matte text-foreground">
+      {/* Top bar */}
+      <header className="sticky top-0 z-40 px-4 sm:px-6 py-3 glass border-b border-border/50">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
+          <button onClick={() => setView("home")} className="flex items-center gap-2">
+            <SpagKingLogo size={32} />
+          </button>
+
+          <button onClick={() => setSearchOpen(true)}
+            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-muted-foreground hover:border-[var(--gold)]/40 transition-colors min-w-[260px]">
+            <Search className="w-4 h-4" /> Search meals, orders, restaurants…
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} className="sm:hidden rounded-full">
+              <Search className="w-5 h-5" />
+            </Button>
+            <NotificationBell />
+            <Button variant="ghost" size="icon" onClick={() => setCartOpen(true)} className="relative rounded-full">
+              <ShoppingCart className="w-5 h-5" />
+              {cart.length > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[var(--gold)] text-black text-[10px] font-bold flex items-center justify-center">
+                  {cart.length}
+                </span>
+              )}
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main content */}
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-4 pb-28 sm:pb-8">
+        <AnimatePresence mode="wait">
+          <motion.div key={view}
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}>
+            {view === "home" && <CustomerHome />}
+            {view === "menu" && <CustomerMenu />}
+            {view === "meal" && <CustomerMealDetails />}
+            {view === "checkout" && <CustomerCheckout />}
+            {view === "tracking" && <CustomerTracking />}
+            {view === "history" && <CustomerHistory />}
+            {view === "profile" && <CustomerProfile />}
+            {view === "qr" && <CustomerQROrdering />}
+          </motion.div>
+        </AnimatePresence>
+      </main>
+
+      {/* Bottom navigation (mobile + tablet) */}
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 glass border-t border-border/50 px-2 py-2">
+        <div className="flex items-center justify-around">
+          {navItems.map((item) => {
+            const active = view === item.id || (item.id === "cart" && cartOpen);
+            return (
+              <button key={item.id}
+                onClick={() => item.id === "cart" ? setCartOpen(true) : setView(item.id as any)}
+                className={`relative flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-colors ${active ? "text-[var(--gold)]" : "text-muted-foreground"}`}>
+                <item.icon className="w-5 h-5" />
+                <span className="text-[10px] font-medium">{item.label}</span>
+                {"badge" in item && item.badge ? (
+                  <span className="absolute top-0.5 right-1 w-3.5 h-3.5 rounded-full bg-[var(--gold)] text-black text-[9px] font-bold flex items-center justify-center">
+                    {item.badge}
+                  </span>
+                ) : null}
+                {active && <motion.div layoutId="nav-dot" className="absolute -bottom-0.5 w-1 h-1 rounded-full bg-[var(--gold)]" />}
+              </button>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* Desktop footer nav (optional - for desktop) */}
+      <CartSheet />
+
+      {/* Global search */}
+      <GlobalSearch />
+
+      {/* AI Assistant FAB */}
+      <button onClick={() => setAiOpen(true)}
+        className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-30 w-14 h-14 rounded-full btn-gold shadow-2xl flex items-center justify-center animate-float"
+        aria-label="AI Assistant">
+        <Sparkles className="w-6 h-6" />
+      </button>
+      <AIAssistant />
+    </div>
+  );
+}
