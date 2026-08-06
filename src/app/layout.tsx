@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   keywords: ["SpagKing", "restaurant", "POS", "inventory", "CRM", "delivery", "Nigeria"],
   authors: [{ name: "SpagKing" }],
   icons: {
-    icon: "/spagking-mark.svg",
+    icon: "/favicon.svg",
   },
   openGraph: {
     title: "SpagKing — Premium Restaurant OS",

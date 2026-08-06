@@ -44,28 +44,29 @@ export function StaffApp() {
   const allowed = NAV.filter(n => n.roles.includes(user.role));
 
   return (
-    <div className="min-h-screen bg-matte text-foreground flex">
-      {/* Sidebar (desktop) */}
-      <aside className="hidden lg:flex flex-col w-64 shrink-0 glass border-r border-border/50 fixed inset-y-0 left-0 z-30">
-        <div className="p-5 border-b border-border/50">
-          <SpagKingLogo size={36} />
+    <div className="min-h-screen bg-brand text-foreground flex">
+      {/* Sidebar (desktop) — refined, breathing */}
+      <aside className="hidden lg:flex flex-col w-64 shrink-0 glass border-r border-border/40 fixed inset-y-0 left-0 z-30">
+        <div className="px-5 py-5 border-b border-border/40">
+          <SpagKingLogo size={34} />
         </div>
-        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+          <div className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">Workspace</div>
           {allowed.map(item => (
             <NavButton key={item.id} active={view === item.id} onClick={() => setView(item.id as any)} icon={item.icon} label={item.label} />
           ))}
         </nav>
-        <div className="p-3 border-t border-border/50">
-          <button onClick={() => setAiOpen(true)} className="w-full flex items-center gap-2 p-2.5 rounded-xl glass-gold text-[var(--gold)] text-sm font-medium hover:scale-[1.02] transition-transform mb-2">
+        <div className="p-3 border-t border-border/40 space-y-2">
+          <button onClick={() => setAiOpen(true)} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl glass-gold text-[var(--gold)] text-sm font-medium hover:scale-[1.01] transition-transform">
             <Sparkles className="w-4 h-4" /> Ask SpagKing AI
           </button>
-          <div className="flex items-center gap-2 p-2">
-            <img src={user.avatar} alt={user.name} className="w-9 h-9 rounded-lg bg-muted" />
+          <div className="flex items-center gap-2.5 px-2 py-1.5">
+            <img src={user.avatar} alt={user.name} className="w-9 h-9 rounded-lg bg-foreground/10" />
             <div className="flex-1 min-w-0">
               <div className="text-xs font-semibold truncate">{user.name}</div>
               <div className="text-[10px] text-muted-foreground capitalize">{user.role}{user.branch ? ` · ${user.branch.split("SpagKing ")[1] || user.branch}` : ""}</div>
             </div>
-            <button onClick={logout} className="text-muted-foreground hover:text-red-400 p-1.5"><LogOut className="w-4 h-4" /></button>
+            <button onClick={logout} className="text-muted-foreground hover:text-[var(--error)] p-1.5 transition-colors"><LogOut className="w-4 h-4" /></button>
           </div>
         </div>
       </aside>
@@ -104,30 +105,30 @@ export function StaffApp() {
 
       {/* Main */}
       <div className="flex-1 lg:ml-64 flex flex-col min-w-0">
-        <header className="sticky top-0 z-20 px-4 sm:px-6 py-3 glass border-b border-border/50">
+        <header className="sticky top-0 z-20 px-4 sm:px-6 py-3 glass border-b border-border/40">
           <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <button onClick={() => setMobileNav(true)} className="lg:hidden p-2 rounded-lg hover:bg-muted/50">
+            <div className="flex items-center gap-3">
+              <button onClick={() => setMobileNav(true)} className="lg:hidden p-2 rounded-lg hover:bg-foreground/[0.06] transition-colors">
                 <MenuIcon className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="font-display font-bold text-lg leading-none">
+                <h1 className="font-display font-semibold text-lg leading-tight tracking-tight">
                   {NAV.find(n => n.id === view)?.label || "Dashboard"}
                 </h1>
-                <p className="text-[10px] text-muted-foreground hidden sm:block">
+                <p className="text-[10px] text-muted-foreground hidden sm:block capitalize">
                   {new Date().toLocaleDateString("en-NG", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-1.5">
-              <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} className="rounded-full">
-                <Search className="w-5 h-5" />
+              <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} className="rounded-full h-9 w-9">
+                <Search className="w-4.5 h-4.5" />
               </Button>
               <NotificationBell />
-              <div className="hidden sm:flex items-center gap-2 ml-2 pl-3 border-l border-border/50">
-                <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-lg bg-muted" />
+              <div className="hidden sm:flex items-center gap-2.5 ml-2 pl-3 border-l border-border/40">
+                <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-lg bg-foreground/10" />
                 <div className="text-xs">
-                  <div className="font-semibold leading-none">{user.name.split(" ")[0]}</div>
+                  <div className="font-semibold leading-tight">{user.name.split(" ")[0]}</div>
                   <div className="text-[10px] text-muted-foreground capitalize">{user.role}</div>
                 </div>
               </div>
@@ -135,11 +136,11 @@ export function StaffApp() {
           </div>
         </header>
 
-        <main className="flex-1 p-4 sm:p-6">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">
           <AnimatePresence mode="wait">
             <motion.div key={view}
-              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.25 }}>
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
               {view === "executive" && <ExecutiveDashboard />}
               {view === "pos" && <POSDashboard />}
               {view === "inventory" && <InventoryDashboard />}
@@ -156,12 +157,16 @@ export function StaffApp() {
       <GlobalSearch />
       <AIAssistant />
 
-      {/* AI FAB */}
-      <button onClick={() => setAiOpen(true)}
-        className="fixed bottom-6 right-6 z-30 w-14 h-14 rounded-full btn-gold shadow-2xl flex items-center justify-center animate-float"
-        aria-label="AI Assistant">
-        <Sparkles className="w-6 h-6" />
-      </button>
+      {/* AI FAB — premium gold orb */}
+      <motion.button
+        onClick={() => setAiOpen(true)}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.94 }}
+        className="fixed bottom-6 right-6 z-30 w-14 h-14 rounded-full btn-gold flex items-center justify-center group"
+        aria-label="Ask SpagKing AI">
+        <span className="absolute inset-0 rounded-full bg-gold-gradient opacity-40 blur-md group-hover:opacity-60 transition-opacity animate-glow-pulse" />
+        <Sparkles className="w-5 h-5 relative" />
+      </motion.button>
     </div>
   );
 }
@@ -169,9 +174,10 @@ export function StaffApp() {
 function NavButton({ active, onClick, icon: Icon, label }: { active: boolean; onClick: () => void; icon: any; label: string }) {
   return (
     <button onClick={onClick}
-      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${active ? "glass-gold text-[var(--gold)]" : "text-muted-foreground hover:bg-muted/40 hover:text-foreground"}`}>
-      <Icon className="w-4 h-4" /> {label}
-      {active && <motion.div layoutId="nav-active" className="ml-auto w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />}
+      className={`relative w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${active ? "bg-gold-soft text-[var(--gold)]" : "text-muted-foreground hover:bg-foreground/[0.04] hover:text-foreground"}`}>
+      <Icon className="w-4 h-4 shrink-0" />
+      <span>{label}</span>
+      {active && <motion.div layoutId="nav-active-indicator" className="ml-auto w-1.5 h-1.5 rounded-full bg-[var(--gold)]" />}
     </button>
   );
 }

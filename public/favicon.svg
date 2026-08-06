@@ -1,0 +1,18 @@
+<svg width="32" height="32" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="favCrown" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCE9B0"/>
+      <stop offset="100%" stop-color="#9C7416"/>
+    </linearGradient>
+    <linearGradient id="favBowl" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5D780"/>
+      <stop offset="100%" stop-color="#B8901E"/>
+    </linearGradient>
+  </defs>
+  <rect width="140" height="140" rx="28" fill="#161310"/>
+  <rect x="44" y="58" width="52" height="6" rx="2" fill="url(#favCrown)"/>
+  <path d="M 44 58 L 52 42 L 60 54 L 70 38 L 80 54 L 88 42 L 96 58 Z" fill="url(#favCrown)"/>
+  <circle cx="70" cy="36" r="3.4" fill="#FFFFFF" opacity="0.95"/>
+  <ellipse cx="70" cy="74" rx="38" ry="7" fill="url(#favBowl)"/>
+  <path d="M 32 74 Q 32 100 70 104 Q 108 100 108 74 Z" fill="url(#favBowl)"/>
+</svg>

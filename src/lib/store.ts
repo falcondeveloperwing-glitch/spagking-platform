@@ -23,6 +23,10 @@ export type StaffView =
   | "delivery" | "admin" | "notifications" | "search";
 
 interface AppState {
+  // Splash
+  splashDone: boolean;
+  setSplashDone: () => void;
+
   // Auth
   user: User | null;
   login: (role: Role) => void;
@@ -90,6 +94,9 @@ interface AppState {
 export const useStore = create<AppState>()(
   persist(
     (set, get) => ({
+      splashDone: false,
+      setSplashDone: () => set({ splashDone: true }),
+
       user: null,
       login: (role) => set({ user: demoUsers[role], customerView: "home", staffView: role === "ceo" ? "executive" : role === "cashier" ? "pos" : role === "inventory" ? "inventory" : role === "hr" ? "staff" : role === "rider" ? "delivery" : role === "admin" ? "admin" : role === "manager" ? "executive" : "reports" }),
       logout: () => set({ user: null, cart: [], myOrders: [], customerView: "home", staffView: "executive" }),

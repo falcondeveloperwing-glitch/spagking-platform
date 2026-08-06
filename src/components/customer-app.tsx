@@ -41,22 +41,26 @@ export function CustomerApp() {
   ] as const;
 
   return (
-    <div className="min-h-screen bg-matte text-foreground">
-      {/* Top bar */}
-      <header className="sticky top-0 z-40 px-4 sm:px-6 py-3 glass border-b border-border/50">
+    <div className="min-h-screen bg-brand text-foreground">
+      {/* Top bar — frosted, slim, premium */}
+      <header className="sticky top-0 z-40 px-4 sm:px-6 py-2.5 glass border-b border-border/40">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
-          <button onClick={() => setView("home")} className="flex items-center gap-2">
-            <SpagKingLogo size={32} />
+          <button onClick={() => setView("home")} className="flex items-center gap-2 group">
+            <div className="transition-transform group-hover:scale-105"><SpagKingLogo size={30} showText={false} /></div>
+            <span className="hidden sm:block font-display font-semibold tracking-tight">
+              <span className="text-gold-gradient">Spag</span><span className="text-foreground">King</span>
+            </span>
           </button>
 
           <button onClick={() => setSearchOpen(true)}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-muted-foreground hover:border-[var(--gold)]/40 transition-colors min-w-[260px]">
+            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/[0.04] border border-border/50 text-sm text-muted-foreground hover:border-[var(--gold)]/30 hover:bg-foreground/[0.06] transition-all min-w-[280px]">
             <Search className="w-4 h-4" /> Search meals, orders, restaurants…
+            <kbd className="ml-auto text-[10px] px-1.5 py-0.5 rounded bg-foreground/[0.06] border border-border/50 text-muted-foreground">⌘K</kbd>
           </button>
 
-          <div className="flex items-center gap-1.5">
-            <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} className="sm:hidden rounded-full">
-              <Search className="w-5 h-5" />
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} className="sm:hidden rounded-full h-9 w-9">
+              <Search className="w-4.5 h-4.5" />
             </Button>
             <NotificationBell />
             <Button variant="ghost" size="icon" onClick={() => setCartOpen(true)} className="relative rounded-full">
@@ -72,11 +76,11 @@ export function CustomerApp() {
       </header>
 
       {/* Main content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-4 pb-28 sm:pb-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-28 sm:pb-12">
         <AnimatePresence mode="wait">
           <motion.div key={view}
-            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25 }}>
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
             {view === "home" && <CustomerHome />}
             {view === "menu" && <CustomerMenu />}
             {view === "meal" && <CustomerMealDetails />}
@@ -89,8 +93,8 @@ export function CustomerApp() {
         </AnimatePresence>
       </main>
 
-      {/* Bottom navigation (mobile + tablet) */}
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 glass border-t border-border/50 px-2 py-2">
+      {/* Bottom navigation (mobile + tablet) — frosted, refined */}
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 z-40 glass border-t border-border/40 px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
         <div className="flex items-center justify-around">
           {navItems.map((item) => {
             const active = view === item.id || (item.id === "cart" && cartOpen);
@@ -118,12 +122,16 @@ export function CustomerApp() {
       {/* Global search */}
       <GlobalSearch />
 
-      {/* AI Assistant FAB */}
-      <button onClick={() => setAiOpen(true)}
-        className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-30 w-14 h-14 rounded-full btn-gold shadow-2xl flex items-center justify-center animate-float"
-        aria-label="AI Assistant">
-        <Sparkles className="w-6 h-6" />
-      </button>
+      {/* AI Assistant FAB — premium gold orb */}
+      <motion.button
+        onClick={() => setAiOpen(true)}
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.94 }}
+        className="fixed bottom-24 sm:bottom-6 right-4 sm:right-6 z-30 w-14 h-14 rounded-full btn-gold flex items-center justify-center group"
+        aria-label="Ask SpagKing AI">
+        <span className="absolute inset-0 rounded-full bg-gold-gradient opacity-40 blur-md group-hover:opacity-60 transition-opacity animate-glow-pulse" />
+        <Sparkles className="w-5 h-5 relative" />
+      </motion.button>
       <AIAssistant />
     </div>
   );

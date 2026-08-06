@@ -45,12 +45,12 @@ export function ExecutiveDashboard() {
 
   return (
     <div className="space-y-5">
-      {/* Hero KPI row */}
+      {/* Hero KPI row — Bloomberg meets Apple */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <KPICard title="Today's Sales" value={formatNaira(1_845_000)} change="+12.4%" up icon={DollarSign} accent="from-amber-500/20 to-yellow-600/5" />
-        <KPICard title="Orders Today" value="187" change="+8.2%" up icon={ShoppingBag} accent="from-emerald-500/20 to-green-600/5" />
-        <KPICard title="Avg Order Value" value={formatNaira(9_866)} change="+3.8%" up icon={TrendingUp} accent="from-cyan-500/20 to-blue-600/5" />
-        <KPICard title="Satisfaction" value="4.8★" change="+0.2" up icon={Star} accent="from-violet-500/20 to-purple-600/5" />
+        <KPICard title="Today's Sales" value={formatNaira(1_845_000)} change="+12.4%" up icon={DollarSign} accent="from-[var(--gold)]/15" />
+        <KPICard title="Orders Today" value="187" change="+8.2%" up icon={ShoppingBag} accent="from-[var(--success)]/15" />
+        <KPICard title="Avg Order Value" value={formatNaira(9_866)} change="+3.8%" up icon={TrendingUp} accent="from-[#60A5FA]/15" />
+        <KPICard title="Satisfaction" value="4.8★" change="+0.2" up icon={Star} accent="from-[#A78BFA]/15" />
       </div>
 
       {/* Yesterday vs Today chart */}
@@ -58,8 +58,8 @@ export function ExecutiveDashboard() {
         <div className="lg:col-span-2 glass-card rounded-2xl p-5">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-display font-bold">Revenue · Yesterday vs Today</h3>
-              <p className="text-xs text-muted-foreground">Last 7 days · ₦ millions</p>
+              <h3 className="font-display font-semibold tracking-tight">Revenue · Yesterday vs Today</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">Last 7 days · ₦ millions</p>
             </div>
             <div className="flex items-center gap-3 text-xs">
               <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-[var(--gold)]" /> Today</span>
@@ -70,20 +70,20 @@ export function ExecutiveDashboard() {
             <AreaChart data={salesTrend} margin={{ left: -20, right: 5, top: 5 }}>
               <defs>
                 <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#D4A017" stopOpacity={0.4} />
-                  <stop offset="100%" stopColor="#D4A017" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#E8B84A" stopOpacity={0.35} />
+                  <stop offset="100%" stopColor="#E8B84A" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="gray" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#6b7280" stopOpacity={0.25} />
+                  <stop offset="0%" stopColor="#6b7280" stopOpacity={0.22} />
                   <stop offset="100%" stopColor="#6b7280" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-              <XAxis dataKey="day" stroke="rgba(255,255,255,0.4)" fontSize={11} />
-              <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-              <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(245,239,230,0.05)" />
+              <XAxis dataKey="day" stroke="rgba(245,239,230,0.4)" fontSize={11} tickLine={false} axisLine={false} />
+              <YAxis stroke="rgba(245,239,230,0.4)" fontSize={11} tickLine={false} axisLine={false} />
+              <Tooltip contentStyle={{ background: "rgba(28,24,20,0.96)", border: "1px solid rgba(232,184,74,0.25)", borderRadius: 12, color: "#F5EFE6", fontSize: 12 }} />
               <Area type="monotone" dataKey="yesterday" stroke="#6b7280" strokeWidth={2} fill="url(#gray)" />
-              <Area type="monotone" dataKey="today" stroke="#D4A017" strokeWidth={2.5} fill="url(#gold)" />
+              <Area type="monotone" dataKey="today" stroke="#E8B84A" strokeWidth={2.5} fill="url(#gold)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -239,17 +239,20 @@ export function ExecutiveDashboard() {
 
 function KPICard({ title, value, change, up, icon: Icon, accent }: { title: string; value: string; change: string; up: boolean; icon: any; accent: string }) {
   return (
-    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-      className={`glass-card rounded-2xl p-4 relative overflow-hidden bg-gradient-to-br ${accent}`}>
-      <div className="flex items-start justify-between mb-2">
-        <span className="text-[10px] text-muted-foreground uppercase tracking-wide">{title}</span>
-        <div className="w-8 h-8 rounded-lg glass flex items-center justify-center">
-          <Icon className="w-4 h-4 text-[var(--gold)]" />
+    <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: [0.22, 1, 0.36, 1] }}
+      className="glass-card rounded-2xl p-5 relative overflow-hidden card-hover">
+      <div className={`absolute inset-0 bg-gradient-to-br ${accent} to-transparent opacity-60`} />
+      <div className="relative">
+        <div className="flex items-start justify-between mb-3">
+          <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">{title}</span>
+          <div className="w-8 h-8 rounded-lg bg-foreground/[0.06] border border-border/50 flex items-center justify-center">
+            <Icon className="w-4 h-4 text-[var(--gold)]" />
+          </div>
         </div>
-      </div>
-      <div className="font-display font-bold text-xl sm:text-2xl mb-1">{value}</div>
-      <div className={`text-[11px] inline-flex items-center gap-0.5 ${up ? "text-emerald-400" : "text-red-400"}`}>
-        {up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />} {change} <span className="text-muted-foreground">vs yesterday</span>
+        <div className="font-display font-semibold text-2xl tracking-tight num mb-1">{value}</div>
+        <div className={`text-[11px] inline-flex items-center gap-1 ${up ? "text-[var(--success)]" : "text-[var(--error)]"}`}>
+          {up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />} <span className="font-medium">{change}</span> <span className="text-muted-foreground">vs yesterday</span>
+        </div>
       </div>
     </motion.div>
   );
