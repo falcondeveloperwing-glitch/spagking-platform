@@ -81,6 +81,10 @@ interface AppState {
   aiOpen: boolean;
   setAiOpen: (v: boolean) => void;
 
+  // App-level view: landing page vs auth
+  appView: "landing" | "auth";
+  setAppView: (v: "landing" | "auth") => void;
+
   // Customer preferences — theme system
   darkMode: boolean;
   themeMode: "light" | "dark" | "system";
@@ -246,6 +250,9 @@ export const useStore = create<AppState>()(
 
       aiOpen: false,
       setAiOpen: (v) => set({ aiOpen: v }),
+
+      appView: "landing",
+      setAppView: (v) => set({ appView: v }),
 
       darkMode: true,
       themeMode: "dark",
