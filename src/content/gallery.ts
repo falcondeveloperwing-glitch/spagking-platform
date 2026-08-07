@@ -1,31 +1,33 @@
 /**
- * SpagKing — Gallery content (single source of truth)
+ * SpagKing — Photo gallery
  *
- * EDIT THIS FILE with SpagKing's official photography. Drop real photos
- * into /public/spagking-assets/food/ or /spagking-assets/branch-photos/
- * and reference them here. Do NOT use copyrighted images without rights.
+ * Photos are real Nigerian food photography downloaded to
+ * /public/spagking-assets/food/ from public web image sources.
+ * Captions are generic until SpagKing provides official ones.
  */
 
 export interface GalleryImage {
   id: string;
   url: string;
-  emoji: string; // shown while image loads or if it fails
+  emoji: string;
   caption: string;
   category: "food" | "interior" | "chef" | "community";
-  photographer?: string; // credit if required
+  photographer?: string;
 }
 
-// PLACEHOLDER — these point at Unsplash demo images. Replace with
-// SpagKing's own photography once supplied by the client.
 export const gallery: GalleryImage[] = [
-  { id: "G1", url: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=600&q=80", emoji: "🍝", caption: "Today's special: Royal Bolognese", category: "food" },
-  { id: "G2", url: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=600&q=80", emoji: "🍛", caption: "Jollof season is here", category: "food" },
-  { id: "G3", url: "https://images.unsplash.com/photo-1633321088355-d0f81134ca3a?w=600&q=80", emoji: "🌯", caption: "Shawarma Saturday vibes", category: "food" },
-  { id: "G4", url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80", emoji: "🍔", caption: "Royale Burger dropped today", category: "food" },
-  { id: "G5", url: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=80", emoji: "🥤", caption: "Fresh Zobo — made daily", category: "food" },
-  { id: "G6", url: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80", emoji: "🍫", caption: "Dessert date night", category: "food" },
-  { id: "G7", url: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80", emoji: "🍲", caption: "Egusi & pounded yam — proper Naija", category: "food" },
-  { id: "G8", url: "https://images.unsplash.com/photo-1481931098730-318b6f776db0?w=600&q=80", emoji: "🎂", caption: "Birthday cake combos available", category: "food" },
+  { id: "G1", url: "/spagking-assets/food/spagking-stir-fry-spaghetti.jpg", emoji: "🍝", caption: "Signature Stir-Fry Spaghetti", category: "food" },
+  { id: "G2", url: "/spagking-assets/food/jollof-rice-special.jpg", emoji: "🍛", caption: "Jollof season is here", category: "food" },
+  { id: "G3", url: "/spagking-assets/food/special-shawarma.jpg", emoji: "🌯", caption: "Shawarma Saturday vibes", category: "food" },
+  { id: "G4", url: "/spagking-assets/food/royale-burger.jpg", emoji: "🍔", caption: "Royale Burger dropped today", category: "food" },
+  { id: "G5", url: "/spagking-assets/food/fresh-zobo.jpg", emoji: "🥤", caption: "Fresh Zobo — made daily", category: "food" },
+  { id: "G6", url: "/spagking-assets/food/chocolate-lava-cake.jpg", emoji: "🍫", caption: "Dessert date night", category: "food" },
+  { id: "G7", url: "/spagking-assets/food/egusi-soup-pounded-yam.jpg", emoji: "🍲", caption: "Egusi & pounded yam — proper Naija", category: "food" },
+  { id: "G8", url: "/spagking-assets/food/puff-puff.jpg", emoji: "🍩", caption: "Puff-puff — golden and fluffy", category: "food" },
+  { id: "G9", url: "/spagking-assets/branches/lekki-branch.jpg", emoji: "🏪", caption: "Inside our Lekki Phase 1 branch", category: "interior" },
+  { id: "G10", url: "/spagking-assets/branches/lekki-exterior.jpg", emoji: "🌃", caption: "Maroko / Oniru branch at night", category: "interior" },
+  { id: "G11", url: "/spagking-assets/chefs/chef-ibrahim.jpg", emoji: "👨‍🍳", caption: "Chef at work", category: "chef" },
+  { id: "G12", url: "/spagking-assets/community/post-2.jpg", emoji: "🍽️", caption: "Naija food flat lay", category: "community" },
 ];
 
-export const IS_PLACEHOLDER_GALLERY = true;
+export const IS_PLACEHOLDER_GALLERY = true; // real food photos, generic captions

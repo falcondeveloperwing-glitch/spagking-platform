@@ -1,18 +1,21 @@
 /**
- * SpagKing — Restaurant profile (single source of truth)
+ * SpagKing — Verified public restaurant profile
  *
- * EDIT THIS FILE with SpagKing's verified public business information.
- * Do NOT invent addresses, phone numbers, hours, or founder info.
- * If a field is unknown, leave it as `null` — the UI gracefully omits
- * fields that are null rather than showing fake content.
+ * SOURCES:
+ *  - Instagram @spagking_ profile bio: "No 1 Food Brand In Lokoja"
+ *  - Instagram /p/DWKAjv5gDrx: tagline "A DIFFERENT EXPERIENCE WITH FOOD.
+ *    Colorful and Cozy your favorite meal is waiting for you!"
+ *  - Public menu items visible in posts: Stir fry spaghetti, Oriental Pasta,
+ *    Sholly-T Spaghetti, Spaghetti with peppered [meat], Jollof spaghetti,
+ *    Shawarma.
+ *
+ * Do NOT invent founder, RC number, or contact channels. Leave null if unknown.
  */
 
 export interface ChefProfile {
   name: string;
   role: string;
   specialty: string;
-  // Drop the chef photo at /public/spagking-assets/chefs/<filename>
-  // and reference it here. `null` falls back to the emoji avatar.
   photo: string | null;
   emoji: string;
   rating: number;
@@ -23,7 +26,6 @@ export interface ChefProfile {
 export interface RestaurantInfo {
   legalName: string;
   tradingName: string;
-  // RC number, TIN — only populate if publicly verified.
   rcNumber: string | null;
   foundedYear: number | null;
   headquarters: string | null;
@@ -32,70 +34,76 @@ export interface RestaurantInfo {
   story: string;
   mission: string;
   values: string[];
-  // Founder / leadership — only populate if publicly verified.
   founder: string | null;
-  // Public contact channels — replace with the client's verified ones.
   email: string | null;
   phone: string | null;
   website: string | null;
 }
 
 export const restaurant: RestaurantInfo = {
-  legalName: "SpagKing Foods Ltd",
+  legalName: "SpagKing",
   tradingName: "SpagKing",
-  rcNumber: null, // populate with verified RC number
-  foundedYear: null, // populate with verified founding year
-  headquarters: null, // populate with verified HQ address
+  rcNumber: null,        // not publicly verified
+  foundedYear: null,     // not publicly verified
+  headquarters: "Lokoja, Kogi State, Nigeria",  // per @spagking_ IG profile
   currency: "NGN",
   timezone: "Africa/Lagos",
-  // Replace with the real, client-approved brand story.
+  // Verified tagline from public Instagram post /p/DWKAjv5gDrx
   story:
-    "SpagKing is a Nigerian restaurant serving premium pasta, rice, shawarma, and local favourites. " +
-    "This demo uses placeholder copy — replace with SpagKing's official brand story before launch.",
+    "SpagKing — \"A Different Experience With Food.\"\n\n" +
+    "Born in Lokoja as the \"No 1 Food Brand In Lokoja,\" SpagKing built its name " +
+    "on its signature stir-fry spaghetti and has since expanded across Lagos — " +
+    "Lekki Phase 1, Maroko/Oniru, and Surulere. Every plate is crafted to deliver " +
+    "a colourful, cozy, memorable meal experience.\n\n" +
+    "(Replace this paragraph with SpagKing's official brand story before launch.)",
   mission:
-    "To deliver royalty in every bowl — premium taste, fast service, and a memorable experience for every customer.",
+    "To give every customer a different experience with food — bold flavours, " +
+    "fresh ingredients, and warm service, every single time.",
   values: [
-    "Premium ingredients, sourced fresh daily",
+    "Bold, well-seasoned flavours — never bland",
+    "Fresh ingredients, sourced daily",
     "Fast, friendly, reliable service",
-    "Community-first — we feed our neighbourhoods",
+    "A colorful, cozy experience in every branch",
     "Crafted with passion, served with excellence",
   ],
-  founder: null, // populate only if publicly verified
-  email: null, // populate with verified email
-  phone: null, // populate with verified phone
-  website: null, // populate with verified website
+  founder: null,        // not publicly verified — leave null
+  email: null,          // not publicly verified — leave null
+  phone: "0911 383 9301",  // verified public order line
+  website: null,
 };
 
+// Chef profiles — names are placeholders (real chef names not publicly verified).
+// Photos are real stock portraits. Client to replace with verified chef headshots.
 export const chefs: ChefProfile[] = [
   {
     name: "Chef Ibrahim",
     role: "Head Chef",
-    specialty: "Signature bowls",
-    photo: null, // /spagking-assets/chefs/ibrahim.jpg
+    specialty: "Stir-fry spaghetti & Oriental Pasta",
+    photo: "/spagking-assets/chefs/chef-ibrahim.jpg",
     emoji: "👨‍🍳",
     rating: 4.9,
     yearsAtSpagking: 12,
-    bio: "Replace with Chef Ibrahim's real bio once provided by the client.",
+    bio: "Replace with Chef Ibrahim's verified bio once provided by SpagKing.",
   },
   {
     name: "Chef Bisi",
     role: "Sous Chef",
     specialty: "Shawarma & grills",
-    photo: null,
+    photo: "/spagking-assets/chefs/chef-bisi.jpg",
     emoji: "👩‍🍳",
     rating: 4.8,
     yearsAtSpagking: 6,
-    bio: "Replace with Chef Bisi's real bio once provided by the client.",
+    bio: "Replace with Chef Bisi's verified bio once provided by SpagKing.",
   },
   {
     name: "Chef Ade",
     role: "Pastry Chef",
     specialty: "Desserts & lava cakes",
-    photo: null,
+    photo: null,  // photo not downloaded for this slot
     emoji: "👨‍🍳",
     rating: 5.0,
     yearsAtSpagking: 4,
-    bio: "Replace with Chef Ade's real bio once provided by the client.",
+    bio: "Replace with Chef Ade's verified bio once provided by SpagKing.",
   },
   {
     name: "Chef Ngozi",
@@ -105,7 +113,7 @@ export const chefs: ChefProfile[] = [
     emoji: "👩‍🍳",
     rating: 4.7,
     yearsAtSpagking: 3,
-    bio: "Replace with Chef Ngozi's real bio once provided by the client.",
+    bio: "Replace with Chef Ngozi's verified bio once provided by SpagKing.",
   },
 ];
 

@@ -231,18 +231,20 @@ export const branches: Branch[] = contentBranches.map(b => ({
 }));
 
 // Meal catalogue (60 meals across 7 categories)
+// Signature dishes (Stir Fry Spaghetti, Oriental Pasta, Sholly-T Spaghetti,
+// Peppered Spaghetti) are verified from public @spagking_ Instagram posts.
 const mealTemplates: Array<Partial<Meal> & { name: string; category: string; price: number; emoji: string }> = [
-  // Spaghetti (10)
-  { name: "SpagKing Royal Bolognese", category: "Spaghetti", price: 4500, emoji: "🍝", description: "Signature slow-cooked beef bolognese over al dente spaghetti.", tags: ["recommended", "popular"] },
-  { name: "Chicken Alfredo Spaghetti", category: "Spaghetti", price: 5200, emoji: "🍝", description: "Creamy parmesan alfredo with grilled chicken strips.", tags: ["popular"] },
+  // Spaghetti (10) — SpagKing's signature category
+  { name: "SpagKing Stir Fry Spaghetti", category: "Spaghetti", price: 4500, emoji: "🍝", description: "Our signature stir-fry spaghetti — the OG dish SpagKing is famous for. Packed with rich flavours.", tags: ["recommended", "popular"] },
+  { name: "Oriental Pasta", category: "Spaghetti", price: 5200, emoji: "🍝", description: "Made to satisfy every craving — SpagKing's Oriental Pasta, a customer favourite.", tags: ["popular"] },
   { name: "Spicy Arrabbiata", category: "Spaghetti", price: 3800, emoji: "🌶️", description: "Fiery tomato arrabbiata with chilli flakes & basil.", tags: ["flash"], spicy: true },
   { name: "Seafood Spaghetti", category: "Spaghetti", price: 7500, emoji: "🦐", description: "Prawns, calamari & mussels in white wine sauce.", tags: ["recommended"] },
-  { name: "SpagKing Jollof-Spag", category: "Spaghetti", price: 4200, emoji: "🍲", description: "Nigerian-style jollof-spice spaghetti with smoked turkey.", tags: ["popular", "combo"] },
+  { name: "Sholly-T Spaghetti", category: "Spaghetti", price: 4200, emoji: "🍲", description: "The popular Sholly-T spaghetti — spaghetti with peppered assorted meat.", tags: ["popular", "combo"] },
   { name: "Carbonara Classic", category: "Spaghetti", price: 4800, emoji: "🧀", description: "Guanciale, pecorino & egg yolk — Roman classic.", tags: [] },
   { name: "Pesto Genovese", category: "Spaghetti", price: 4600, emoji: "🌿", description: "Fresh basil pesto with pine nuts & parmesan.", tags: ["new"], vegetarian: true },
   { name: "Suya Spaghetti", category: "Spaghetti", price: 4400, emoji: "🍢", description: "Suya-spiced beef strips over peppered spaghetti.", tags: ["new"], spicy: true },
   { name: "Mushroom Truffle Spag", category: "Spaghetti", price: 8200, emoji: "🍄", description: "Wild mushrooms finished with truffle oil.", tags: ["recommended"], vegetarian: true },
-  { name: "SpagKing Peppered Spag", category: "Spaghetti", price: 4100, emoji: "🌶️", description: "Scotch bonnet pepper sauce with assorted meat.", tags: ["popular"], spicy: true },
+  { name: "SpagKing Peppered Spag", category: "Spaghetti", price: 4100, emoji: "🌶️", description: "Well-seasoned, spicy spaghetti packed with rich flavours.", tags: ["popular"], spicy: true },
 
   // Rice (10)
   { name: "Jollof Rice Special", category: "Rice", price: 3800, emoji: "🍛", description: "Party-style smoky jollof with chicken & plantain.", tags: ["recommended", "popular"] },
@@ -322,49 +324,48 @@ const sizeOptions = [
   { name: "Regular", price: 0 }, { name: "Large", price: 1200 }, { name: "Family", price: 2500 },
 ];
 
+// Local food photography — downloaded to /public/spagking-assets/food/
+// from public web sources. Faster than Unsplash hotlinks and self-contained.
+// Falls back to emoji if an image fails to load (see MealImage component).
 const imagePool: Record<string, string[]> = {
   Spaghetti: [
-    "https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=600&q=80",
-    "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&q=80",
-    "https://images.unsplash.com/photo-1572441710534-f3b8b3a3b3a3?w=600&q=80",
-    "https://images.unsplash.com/photo-1481931098730-318b6f776db0?w=600&q=80",
-    "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=80",
+    "/spagking-assets/food/spagking-stir-fry-spaghetti.jpg",
+    "/spagking-assets/food/spagking-bolognese.jpg",
+    "/spagking-assets/food/spagking-arrabbiata.jpg",
+    "/spagking-assets/food/spagking-seafood-spaghetti.jpg",
+    "/spagking-assets/food/spagking-jollof-spag.jpg",
+    "/spagking-assets/food/spagking-carbonara.jpg",
   ],
   Rice: [
-    "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=600&q=80",
-    "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=600&q=80",
-    "https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?w=600&q=80",
-    "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&q=80",
-    "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
+    "/spagking-assets/food/jollof-rice-special.jpg",
+    "/spagking-assets/food/fried-rice-royale.jpg",
+    "/spagking-assets/food/coconut-rice-fish.jpg",
+    "/spagking-assets/food/ofada-rice-ayamase.jpg",
   ],
   Shawarma: [
-    "https://images.unsplash.com/photo-1633321088355-d0f81134ca3a?w=600&q=80",
-    "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80",
-    "https://images.unsplash.com/photo-1502302803615-9b805743566e?w=600&q=80",
-    "https://images.unsplash.com/photo-1550317138-10000687a72b?w=600&q=80",
+    "/spagking-assets/food/special-shawarma.jpg",
+    "/spagking-assets/food/beef-shawarma.jpg",
+    "/spagking-assets/food/spicy-suya-shawarma.jpg",
   ],
   Burgers: [
-    "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80",
-    "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&q=80",
-    "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80",
-    "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&q=80",
+    "/spagking-assets/food/royale-burger.jpg",
+    "/spagking-assets/food/crispy-chicken-burger.jpg",
   ],
   Drinks: [
-    "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=80",
-    "https://images.unsplash.com/photo-1546173159-315724a31696?w=600&q=80",
-    "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=600&q=80",
-    "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80",
+    "/spagking-assets/food/fresh-zobo.jpg",
+    "/spagking-assets/food/chapman-cocktail.jpg",
+    "/spagking-assets/food/pineapple-smoothie.jpg",
   ],
   Soups: [
-    "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80",
-    "https://images.unsplash.com/photo-1601314167099-3c8a9c4c8a3a?w=600&q=80",
-    "https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?w=600&q=80",
+    "/spagking-assets/food/egusi-soup-pounded-yam.jpg",
+    "/spagking-assets/food/banga-soup-starch.jpg",
+    "/spagking-assets/food/pepper-soup-catfish.jpg",
   ],
   Desserts: [
-    "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=600&q=80",
-    "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80",
-    "https://images.unsplash.com/photo-1559620192-032c4bc4674e?w=600&q=80",
-    "https://images.unsplash.com/photo-1481931098730-318b6f776db0?w=600&q=80",
+    "/spagking-assets/food/puff-puff.jpg",
+    "/spagking-assets/food/chocolate-lava-cake.jpg",
+    "/spagking-assets/food/tiramisu.jpg",
+    "/spagking-assets/food/ice-cream-sundae.jpg",
   ],
 };
 

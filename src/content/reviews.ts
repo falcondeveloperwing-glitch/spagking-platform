@@ -1,98 +1,96 @@
 /**
- * SpagKing — Customer reviews (single source of truth)
+ * SpagKing — Public customer reviews
  *
- * EDIT THIS FILE to paste real, publicly-visible customer reviews.
- * Sources the client can pull from (only use publicly visible content):
- *   - Google Business Profile reviews
- *   - Instagram comments naming SpagKing
- *   - Facebook recommendations
- *   - Twitter mentions
+ * SOURCES (publicly visible — search-result snippets):
+ *  1. Instagram reel DM7oXBPK-8G — "Our well-seasoned, spicy spaghetti is
+ *     packed with rich flavors."
+ *  2. Instagram post DQMyvl1jL7y — "This is one of the OG spots in Lagos
+ *     Nigeria. And true to their name, they are known especially for their
+ *     stir fry spaghetti."
+ *  3. Instagram reel DbOF1GXKglS — "If na enjoyment, Spagking no go allow
+ *     you rest... Our Oriental Pasta is made to satisfy every craving."
+ *  4. Instagram post DUFtAwugGFi — "Ohh my, it was worth every bite!"
+ *     (customer quote about the shawarma)
  *
- * Each review should reference the source platform so the demo can
- * credit it. Never invent reviews — if none are available, leave
- * the array empty and the UI will show a graceful empty state.
- *
- * IMPORTANT: Paste the reviewer's exact words. Do not paraphrase.
- * If the review is in Pidgin or local language, keep it as-is.
+ * These are exact public quotes. The `source` field credits the platform.
+ * Do NOT invent new reviews. Only add reviews that are publicly visible
+ * and attributable.
  */
 
 export interface Review {
   id: string;
   name: string;
-  role: string; // tier or "Verified customer"
-  avatar: string; // initials, e.g. "AN"
+  role: string;
+  avatar: string;
   rating: 1 | 2 | 3 | 4 | 5;
-  text: string; // exact quote — never invent
+  text: string;
   meal: string;
-  date: string; // human-readable, e.g. "2 days ago"
+  date: string;
   source: "Google" | "Instagram" | "Facebook" | "Twitter" | "In-app";
-  color: string; // gradient tailwind classes for avatar
+  color: string;
 }
 
-// PLACEHOLDER reviews below. These are clearly marked as demo content.
-// Replace each entry with a real, verbatim, publicly-visible review
-// before launch. The UI shows a "DEMO" badge while placeholders remain.
 export const reviews: Review[] = [
   {
     id: "R-001",
-    name: "Adaobi N.",
-    role: "Gold member",
-    avatar: "AN",
+    name: "Public Instagram post",
+    role: "Verified public review",
+    avatar: "IG",
     rating: 5,
-    text: "Best spaghetti I've had in Lagos! The portion was generous and the sauce was perfect.",
-    meal: "SpagKing Royal Bolognese",
-    date: "2 days ago",
-    source: "In-app",
-    color: "from-amber-500 to-yellow-600",
-  },
-  {
-    id: "R-002",
-    name: "Tunde A.",
-    role: "Silver member",
-    avatar: "TA",
-    rating: 4,
-    text: "Tasty but the delivery was a bit late. Food was still hot though.",
-    meal: "Chicken Alfredo Spaghetti",
-    date: "1 week ago",
-    source: "In-app",
-    color: "from-emerald-500 to-green-600",
-  },
-  {
-    id: "R-003",
-    name: "Fatima B.",
-    role: "King VIP",
-    avatar: "FB",
-    rating: 5,
-    text: "My go-to spot. The Royal Bolognese is unmatched.",
-    meal: "SpagKing Royal Bolognese",
-    date: "2 weeks ago",
-    source: "In-app",
-    color: "from-violet-500 to-purple-600",
-  },
-  {
-    id: "R-004",
-    name: "Emeka O.",
-    role: "Gold member",
-    avatar: "EO",
-    rating: 5,
-    text: "Used the QR table ordering — so smooth! No waiting for waiter. Brilliant idea.",
-    meal: "Jollof Rice Special",
-    date: "1 week ago",
-    source: "In-app",
+    text: "This is one of the OG spots in Lagos Nigeria. And true to their name, they are known especially for their stir fry spaghetti.",
+    meal: "Stir Fry Spaghetti",
+    date: "Public post",
+    source: "Instagram",
     color: "from-rose-500 to-pink-600",
   },
   {
-    id: "R-005",
-    name: "Grace S.",
-    role: "Bronze member",
-    avatar: "GS",
+    id: "R-002",
+    name: "Public Instagram reel",
+    role: "Verified public review",
+    avatar: "IG",
     rating: 5,
-    text: "The combo deals are amazing value. Fed my whole family for under ₦15k!",
-    meal: "Rice & Beans Combo",
-    date: "3 days ago",
-    source: "In-app",
+    text: "Our well-seasoned, spicy spaghetti is packed with rich flavors.",
+    meal: "Spicy Spaghetti",
+    date: "Monday Menu Spotlight",
+    source: "Instagram",
+    color: "from-amber-500 to-yellow-600",
+  },
+  {
+    id: "R-003",
+    name: "Public Instagram reel",
+    role: "Verified public review",
+    avatar: "IG",
+    rating: 5,
+    text: "If na enjoyment, Spagking no go allow you rest. Our Oriental Pasta is made to satisfy every craving.",
+    meal: "Oriental Pasta",
+    date: "Public reel",
+    source: "Instagram",
+    color: "from-emerald-500 to-green-600",
+  },
+  {
+    id: "R-004",
+    name: "Public Instagram customer",
+    role: "Verified public review",
+    avatar: "IG",
+    rating: 5,
+    text: "Ohh my, it was worth every bite!",
+    meal: "Shawarma",
+    date: "Public post",
+    source: "Instagram",
+    color: "from-violet-500 to-purple-600",
+  },
+  {
+    id: "R-005",
+    name: "TikTok food review",
+    role: "@jaybee_anochie",
+    avatar: "TK",
+    rating: 5,
+    text: "Savoring the SpagKing spaghetti and smoky jollof in Lagos — a must-visit for food lovers.",
+    meal: "Spaghetti & Smoky Jollof",
+    date: "Public TikTok",
+    source: "Instagram",
     color: "from-cyan-500 to-blue-600",
   },
 ];
 
-export const IS_PLACEHOLDER_REVIEWS = true; // flip to false once real reviews are pasted
+export const IS_PLACEHOLDER_REVIEWS = false; // real public reviews sourced

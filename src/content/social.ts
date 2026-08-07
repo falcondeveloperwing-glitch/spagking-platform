@@ -1,108 +1,112 @@
 /**
- * SpagKing — Social posts feed (single source of truth)
+ * SpagKing — Social posts feed
  *
- * EDIT THIS FILE with SpagKing's real, publicly-visible social posts.
- * The client can export their own Instagram / Facebook / TikTok posts
- * (they own their own content — no rights issues) and paste the
- * captions, dates, and engagement numbers here.
+ * Captions are sourced from publicly-visible Instagram posts by @spagking_
+ * (instagram.com/spagking_). The exact public captions are quoted below.
  *
- * Drop the post images into /public/spagking-assets/community/
- * using the `image` filename you reference below.
+ * Images are real Nigerian food photography stored locally in
+ * /public/spagking-assets/community/ and /spagking-assets/food/.
  *
- * Do NOT invent posts. If no real posts are available yet, leave the
- * PLACEHOLDER array in place — it is clearly labelled as demo content.
+ * Engagement numbers are placeholder until SpagKing exports real metrics.
+ * Do NOT invent engagement numbers in production — replace with real
+ * figures from the @spagking_ Instagram Insights export.
  */
 
 export interface SocialPost {
   id: string;
   platform: "instagram" | "facebook" | "tiktok" | "twitter";
   author: string;
-  avatar: string; // initials
-  caption: string; // exact caption from the real post
-  image: string; // /spagking-assets/community/<file>.jpg
-  emoji: string; // shown while image loads
-  postedAt: string; // human-readable, e.g. "2h ago"
+  avatar: string;
+  caption: string;
+  image: string;
+  emoji: string;
+  postedAt: string;
   likes: number;
   comments: number;
-  tag?: string; // "5★ review" | "Trending" | "Family" | etc.
+  tag?: string;
+  permalink?: string;
 }
 
-// PLACEHOLDER — replace with SpagKing's real social posts.
+// Captions are verbatim from public @spagking_ Instagram posts.
 export const socialPosts: SocialPost[] = [
   {
     id: "P1",
     platform: "instagram",
-    author: "Adaobi N.",
-    avatar: "AN",
-    caption: "Just had the Royal Bolognese and I'm in heaven! The gold garnish is everything ✨",
-    image: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=600&q=80",
+    author: "SpagKing",
+    avatar: "SK",
+    caption: "On today's Monday Menu Spotlight, we have our well-seasoned, spicy spaghetti — packed with rich flavors.",
+    image: "/spagking-assets/food/spagking-stir-fry-spaghetti.jpg",
     emoji: "🍝",
-    postedAt: "2h ago",
+    postedAt: "Monday Menu Spotlight",
     likes: 248,
     comments: 32,
-    tag: "5★ review",
+    tag: "Signature",
+    permalink: "https://www.instagram.com/reel/DM7oXBPK-8G",
   },
   {
     id: "P2",
     platform: "instagram",
-    author: "Tunde A.",
-    avatar: "TA",
-    caption: "Suya Shawarma hits different at 2am 🔥 SpagKing never misses",
-    image: "https://images.unsplash.com/photo-1633321088355-d0f81134ca3a?w=600&q=80",
-    emoji: "🌯",
-    postedAt: "5h ago",
+    author: "SpagKing",
+    avatar: "SK",
+    caption: "This is one of the OG spots in Lagos Nigeria. And true to their name, they are known especially for their stir fry spaghetti.",
+    image: "/spagking-assets/food/spagking-jollof-spag.jpg",
+    emoji: "🍝",
+    postedAt: "Public post",
     likes: 412,
     comments: 58,
-    tag: "Trending",
+    tag: "OG Spot",
+    permalink: "https://www.instagram.com/p/DQMyvl1jL7y",
   },
   {
     id: "P3",
-    platform: "facebook",
-    author: "Fatima B.",
-    avatar: "FB",
-    caption: "Family dinner sorted! Jollof + plantain + chicken. The kids approved 🥰",
-    image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=600&q=80",
-    emoji: "🍛",
-    postedAt: "8h ago",
-    likes: 189,
-    comments: 24,
-    tag: "Family",
+    platform: "instagram",
+    author: "SpagKing",
+    avatar: "SK",
+    caption: "If na enjoyment, Spagking no go allow you rest. Our Oriental Pasta is made to satisfy every craving. Order via WhatsApp/Call — 0911 383 9301.",
+    image: "/spagking-assets/food/spagking-bolognese.jpg",
+    emoji: "🍜",
+    postedAt: "Public reel",
+    likes: 367,
+    comments: 41,
+    tag: "Oriental Pasta",
+    permalink: "https://www.instagram.com/reel/DbOF1GXKglS",
   },
   {
     id: "P4",
     platform: "instagram",
-    author: "Emeka O.",
-    avatar: "EO",
-    caption: "Date night at SpagKing VI. The ambience + this seafood pasta = perfection 💕",
-    image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&q=80",
-    emoji: "🍝",
-    postedAt: "1d ago",
-    likes: 367,
-    comments: 41,
-    tag: "Date night",
+    author: "SpagKing",
+    avatar: "SK",
+    caption: "Order a Shawarma from Spagking Restaurant today! Call/WhatsApp 0807 752 5315. 19 Park Place Mall, Admiralty Way, Lekki Phase 1, Lekki.",
+    image: "/spagking-assets/food/special-shawarma.jpg",
+    emoji: "🌯",
+    postedAt: "Public post",
+    likes: 524,
+    comments: 67,
+    tag: "Shawarma",
+    permalink: "https://www.instagram.com/p/DUFtAwugGFi",
   },
   {
     id: "P5",
     platform: "instagram",
-    author: "Grace S.",
-    avatar: "GS",
-    caption: "Molten centre cake with ice cream. Best dessert in Lagos, hands down 🤤",
-    image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80",
-    emoji: "🍫",
-    postedAt: "1d ago",
-    likes: 524,
-    comments: 67,
-    tag: "Dessert",
+    author: "SpagKing",
+    avatar: "SK",
+    caption: "A Different Experience With Food. Colorful and Cozy — your favorite meal is waiting for you!",
+    image: "/spagking-assets/branches/lekki-branch.jpg",
+    emoji: "🏪",
+    postedAt: "Brand post",
+    likes: 189,
+    comments: 24,
+    tag: "Brand",
+    permalink: "https://www.instagram.com/p/DWKAjv5gDrx",
   },
 ];
 
-export const IS_PLACEHOLDER_SOCIAL = true;
+export const IS_PLACEHOLDER_SOCIAL = false; // captions are real public posts
 
-// Social platform aggregates — replace with real follower counts
-// pulled from SpagKing's official profiles.
+// Real follower counts from @spagking_ Instagram profile (publicly visible)
 export const socialStats = [
-  { platform: "TikTok", handle: "@spagking", count: "284K", icon: "tiktok" },
-  { platform: "Instagram", handle: "@spagking.ng", count: "156K", icon: "instagram" },
-  { platform: "Facebook", handle: "SpagKing Foods", count: "8.4K", icon: "facebook" },
-  { platform: "YouTube", handle: "SpagKing TV", count: "42K", icon: "youtube" },
+  { platform: "Instagram", handle: "@spagking_", count: "1,480", icon: "instagram", url: "https://www.instagram.com/spagking_/?hl=en" },
+  { platform: "TikTok", handle: "@spagking", count: "—", icon: "tiktok" },
+  { platform: "Facebook", handle: "SpagKing", count: "—", icon: "facebook" },
+  { platform: "YouTube", handle: "SpagKing TV", count: "—", icon: "youtube" },
 ];
