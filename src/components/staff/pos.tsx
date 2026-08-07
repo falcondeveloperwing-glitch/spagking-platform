@@ -230,7 +230,7 @@ export function POSDashboard() {
 
       {/* Receipt modal */}
       <Dialog open={receiptOpen} onOpenChange={setReceiptOpen}>
-        <DialogContent className="max-w-sm bg-card border-border/50">
+        <DialogContent aria-describedby={undefined} className="max-w-sm bg-card border-border/50">
           <DialogHeader><DialogTitle className="text-center font-display">Order Complete</DialogTitle></DialogHeader>
           {lastOrder && (
             <div className="text-center">
@@ -259,7 +259,7 @@ export function POSDashboard() {
 
       {/* Cash drawer modal */}
       <Dialog open={drawerOpen} onOpenChange={setDrawerOpen}>
-        <DialogContent className="max-w-md bg-card border-border/50">
+        <DialogContent aria-describedby={undefined} className="max-w-md bg-card border-border/50">
           <DialogHeader><DialogTitle>Cash Drawer</DialogTitle></DialogHeader>
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
@@ -289,7 +289,7 @@ export function POSDashboard() {
 
       {/* Split bill */}
       <Dialog open={splitOpen} onOpenChange={setSplitOpen}>
-        <DialogContent className="max-w-md bg-card border-border/50">
+        <DialogContent aria-describedby={undefined} className="max-w-md bg-card border-border/50">
           <DialogHeader><DialogTitle>Split bill</DialogTitle></DialogHeader>
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-2">
@@ -307,7 +307,7 @@ export function POSDashboard() {
 
       {/* Refund */}
       <Dialog open={refundOpen} onOpenChange={setRefundOpen}>
-        <DialogContent className="max-w-md bg-card border-border/50">
+        <DialogContent aria-describedby={undefined} className="max-w-md bg-card border-border/50">
           <DialogHeader><DialogTitle>Process refund</DialogTitle></DialogHeader>
           <div className="space-y-3">
             <Input placeholder="Order code (e.g. SK48291)" />
@@ -320,7 +320,7 @@ export function POSDashboard() {
 
       {/* Shift close */}
       <Dialog open={shiftCloseOpen} onOpenChange={setShiftCloseOpen}>
-        <DialogContent className="max-w-md bg-card border-border/50">
+        <DialogContent aria-describedby={undefined} className="max-w-md bg-card border-border/50">
           <DialogHeader><DialogTitle>Shift reconciliation</DialogTitle></DialogHeader>
           <div className="space-y-3">
             <div className="glass-card rounded-2xl p-4 space-y-2 text-sm">

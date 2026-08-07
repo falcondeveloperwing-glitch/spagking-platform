@@ -131,7 +131,7 @@ export function StaffApp() {
             </div>
             <div className="flex items-center gap-1.5">
               <Button variant="ghost" size="icon" onClick={() => setSearchOpen(true)} className="rounded-full h-9 w-9">
-                <Search className="w-4.5 h-4.5" />
+                <Search className="w-[18px] h-[18px]" />
               </Button>
               <ThemeToggle />
               <NotificationBell />

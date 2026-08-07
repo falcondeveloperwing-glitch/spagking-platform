@@ -325,7 +325,7 @@ export function CustomerLoyalty() {
 
       {/* === Spin wheel modal === */}
       <Dialog open={spinModal.open} onOpenChange={(v) => setSpinModal(m => ({ ...m, open: v }))}>
-        <DialogContent className="max-w-sm bg-card border-border/50">
+        <DialogContent aria-describedby={undefined} className="max-w-sm bg-card border-border/50">
           <DialogHeader><DialogTitle className="text-center">Spin the Wheel</DialogTitle></DialogHeader>
           <div className="text-center py-4">
             <div className="relative w-56 h-56 mx-auto mb-6">
@@ -364,7 +364,7 @@ export function CustomerLoyalty() {
 
       {/* === Scratch card modal === */}
       <Dialog open={scratchModal.open} onOpenChange={(v) => setScratchModal(m => ({ ...m, open: v }))}>
-        <DialogContent className="max-w-sm bg-card border-border/50">
+        <DialogContent aria-describedby={undefined} className="max-w-sm bg-card border-border/50">
           <DialogHeader><DialogTitle className="text-center">Scratch Card</DialogTitle></DialogHeader>
           <div className="text-center py-4">
             <p className="text-xs text-muted-foreground mb-4">Scratch to reveal your reward!</p>

@@ -34,7 +34,7 @@ export function GlobalSearch() {
 
   return (
     <Dialog open={open} onOpenChange={(v) => { setOpen(v); if (!v) setQ(""); }}>
-      <DialogContent className="max-w-2xl p-0 bg-card/95 backdrop-blur-xl border-border/50 top-[15vh] translate-y-0">
+      <DialogContent aria-describedby={undefined} className="max-w-2xl p-0 bg-card/95 backdrop-blur-xl border-border/50 top-[15vh] translate-y-0">
         <div className="p-4 border-b border-border/50">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />

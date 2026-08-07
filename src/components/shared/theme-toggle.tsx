@@ -38,7 +38,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
             exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
           >
-            {themeMode === "light" ? <Sun className="w-4.5 h-4.5 text-[var(--gold)]" /> : <Moon className="w-4.5 h-4.5" />}
+            {themeMode === "light" ? <Sun className="w-[18px] h-[18px] text-[var(--gold)]" /> : <Moon className="w-[18px] h-[18px]" />}
           </motion.div>
         </AnimatePresence>
       </button>
@@ -53,7 +53,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
         aria-label="Theme options"
         aria-expanded={open}
       >
-        <CurrentIcon className="w-4.5 h-4.5" />
+        <CurrentIcon className="w-[18px] h-[18px]" />
       </button>
       <AnimatePresence>
         {open && (
