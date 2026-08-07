@@ -209,23 +209,26 @@ const phone = () => `+234 80${int(2, 9)} ${int(100, 999)} ${int(1000, 9999)}`;
 const avatarFor = (seed: string) => `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(seed)}&backgroundColor=D4A017,10B981,8B5CF6,EF4444&textColor=0B0B0B`;
 
 // Branches
-export const branches: Branch[] = [
-  {
-    id: "BR-001", name: "SpagKing Victoria Island", address: "12 Adeola Odeku St, Victoria Island, Lagos",
-    city: "Lagos", phone: "+234 802 345 6789", manager: "Emeka Okoro", status: "open",
-    revenueToday: 1_845_000, ordersToday: 187, rating: 4.8, lat: 6.4281, lng: 3.4219,
-  },
-  {
-    id: "BR-002", name: "SpagKing Wuse 2 Abuja", address: "201 Aminu Kano Cres, Wuse 2, Abuja",
-    city: "Abuja", phone: "+234 803 456 7890", manager: "Aisha Bello", status: "busy",
-    revenueToday: 1_432_500, ordersToday: 142, rating: 4.7, lat: 9.0820, lng: 7.4720,
-  },
-  {
-    id: "BR-003", name: "SpagKing Port Harcourt GRA", address: "8 Trans Amadi Rd, GRA Phase 2, Port Harcourt",
-    city: "Port Harcourt", phone: "+234 804 567 8901", manager: "Tunde Adeleke", status: "open",
-    revenueToday: 986_000, ordersToday: 98, rating: 4.6, lat: 4.8156, lng: 7.0498,
-  },
-];
+// Branches — sourced from src/content/branches.ts (single source of truth)
+// Demo KPIs (revenueToday, ordersToday, rating) are layered on top so the
+// dashboards still show believable numbers. Replace the content file with
+// the client's verified branch info before launch.
+import { branches as contentBranches } from "@/content/branches";
+
+export const branches: Branch[] = contentBranches.map(b => ({
+  id: b.id,
+  name: b.name,
+  address: b.address ?? "Address pending verification",
+  city: b.city,
+  phone: b.phone ?? "Phone pending",
+  manager: b.manager,
+  status: b.status,
+  revenueToday: b.revenueToday,
+  ordersToday: b.ordersToday,
+  rating: b.rating,
+  lat: b.lat ?? 6.4 + Math.random() * 0.3, // fallback for demo map only
+  lng: b.lng ?? 3.3 + Math.random() * 0.3,
+}));
 
 // Meal catalogue (60 meals across 7 categories)
 const mealTemplates: Array<Partial<Meal> & { name: string; category: string; price: number; emoji: string }> = [
