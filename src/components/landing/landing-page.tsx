@@ -278,13 +278,13 @@ export function LandingPage() {
             className="text-center mb-12"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-gold text-xs font-medium mb-4">
-              <Heart className="w-3 h-3 text-[var(--gold)]" /> Real Customer Love
+              <Heart className="w-3 h-3 text-[var(--gold)]" /> Customer Love
             </div>
             <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight mb-4">
               What people are <span className="text-gold-gradient">saying.</span>
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Real reviews from public Instagram posts and TikTok. Verbatim — never fabricated.
+              Reviews from public Instagram posts and TikTok. Verbatim quotes — never fabricated.
             </p>
           </motion.div>
 

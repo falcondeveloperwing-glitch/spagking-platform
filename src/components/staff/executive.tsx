@@ -209,7 +209,7 @@ export function ExecutiveDashboard() {
                     <span className="text-[10px] text-amber-400">{m.stock} units left</span>
                   </div>
                 </div>
-                <button className="text-[10px] text-[var(--gold)] font-medium hover:underline">Reorder</button>
+                <span className="text-[10px] text-[var(--gold)] font-medium hover:underline cursor-pointer">Reorder</span>
               </div>
             ))}
           </div>

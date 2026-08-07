@@ -93,4 +93,4 @@ export const reviews: Review[] = [
   },
 ];
 
-export const IS_PLACEHOLDER_REVIEWS = false; // real public reviews sourced
+export const IS_PLACEHOLDER_REVIEWS = false; // public reviews sourced from @spagking_ Instagram + TikTok

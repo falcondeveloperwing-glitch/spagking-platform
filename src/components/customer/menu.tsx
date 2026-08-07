@@ -36,6 +36,11 @@ export function CustomerMenu() {
       <div>
         <h1 className="font-display text-3xl font-extrabold mb-1">Explore our menu</h1>
         <p className="text-sm text-muted-foreground">{filtered.length} meals available across {categories.length} categories</p>
+        <div className="flex items-center gap-2 mt-2">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full glass-gold text-[var(--gold)] text-[10px] font-medium"><Search className="w-2.5 h-2.5" /> Search</span>
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full glass text-muted-foreground text-[10px] font-medium">🍜 Categories</span>
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full glass text-muted-foreground text-[10px] font-medium">↕ Sort</span>
+        </div>
       </div>
 
       {/* Search + sort */}
