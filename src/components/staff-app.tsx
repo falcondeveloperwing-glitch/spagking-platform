@@ -146,7 +146,7 @@ export function StaffApp() {
           </div>
         </header>
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden min-w-0">
           <AnimatePresence mode="wait">
             <motion.div key={view}
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}

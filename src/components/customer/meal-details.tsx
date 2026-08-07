@@ -283,10 +283,10 @@ export function CustomerMealDetails() {
       </motion.div>
 
       {/* === Frequently ordered together === */}
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="min-w-0 max-w-full overflow-hidden">
         <h3 className="font-display font-semibold mb-3">Frequently ordered together</h3>
-        <div className="glass-card rounded-2xl p-4">
-          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar pb-2">
+        <div className="glass-card rounded-2xl p-4 overflow-hidden max-w-full">
+          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar pb-2 max-w-full">
             {/* Main meal */}
             <div className="shrink-0 w-32">
               <div className="relative aspect-square rounded-xl overflow-hidden glass-card">

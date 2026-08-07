@@ -98,7 +98,7 @@ export function CustomerApp() {
       </header>
 
       {/* Main content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-28 sm:pb-12">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-28 sm:pb-12 overflow-x-hidden">
         <AnimatePresence mode="wait">
           <motion.div key={view}
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
