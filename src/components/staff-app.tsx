@@ -16,7 +16,7 @@ import { AIAssistant } from "@/components/shared/ai-assistant";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import {
   LayoutDashboard, ShoppingCart, Boxes, Users, BarChart3, Heart,
-  Truck, ShieldCheck, Search, Sparkles, LogOut, Menu as MenuIcon, X, Bell,
+  Truck, ShieldCheck, Search, Sparkles, LogOut, Menu as MenuIcon, X, Bell, RefreshCw,
 } from "lucide-react";
 import type { Role } from "@/lib/data";
 import { Button } from "@/components/ui/button";
@@ -66,6 +66,9 @@ export function StaffApp() {
           <button onClick={() => setAiOpen(true)} className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl glass-gold text-[var(--gold)] text-sm font-medium hover:scale-[1.01] transition-transform">
             <Sparkles className="w-4 h-4" /> Ask SpagKing AI
           </button>
+          <button onClick={() => useStore.getState().switchRole()} className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-foreground/[0.04] hover:bg-foreground/[0.08] text-muted-foreground hover:text-foreground text-xs font-medium transition-colors">
+            <RefreshCw className="w-3.5 h-3.5" /> Switch Demo Role
+          </button>
           <div className="flex items-center gap-2.5 px-2 py-1.5">
             <img src={user.avatar} alt={user.name} className="w-9 h-9 rounded-lg bg-foreground/10" />
             <div className="flex-1 min-w-0">
@@ -97,7 +100,10 @@ export function StaffApp() {
                   <NavButton key={item.id} active={view === item.id} onClick={() => { setView(item.id as any); setMobileNav(false); }} icon={item.icon} label={item.label} />
                 ))}
               </nav>
-              <div className="p-3 border-t border-border/50">
+              <div className="p-3 border-t border-border/50 space-y-2">
+                <button onClick={() => { useStore.getState().switchRole(); setMobileNav(false); }} className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-foreground/[0.04] hover:bg-foreground/[0.08] text-muted-foreground hover:text-foreground text-xs font-medium transition-colors">
+                  <RefreshCw className="w-3.5 h-3.5" /> Switch Demo Role
+                </button>
                 <div className="flex items-center gap-2 p-2">
                   <img src={user.avatar} alt={user.name} className="w-9 h-9 rounded-lg bg-muted" />
                   <div className="flex-1 min-w-0">

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, CreditCard, Heart, Bell, Moon, Settings, LogOut, ChevronRight, Star, Award, Gift, Crown, Smartphone, Sparkles } from "lucide-react";
+import { MapPin, CreditCard, Heart, Bell, Moon, Settings, LogOut, ChevronRight, Star, Award, Gift, Crown, Smartphone, Sparkles, RefreshCw } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { meals, formatNaira } from "@/lib/data";
 import { MealImage } from "@/components/brand";
@@ -77,6 +77,7 @@ export function CustomerProfile() {
         <Row icon={Settings} label="Settings" desc="Privacy, language, currency" onClick={() => setSection("settings")} />
         <Row icon={Moon} label="Appearance" desc={`${themeMode === "system" ? "System" : themeMode === "dark" ? "Dark" : "Light"} theme`} right={<ThemeToggle />} />
         <Row icon={Smartphone} label="App version" desc="SpagKing v2.6.0 · Demo build" />
+        <Row icon={RefreshCw} label="Switch Demo Role" desc="Return to role selection" onClick={() => useStore.getState().switchRole()} />
         <button onClick={logout} className="w-full flex items-center gap-3 p-4 text-left hover:bg-red-500/10 transition-colors text-red-400">
           <LogOut className="w-5 h-5" /> Sign out
         </button>

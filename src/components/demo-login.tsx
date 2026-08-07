@@ -347,8 +347,12 @@ export function DemoLogin() {
         </div>
       </div>
 
-      <footer className="relative z-10 px-6 py-5 text-center text-[11px] text-muted-foreground border-t border-border/30">
-        © 2026 SpagKing Foods Ltd · RC 1234567 · Lagos, Nigeria
+      <footer className="relative z-10 px-6 py-5 text-center text-[11px] text-muted-foreground border-t border-border/30 flex items-center justify-center gap-3">
+        <span>© 2026 SpagKing Foods Ltd · Lagos, Nigeria</span>
+        <span className="opacity-40">·</span>
+        <button onClick={() => useStore.getState().setAppView("landing")} className="hover:text-[var(--gold)] transition-colors inline-flex items-center gap-1">
+          <ArrowLeft className="w-3 h-3" /> Back to SpagKing
+        </button>
       </footer>
     </div>
   );

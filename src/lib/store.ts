@@ -84,6 +84,7 @@ interface AppState {
   // App-level view: landing page vs auth
   appView: "landing" | "auth";
   setAppView: (v: "landing" | "auth") => void;
+  switchRole: () => void;
 
   // Customer preferences — theme system
   darkMode: boolean;
@@ -158,8 +159,8 @@ export const useStore = create<AppState>()(
       setSplashDone: () => set({ splashDone: true }),
 
       user: null,
-      login: (role) => set({ user: demoUsers[role], customerView: "home", staffView: role === "ceo" ? "executive" : role === "cashier" ? "pos" : role === "kitchen" ? "pos" : role === "inventory" ? "inventory" : role === "hr" ? "staff" : role === "rider" ? "delivery" : role === "admin" ? "admin" : role === "manager" ? "executive" : "reports" }),
-      logout: () => set({ user: null, cart: [], myOrders: [], customerView: "home", staffView: "executive" }),
+      login: (role) => set({ user: demoUsers[role], customerView: "home", staffView: role === "ceo" ? "executive" : role === "cashier" ? "pos" : role === "kitchen" ? "pos" : role === "inventory" ? "inventory" : role === "hr" ? "staff" : role === "rider" ? "delivery" : role === "admin" ? "admin" : role === "manager" ? "executive" : "reports", appView: "landing" }),
+      logout: () => set({ user: null, cart: [], myOrders: [], customerView: "home", staffView: "executive", appView: "landing" }),
 
       customerView: "home",
       staffView: "executive",
@@ -253,6 +254,7 @@ export const useStore = create<AppState>()(
 
       appView: "landing",
       setAppView: (v) => set({ appView: v }),
+      switchRole: () => set({ user: null, cart: [], myOrders: [], customerView: "home", staffView: "executive", appView: "auth" }),
 
       darkMode: true,
       themeMode: "dark",
