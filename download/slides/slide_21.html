@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slide 21 — Business Impact</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="global.css">
+<style>
+  body { margin: 0; background: #1a1a1a; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .impact-card {
+    background: linear-gradient(155deg, rgba(255,215,0,0.12), rgba(255,215,0,0.02) 70%);
+    border: 1px solid rgba(255,215,0,0.22);
+    border-radius: 16px;
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .impact-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FFF099, #FFD700, #D4A017);
+  }
+  .impact-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: rgba(255,215,0,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .impact-title { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 14px; color: #FAFAFA; line-height: 1.2; }
+  .impact-desc { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 11px; color: #B5B5B5; line-height: 1.5; }
+  .impact-num {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    color: rgba(255,215,0,0.55);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+<section class="slide slide-pad">
+
+  <!-- Decorative glow orbs -->
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:320px;height:320px;background:#FFD700;opacity:0.10;top:-120px;right:-100px;"></div>
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:260px;height:260px;background:#D4A017;opacity:0.06;bottom:-100px;left:-80px;"></div>
+
+  <div class="content-layer h-full flex flex-col">
+
+    <!-- Header -->
+    <header class="flex items-end justify-between mb-6">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="accent-bar"></span>
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;color:#FFD700;">WHAT · SPAGKING · GAINS</span>
+        </div>
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:28px;color:#FAFAFA;line-height:1.1;">Business Impact</h1>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;color:#8A8A8A;margin-top:4px;">What SpagKing gains</p>
+      </div>
+      <div class="flex items-center gap-2 text-[11px]" style="font-family:'Inter',sans-serif;color:#8A8A8A;">
+        <span class="material-icons" style="font-size:14px;color:#FFD700;">insights</span>
+        <span>7 measurable outcomes</span>
+      </div>
+    </header>
+
+    <!-- 12-col grid: row 1 = 4×3-span, row 2 = 3×4-span -->
+    <div class="grid grid-cols-12 gap-4 flex-1" style="min-height:0;">
+
+      <!-- Row 1 -->
+      <div class="impact-card col-span-3">
+        <div class="flex items-center justify-between">
+          <div class="impact-icon">⚡</div>
+          <span class="impact-num">01</span>
+        </div>
+        <h3 class="impact-title">Faster Ordering</h3>
+        <p class="impact-desc">30-min delivery, instant order flow</p>
+      </div>
+
+      <div class="impact-card col-span-3">
+        <div class="flex items-center justify-between">
+          <div class="impact-icon">🔄</div>
+          <span class="impact-num">02</span>
+        </div>
+        <h3 class="impact-title">Customer Retention</h3>
+        <p class="impact-desc">Loyalty program, reorder, community</p>
+      </div>
+
+      <div class="impact-card col-span-3">
+        <div class="flex items-center justify-between">
+          <div class="impact-icon">📦</div>
+          <span class="impact-num">03</span>
+        </div>
+        <h3 class="impact-title">Inventory Control</h3>
+        <p class="impact-desc">Real-time stock, waste reduction</p>
+      </div>
+
+      <div class="impact-card col-span-3">
+        <div class="flex items-center justify-between">
+          <div class="impact-icon">💰</div>
+          <span class="impact-num">04</span>
+        </div>
+        <h3 class="impact-title">Reduced Leakage</h3>
+        <p class="impact-desc">Cash reconciliation, no blind spots</p>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="impact-card col-span-4">
+        <div class="flex items-center justify-between">
+          <div class="impact-icon">👥</div>
+          <span class="impact-num">05</span>
+        </div>
+        <h3 class="impact-title">Staff Visibility</h3>
+        <p class="impact-desc">Attendance, performance, shift tracking</p>
+      </div>
+
+      <div class="impact-card col-span-4">
+        <div class="flex items-center justify-between">
+          <div class="impact-icon">📊</div>
+          <span class="impact-num">06</span>
+        </div>
+        <h3 class="impact-title">Faster Decisions</h3>
+        <p class="impact-desc">Real-time dashboards for management</p>
+      </div>
+
+      <div class="impact-card col-span-4">
+        <div class="flex items-center justify-between">
+          <div class="impact-icon">🏢</div>
+          <span class="impact-num">07</span>
+        </div>
+        <h3 class="impact-title">Centralized Intelligence</h3>
+        <p class="impact-desc">All branches in one platform</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <span class="slide-num">21 / 24</span>
+</section>
+</body>
+</html>

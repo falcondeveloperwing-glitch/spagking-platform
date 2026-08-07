@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Role-Based Platform — SpagKing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="global.css">
+<style>
+  .role-card { background:#101010; border:1px solid rgba(250,250,250,0.08); border-radius:16px; padding:18px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:148px; transition:border-color .2s; }
+  .role-icon { width:48px; height:48px; border-radius:50%; background:rgba(255,215,0,0.12); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:10px; border:1px solid rgba(255,215,0,0.18); }
+  .role-name { font-family:'Poppins',sans-serif; font-weight:600; font-size:15px; color:#FAFAFA; line-height:1.15; margin-bottom:4px; }
+  .role-desc { font-family:'Inter',sans-serif; font-weight:400; font-size:11px; color:#8A8A8A; line-height:1.4; }
+</style>
+</head>
+<body class="bg-black">
+<div class="slide slide-pad">
+  <!-- Decorative glow -->
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:380px;height:380px;background:rgba(255,215,0,0.10);top:-160px;right:-120px;"></div>
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:300px;height:300px;background:rgba(255,215,0,0.06);bottom:-140px;left:-100px;"></div>
+
+  <div class="content-layer">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-1">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="accent-bar"></div>
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#FFD700;letter-spacing:0.15em;">ROLE-BASED PLATFORM</span>
+        </div>
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:28px;color:#FAFAFA;line-height:1.15;">Role-Based Platform</h1>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;color:#8A8A8A;margin-top:4px;">9 roles, 9 customized experiences</p>
+      </div>
+      <div class="logo-mark">👑</div>
+    </div>
+
+    <!-- 3x3 grid -->
+    <div class="grid grid-cols-3 gap-4 mt-6">
+      <div class="role-card">
+        <div class="role-icon">👤</div>
+        <div class="role-name">Customer</div>
+        <div class="role-desc">Order, track, earn rewards</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">💳</div>
+        <div class="role-name">Cashier</div>
+        <div class="role-desc">POS terminal &amp; walk-in orders</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">👨‍🍳</div>
+        <div class="role-name">Kitchen</div>
+        <div class="role-desc">Kitchen tickets &amp; order prep</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">📊</div>
+        <div class="role-name">Manager</div>
+        <div class="role-desc">Branch ops &amp; performance</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">📦</div>
+        <div class="role-name">Inventory</div>
+        <div class="role-desc">Stock, suppliers, POs</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">👥</div>
+        <div class="role-name">HR</div>
+        <div class="role-desc">Staff, payroll, leaves</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">🛵</div>
+        <div class="role-name">Rider</div>
+        <div class="role-desc">Live assignments &amp; earnings</div>
+      </div>
+      <div class="role-card">
+        <div class="role-icon">🛡️</div>
+        <div class="role-name">Admin</div>
+        <div class="role-desc">Branches, roles, audit</div>
+      </div>
+      <div class="role-card" style="background:linear-gradient(135deg, rgba(255,215,0,0.12), rgba(255,215,0,0.02));border-color:rgba(255,215,0,0.28);">
+        <div class="role-icon">👑</div>
+        <div class="role-name">CEO</div>
+        <div class="role-desc">Executive P&amp;L &amp; growth.</div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="flex items-center gap-3 mt-5">
+      <div class="accent-bar"></div>
+      <span style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;color:#FFD700;">One platform. Every role. One SpagKing.</span>
+    </div>
+  </div>
+
+  <div class="slide-num">14</div>
+</div>
+</body>
+</html>

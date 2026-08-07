@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reports &amp; Business Intelligence — SpagKing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="global.css">
+<style>
+  .rpt-card { background:#101010; border:1px solid rgba(250,250,250,0.08); border-radius:16px; padding:24px 22px; position:relative; overflow:hidden; }
+  .rpt-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+  .rpt-gold::before { background:linear-gradient(90deg,#FFF099,#FFD700,#D4A017); }
+  .rpt-green::before { background:linear-gradient(90deg,#69F0AE,#00E676,#00C853); }
+  .rpt-blue::before { background:linear-gradient(90deg,#82B1FF,#448AFF,#2962FF); }
+  .rpt-header { font-family:'Poppins',sans-serif; font-weight:600; font-size:16px; line-height:1.2; }
+  .rpt-gold .rpt-header { color:#FFD700; }
+  .rpt-green .rpt-header { color:#00E676; }
+  .rpt-blue .rpt-header { color:#82B1FF; }
+  .rpt-item { display:flex; align-items:center; gap:10px; padding:9px 0; border-top:1px solid rgba(250,250,250,0.05); font-family:'Inter',sans-serif; font-weight:400; font-size:12.5px; color:#FAFAFA; line-height:1.35; }
+  .rpt-item:first-of-type { border-top:none; }
+  .rpt-dot { width:6px; height:6px; border-radius:50%; background:#FFD700; flex-shrink:0; box-shadow:0 0 6px rgba(255,215,0,0.5); }
+</style>
+</head>
+<body class="bg-black">
+<div class="slide slide-pad">
+  <!-- Decorative glow -->
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:380px;height:380px;background:rgba(255,215,0,0.08);top:-160px;right:-100px;"></div>
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:300px;height:300px;background:rgba(0,230,118,0.05);bottom:-140px;left:-100px;"></div>
+
+  <div class="content-layer">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-1">
+      <div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="accent-bar"></div>
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#FFD700;letter-spacing:0.15em;">REPORTS &amp; BI</span>
+        </div>
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:28px;color:#FAFAFA;line-height:1.15;">Reports &amp; Business Intelligence</h1>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;color:#8A8A8A;margin-top:4px;">Daily, weekly, and monthly insights</p>
+      </div>
+      <div class="logo-mark">👑</div>
+    </div>
+
+    <!-- 3 columns -->
+    <div class="grid grid-cols-3 gap-5 mt-7">
+      <div class="rpt-card rpt-gold">
+        <div class="rpt-header">Daily</div>
+        <div class="mt-3">
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Sales trend</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Orders volume</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Food cost %</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Waste %</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Labour cost</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Complaints breakdown</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Manager's daily report</span></div>
+        </div>
+      </div>
+
+      <div class="rpt-card rpt-green">
+        <div class="rpt-header">Weekly</div>
+        <div class="mt-3">
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Branch ranking</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Staff ranking</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Best-selling meals</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Slow-moving items</span></div>
+        </div>
+      </div>
+
+      <div class="rpt-card rpt-blue">
+        <div class="rpt-header">Monthly</div>
+        <div class="mt-3">
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Profit &amp; Loss</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Inventory variance</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Customer growth</span></div>
+          <div class="rpt-item"><span class="rpt-dot"></span><span>Staff performance</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="flex items-center gap-3 mt-7">
+      <div class="accent-bar"></div>
+      <span style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;color:#FFD700;">From raw numbers to confident decisions.</span>
+    </div>
+  </div>
+
+  <div class="slide-num">12</div>
+</div>
+</body>
+</html>

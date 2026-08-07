@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slide 22 — Why SpagKing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="global.css">
+<style>
+  body { margin: 0; background: #1a1a1a; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .ghost-mark {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 360px;
+    color: rgba(255,215,0,0.025);
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    user-select: none;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .city-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255,215,0,0.06);
+    border: 1px solid rgba(255,215,0,0.18);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    color: #FFD700;
+    letter-spacing: 0.04em;
+  }
+  .city-pill .material-icons { font-size: 12px; }
+</style>
+</head>
+<body>
+<section class="slide slide-pad" style="display:flex;align-items:center;justify-content:center;">
+
+  <!-- Decorative glow orbs -->
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:380px;height:380px;background:#FFD700;opacity:0.10;top:-140px;left:-120px;"></div>
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:340px;height:340px;background:#D4A017;opacity:0.08;bottom:-120px;right:-100px;"></div>
+
+  <!-- Ghost numeral -->
+  <div data-decor aria-hidden="true" class="ghost-mark" style="bottom:-80px;right:40px;">22</div>
+
+  <div class="content-layer w-full flex flex-col items-center text-center" style="max-width: 880px;">
+
+    <!-- Top label -->
+    <div class="flex items-center gap-3 mb-8">
+      <span style="width:24px;height:1px;background:rgba(255,215,0,0.4);"></span>
+      <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.18em;color:#FFD700;">WHY SPAGKING</span>
+      <span style="width:24px;height:1px;background:rgba(255,215,0,0.4);"></span>
+    </div>
+
+    <!-- Headline -->
+    <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:36px;color:#FAFAFA;line-height:1.15;letter-spacing:-0.01em;">
+      Built for SpagKing's growth.
+    </h1>
+
+    <!-- Body -->
+    <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:18px;color:#8A8A8A;line-height:1.55;margin-top:24px;max-width:700px;">
+      SpagKing started in Lokoja as the No 1 Food Brand. Now expanding across Lagos — Lekki, Maroko, Surulere. This platform is built specifically for that journey: from a single flagship to a multi-branch restaurant chain. Every feature, every workflow, every dashboard is designed around the way SpagKing operates — bold flavours, fast service, and a different experience with food.
+    </p>
+
+    <!-- City expansion pills -->
+    <div class="flex items-center gap-3 mt-7" style="flex-wrap:wrap;justify-content:center;">
+      <span class="city-pill"><span class="material-icons">place</span>Lokoja · Origin</span>
+      <span class="material-icons" style="font-size:14px;color:rgba(255,215,0,0.4);">arrow_forward</span>
+      <span class="city-pill"><span class="material-icons">place</span>Lekki</span>
+      <span class="city-pill"><span class="material-icons">place</span>Maroko</span>
+      <span class="city-pill"><span class="material-icons">place</span>Surulere</span>
+    </div>
+
+    <!-- Accent bar -->
+    <div style="width:48px;height:4px;background:linear-gradient(90deg,#FFF099,#FFD700,#D4A017);border-radius:2px;margin-top:32px;"></div>
+
+    <!-- SpagKing tagline -->
+    <p class="gold-text" style="font-family:'Poppins',sans-serif;font-weight:500;font-size:16px;margin-top:18px;letter-spacing:0.02em;">
+      A Different Experience With Food.
+    </p>
+
+  </div>
+
+  <span class="slide-num">22 / 24</span>
+</section>
+</body>
+</html>

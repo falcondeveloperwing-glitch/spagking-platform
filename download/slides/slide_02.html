@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SpagKing — The Vision</title>
+  <link rel="stylesheet" href="global.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #050505; }
+    .slide-vision {
+      width: 1280px; height: 720px; position: relative; overflow: hidden;
+      background: #050505; color: #FAFAFA; font-family: 'Inter', sans-serif;
+    }
+    .orb-glow { position: absolute; border-radius: 50%; pointer-events: none; }
+    .orb-1 { top: -160px; right: -140px; width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(255,215,0,0.10), transparent 65%); }
+    .orb-2 { bottom: -180px; left: -160px; width: 540px; height: 540px;
+      background: radial-gradient(circle, rgba(255,215,0,0.08), transparent 65%); }
+    .accent-bar-thin {
+      width: 48px; height: 4px;
+      background: linear-gradient(90deg, #FFD700, #D4A017); border-radius: 2px;
+    }
+    .icon-circle-sm {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255,215,0,0.10);
+      border: 1px solid rgba(255,215,0,0.22);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 0 24px rgba(255,215,0,0.10);
+    }
+    .icon-divider {
+      width: 28px; height: 1px;
+      background: linear-gradient(90deg, rgba(255,215,0,0.45), rgba(255,215,0,0.05));
+    }
+    .slide-num-c {
+      position: absolute; bottom: 24px; right: 32px;
+      font-size: 11px; color: #8A8A8A; font-family: 'Inter', sans-serif;
+    }
+    .ghost-numeral {
+      position: absolute; right: -40px; top: 80px;
+      font-family: 'Poppins', sans-serif; font-weight: 800;
+      font-size: 380px; line-height: 1; color: rgba(255,215,0,0.025);
+      pointer-events: none; user-select: none;
+    }
+  </style>
+</head>
+<body>
+<div class="slide-vision">
+  <div class="orb-glow orb-1" data-decor></div>
+  <div class="orb-glow orb-2" data-decor></div>
+  <div class="ghost-numeral" data-decor>V</div>
+  <div class="content-layer w-full h-full flex flex-col" style="padding: 64px 72px;">
+    <div class="flex items-center gap-3">
+      <div class="accent-bar-thin"></div>
+      <span style="font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; color:#FFD700; letter-spacing:0.15em;">THE VISION</span>
+    </div>
+    <div class="flex-1 flex flex-col items-center justify-center" style="margin-top: -20px;">
+      <h1 class="text-center" style="font-family:'Poppins',sans-serif; font-weight:700; font-size:36px; color:#FFFFFF; line-height:1.25; max-width:920px; letter-spacing:-0.01em;">One platform connecting every part of SpagKing</h1>
+      <p class="mt-6 text-center" style="font-family:'Inter',sans-serif; font-weight:400; font-size:18px; color:#8A8A8A; line-height:1.65; max-width:800px;">From the customer's first craving to the CEO's morning dashboard — SpagKing unifies ordering, kitchen operations, inventory, staff, delivery, and business intelligence into a single, connected ecosystem. No more scattered tools. No more blind spots. Just one platform, built for the way SpagKing runs.</p>
+    </div>
+    <div class="flex justify-end items-center gap-3">
+      <div class="icon-circle-sm" title="Ordering">📱</div>
+      <div class="icon-divider"></div>
+      <div class="icon-circle-sm" title="Operations">🏪</div>
+      <div class="icon-divider"></div>
+      <div class="icon-circle-sm" title="Intelligence">📊</div>
+    </div>
+  </div>
+  <div class="slide-num-c">02</div>
+</div>
+</body>
+</html>

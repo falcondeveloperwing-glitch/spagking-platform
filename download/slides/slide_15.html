@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Multi-Branch Visibility — SpagKing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="global.css">
+<style>
+  .branch-card { background:#101010; border:1px solid rgba(250,250,250,0.08); border-radius:12px; padding:12px 14px; }
+  .branch-name { font-family:'Poppins',sans-serif; font-weight:600; font-size:13px; color:#FAFAFA; line-height:1.15; }
+  .branch-rev { font-family:'Poppins',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#FFF099,#FFD700,#D4A017); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; margin-top:4px; letter-spacing:-0.01em; }
+  .branch-rating { font-family:'Inter',sans-serif; font-weight:500; font-size:11px; color:#8A8A8A; margin-top:2px; }
+</style>
+</head>
+<body class="bg-black">
+<div class="slide" style="display:flex;">
+  <!-- Decorative glow -->
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:340px;height:340px;background:rgba(255,215,0,0.10);top:-140px;left:-100px;"></div>
+
+  <!-- LEFT: 55% text -->
+  <div class="content-layer" style="width:55%;padding:64px 56px 64px 72px;display:flex;flex-direction:column;">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="accent-bar"></div>
+      <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;color:#FFD700;letter-spacing:0.15em;">MULTI-BRANCH</span>
+    </div>
+    <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:28px;color:#FAFAFA;line-height:1.15;">One platform, every branch</h1>
+
+    <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:16px;color:#8A8A8A;line-height:1.55;max-width:480px;margin-top:14px;margin-bottom:24px;">
+      Management can view and compare all branches from a single dashboard. See which branch is selling the most, which has the lowest waste, which staff are performing best — all in real-time, all from one screen.
+    </p>
+
+    <!-- 2x2 mini-grid -->
+    <div class="grid grid-cols-2 gap-3" style="max-width:480px;">
+      <div class="branch-card">
+        <div class="branch-name">Lekki Phase 1</div>
+        <div class="branch-rev">₦1.85M</div>
+        <div class="branch-rating">★ 4.9 · Top performer</div>
+      </div>
+      <div class="branch-card">
+        <div class="branch-name">Maroko / Oniru</div>
+        <div class="branch-rev">₦1.43M</div>
+        <div class="branch-rating">★ 4.7 · Growing</div>
+      </div>
+      <div class="branch-card">
+        <div class="branch-name">Surulere</div>
+        <div class="branch-rev">₦986K</div>
+        <div class="branch-rating">★ 4.6 · New branch</div>
+      </div>
+      <div class="branch-card">
+        <div class="branch-name">Lokoja</div>
+        <div class="branch-rev">₦1.24M</div>
+        <div class="branch-rating">★ 4.8 · Flagship</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: 45% image -->
+  <div style="width:45%;position:relative;overflow:hidden;">
+    <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/833e43990758.jpg" alt="SpagKing restaurant" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <!-- Dark gradient overlay from left -->
+    <div data-decor aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(90deg, #050505 0%, rgba(5,5,5,0.55) 30%, rgba(5,5,5,0.10) 100%);"></div>
+    <div data-decor aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(5,5,5,0.30) 0%, transparent 30%, transparent 70%, rgba(5,5,5,0.40) 100%);"></div>
+  </div>
+
+  <div class="slide-num">15</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slide 17 — Demo vs Production</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="global.css">
+<style>
+  body { margin: 0; background: #1a1a1a; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .col-card {
+    border-radius: 18px;
+    padding: 22px 22px 18px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .col-green {
+    background: linear-gradient(160deg, rgba(0,230,118,0.10), rgba(0,230,118,0.02));
+    border: 1px solid rgba(0,230,118,0.22);
+  }
+  .col-gold {
+    background: linear-gradient(160deg, rgba(255,215,0,0.10), rgba(255,215,0,0.02));
+    border: 1px solid rgba(255,215,0,0.22);
+  }
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 8px;
+    border-bottom: 1px dashed rgba(250,250,250,0.05);
+  }
+  .row:last-child { border-bottom: none; }
+  .row-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+  .row-num-g { background: rgba(0,230,118,0.18); color: #00E676; }
+  .row-num-y { background: rgba(255,215,0,0.16); color: #FFD700; }
+  .row-text { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 13px; color: #FAFAFA; line-height: 1.3; }
+  .check-icon { font-size: 16px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<section class="slide slide-pad">
+
+  <!-- Decorative glow orbs -->
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:280px;height:280px;background:#FFD700;opacity:0.10;top:-80px;right:-60px;"></div>
+  <div data-decor aria-hidden="true" class="glow-orb" style="width:260px;height:260px;background:#00E676;opacity:0.07;bottom:-100px;left:-80px;"></div>
+
+  <div class="content-layer h-full flex flex-col">
+
+    <!-- Header -->
+    <header class="flex items-end justify-between mb-5">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="accent-bar"></span>
+          <span style="font-family:'Poppins',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;color:#FFD700;">READY · TO · LAUNCH</span>
+        </div>
+        <h1 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:28px;color:#FAFAFA;line-height:1.1;">Demo vs Production</h1>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;color:#8A8A8A;margin-top:4px;">What's ready now vs what needs production setup</p>
+      </div>
+      <div class="flex items-center gap-2 text-[11px]" style="font-family:'Inter',sans-serif;color:#8A8A8A;">
+        <span class="material-icons" style="font-size:14px;color:#FFD700;">stacked_bar_chart</span>
+        <span>10 ready</span>
+        <span style="color:rgba(250,250,250,0.2);">|</span>
+        <span>10 to integrate</span>
+      </div>
+    </header>
+
+    <!-- Two columns -->
+    <div class="grid grid-cols-2 gap-5 flex-1" style="min-height:0;">
+
+      <!-- LEFT: Available in Demo -->
+      <div class="col-card col-green">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,230,118,0.15);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:18px;">✅</span>
+            </div>
+            <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;color:#00E676;">Available in Demo</h2>
+          </div>
+          <span style="font-family:'Inter',sans-serif;font-size:10px;color:#8A8A8A;letter-spacing:0.1em;">10 / 10</span>
+        </div>
+        <div class="flex-1 flex flex-col justify-between">
+          <div class="row"><span class="row-num row-num-g">1</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">Full customer ordering flow</span></div>
+          <div class="row"><span class="row-num row-num-g">2</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">POS terminal</span></div>
+          <div class="row"><span class="row-num row-num-g">3</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">Inventory management</span></div>
+          <div class="row"><span class="row-num row-num-g">4</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">Staff & HR</span></div>
+          <div class="row"><span class="row-num row-num-g">5</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">Reports & analytics</span></div>
+          <div class="row"><span class="row-num row-num-g">6</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">CRM & loyalty</span></div>
+          <div class="row"><span class="row-num row-num-g">7</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">Delivery management</span></div>
+          <div class="row"><span class="row-num row-num-g">8</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">Executive dashboard</span></div>
+          <div class="row"><span class="row-num row-num-g">9</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">9 role-based dashboards</span></div>
+          <div class="row"><span class="row-num row-num-g">10</span><i class="material-icons check-icon" style="color:#00E676;">check_circle</i><span class="row-text">Real SpagKing branding & content</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Production Integrations -->
+      <div class="col-card col-gold">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <div style="width:36px;height:36px;border-radius:10px;background:rgba(255,215,0,0.15);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:18px;">🔧</span>
+            </div>
+            <h2 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;color:#FFD700;">Production Integrations</h2>
+          </div>
+          <span style="font-family:'Inter',sans-serif;font-size:10px;color:#8A8A8A;letter-spacing:0.1em;">10 / 10</span>
+        </div>
+        <div class="flex-1 flex flex-col justify-between">
+          <div class="row"><span class="row-num row-num-y">1</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">Live Paystack credentials</span></div>
+          <div class="row"><span class="row-num row-num-y">2</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">Live Flutterwave credentials</span></div>
+          <div class="row"><span class="row-num row-num-y">3</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">Backend database & API</span></div>
+          <div class="row"><span class="row-num row-num-y">4</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">WhatsApp Business API</span></div>
+          <div class="row"><span class="row-num row-num-y">5</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">SMS gateway (Twilio)</span></div>
+          <div class="row"><span class="row-num row-num-y">6</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">Email service (SendGrid)</span></div>
+          <div class="row"><span class="row-num row-num-y">7</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">GPS provider (Google Maps)</span></div>
+          <div class="row"><span class="row-num row-num-y">8</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">Receipt printer hardware</span></div>
+          <div class="row"><span class="row-num row-num-y">9</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">Production authentication</span></div>
+          <div class="row"><span class="row-num row-num-y">10</span><i class="material-icons check-icon" style="color:#FFD700;">build</i><span class="row-text">App store deployment</span></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <span class="slide-num">17 / 24</span>
+</section>
+</body>
+</html>
