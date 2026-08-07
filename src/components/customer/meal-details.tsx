@@ -177,7 +177,7 @@ export function CustomerMealDetails() {
                 { name: "Tunde A.", rating: 4, comment: "Tasty but the delivery was a bit late. Food was still hot though.", date: "1 week ago" },
                 { name: "Fatima M.", rating: 5, comment: "My go-to spot. The Royal Bolognese is unmatched.", date: "2 weeks ago" },
               ].map((r, i) => (
-                <div key={i} className="glass-card rounded-xl p-4">
+                <div key={i} className="glass-card rounded-2xl p-4">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-semibold">{r.name}</span>
                     <span className="text-xs text-muted-foreground">{r.date}</span>
@@ -343,7 +343,7 @@ export function CustomerMealDetails() {
             { emoji: "☕", name: "Iced Caramel Macchiato", reason: "For the after-meal kick", price: 2500 },
           ].map((p, i) => (
             <button key={i} onClick={() => toast.success(`${p.name} added`)}
-              className="glass-card rounded-xl p-3 text-left card-hover">
+              className="glass-card rounded-2xl p-3 text-left card-hover">
               <div className="text-3xl mb-1.5">{p.emoji}</div>
               <div className="text-xs font-semibold">{p.name}</div>
               <div className="text-[10px] text-muted-foreground mb-1.5">{p.reason}</div>

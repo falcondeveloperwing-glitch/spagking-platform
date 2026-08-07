@@ -127,7 +127,7 @@ export function AIAssistant() {
                 {m.cards && (
                   <div className="grid grid-cols-2 gap-2">
                     {m.cards.map((c, j) => (
-                      <div key={j} className="glass-card rounded-xl p-2.5">
+                      <div key={j} className="glass-card rounded-2xl p-2.5">
                         <div className="text-[10px] text-muted-foreground uppercase tracking-wide">{c.title}</div>
                         <div className="font-display font-bold text-base text-gold-gradient">{c.value}</div>
                         {c.trend && <div className="text-[10px] text-emerald-400">{c.trend}</div>}

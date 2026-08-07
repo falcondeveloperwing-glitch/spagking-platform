@@ -75,7 +75,7 @@ export function CartSheet() {
                 {cart.map((item, idx) => (
                   <motion.div key={`${item.mealId}-${item.size}-${idx}`}
                     initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30, height: 0 }}
-                    className="flex gap-3 glass-card rounded-xl p-2.5">
+                    className="flex gap-3 glass-card rounded-2xl p-2.5">
                     <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0">
                       <MealImage src={item.image} emoji={item.emoji} alt={item.name} className="w-full h-full" />
                     </div>

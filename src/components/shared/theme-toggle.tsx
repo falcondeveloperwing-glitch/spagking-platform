@@ -14,8 +14,10 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("mousedown", handler); document.removeEventListener("keydown", onKey); };
   }, []);
 
   const CurrentIcon = themeMode === "light" ? Sun : themeMode === "system" ? Monitor : Moon;
@@ -60,7 +62,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.96 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute right-0 mt-2 w-44 glass-card rounded-xl p-1.5 z-50 shadow-xl"
+            className="absolute right-0 mt-2 w-44 glass-card rounded-2xl p-1.5 z-50 shadow-xl"
           >
             {[
               { mode: "light" as const, icon: Sun, label: "Light" },

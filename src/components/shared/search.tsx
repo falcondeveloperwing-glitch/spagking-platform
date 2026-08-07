@@ -96,7 +96,7 @@ export function GlobalSearch() {
                   { icon: Boxes, label: "Suppliers", count: suppliers.length },
                   { icon: TrendingUp, label: "Reports", count: 12 },
                 ].map(c => (
-                  <button key={c.label} onClick={() => setQ(c.label)} className="glass-card rounded-xl p-3 flex items-center gap-2.5 hover:glass-gold transition-all text-left">
+                  <button key={c.label} onClick={() => setQ(c.label)} className="glass-card rounded-2xl p-3 flex items-center gap-2.5 hover:glass-gold transition-all text-left">
                     <c.icon className="w-4 h-4 text-[var(--gold)]" />
                     <div>
                       <div className="text-xs font-semibold">{c.label}</div>

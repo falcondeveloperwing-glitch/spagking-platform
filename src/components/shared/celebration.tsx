@@ -10,17 +10,24 @@ export function Celebration() {
   useEffect(() => {
     if (!celebration) return;
     const timer = setTimeout(() => clearCelebration(), 4000);
-    return () => clearTimeout(timer);
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") clearCelebration(); };
+    window.addEventListener("keydown", onKey);
+    return () => { clearTimeout(timer); window.removeEventListener("keydown", onKey); };
   }, [celebration, clearCelebration]);
 
   return (
     <AnimatePresence>
       {celebration && (
         <motion.div
+          key="celebration-overlay"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[90] flex items-center justify-center pointer-events-none"
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-[90] flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-label={celebration.title}
           onClick={clearCelebration}
         >
           {/* Backdrop */}

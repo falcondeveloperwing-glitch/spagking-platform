@@ -102,7 +102,7 @@ export function POSDashboard() {
               <motion.button key={m.id} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: Math.min(i * 0.02, 0.3) }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => addItem(m)}
-                className="group glass-card rounded-xl overflow-hidden text-left card-hover relative">
+                className="group glass-card rounded-2xl overflow-hidden text-left card-hover relative">
                 <div className="relative aspect-square">
                   <MealImage src={m.image} emoji={m.emoji} alt={m.name} className="w-full h-full" />
                   {m.stock < 20 && <span className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-amber-500/90 text-white">{m.stock} left</span>}
@@ -240,7 +240,7 @@ export function POSDashboard() {
               </motion.div>
               <h3 className="font-display font-bold text-xl mb-1">Order {lastOrder.code}</h3>
               <p className="text-sm text-muted-foreground mb-4">Total: <span className="font-bold text-[var(--gold)]">{formatNaira(lastOrder.total)}</span></p>
-              <div className="text-left glass-card rounded-xl p-3 mb-4 max-h-48 overflow-y-auto">
+              <div className="text-left glass-card rounded-2xl p-3 mb-4 max-h-48 overflow-y-auto">
                 {lastOrder.items.map((it, i) => (
                   <div key={i} className="flex justify-between text-xs py-1">
                     <span>{it.qty} × {it.emoji} {it.name}</span>
@@ -263,19 +263,19 @@ export function POSDashboard() {
           <DialogHeader><DialogTitle>Cash Drawer</DialogTitle></DialogHeader>
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
-              <div className="glass-card rounded-xl p-3">
+              <div className="glass-card rounded-2xl p-3">
                 <div className="text-[10px] text-muted-foreground uppercase">Opening balance</div>
                 <div className="font-display font-bold text-lg">{formatNaira(50_000)}</div>
               </div>
-              <div className="glass-card rounded-xl p-3">
+              <div className="glass-card rounded-2xl p-3">
                 <div className="text-[10px] text-muted-foreground uppercase">Cash sales</div>
                 <div className="font-display font-bold text-lg text-emerald-400">{formatNaira(184_500)}</div>
               </div>
-              <div className="glass-card rounded-xl p-3">
+              <div className="glass-card rounded-2xl p-3">
                 <div className="text-[10px] text-muted-foreground uppercase">Refunds paid</div>
                 <div className="font-display font-bold text-lg text-red-400">{formatNaira(4_500)}</div>
               </div>
-              <div className="glass-card rounded-xl p-3 bg-gradient-to-br from-[var(--gold)]/15 to-transparent">
+              <div className="glass-card rounded-2xl p-3 bg-gradient-to-br from-[var(--gold)]/15 to-transparent">
                 <div className="text-[10px] text-muted-foreground uppercase">Expected</div>
                 <div className="font-display font-bold text-lg text-gold-gradient">{formatNaira(230_000)}</div>
               </div>
@@ -294,7 +294,7 @@ export function POSDashboard() {
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-2">
               {[2, 3, 4].map(n => (
-                <button key={n} className="glass-card rounded-xl p-3 hover:glass-gold text-center">
+                <button key={n} className="glass-card rounded-2xl p-3 hover:glass-gold text-center">
                   <div className="font-display font-bold text-lg">{n} ways</div>
                   <div className="text-xs text-muted-foreground">{formatNaira(Math.round(total / n))} each</div>
                 </button>
@@ -323,7 +323,7 @@ export function POSDashboard() {
         <DialogContent className="max-w-md bg-card border-border/50">
           <DialogHeader><DialogTitle>Shift reconciliation</DialogTitle></DialogHeader>
           <div className="space-y-3">
-            <div className="glass-card rounded-xl p-4 space-y-2 text-sm">
+            <div className="glass-card rounded-2xl p-4 space-y-2 text-sm">
               <div className="flex justify-between"><span className="text-muted-foreground">Cashier</span><span className="font-semibold">{user?.name}</span></div>
               <div className="flex justify-between"><span className="text-muted-foreground">Shift started</span><span>08:00 AM</span></div>
               <div className="flex justify-between"><span className="text-muted-foreground">Orders processed</span><span>47</span></div>

@@ -89,7 +89,7 @@ export function CustomerProfile() {
             { label: "Home", address: "12 Adeola Odeku St, Victoria Island, Lagos" },
             { label: "Work", address: "5 Adeyemo Alakija St, Lekki Phase 1, Lagos" },
           ].map((a, i) => (
-            <div key={i} className="glass-card rounded-xl p-3 flex items-start gap-3">
+            <div key={i} className="glass-card rounded-2xl p-3 flex items-start gap-3">
               <div className="w-9 h-9 rounded-lg bg-[var(--gold)]/15 flex items-center justify-center">
                 <MapPin className="w-4 h-4 text-[var(--gold)]" />
               </div>
@@ -117,7 +117,7 @@ export function CustomerProfile() {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {favMeals.map(m => (
-                <div key={m.id} className="glass-card rounded-xl overflow-hidden cursor-pointer card-hover"
+                <div key={m.id} className="glass-card rounded-2xl overflow-hidden cursor-pointer card-hover"
                   onClick={() => useStore.getState().setSelectedMeal(m.id)}>
                   <div className="aspect-square">
                     <MealImage src={m.image} emoji={m.emoji} alt={m.name} className="w-full h-full" />
@@ -137,7 +137,7 @@ export function CustomerProfile() {
       {section === "payments" && (
         <Section title="Payment methods" onClose={() => setSection("overview")}>
           <div className="space-y-2">
-            <div className="glass-card rounded-xl p-4 flex items-center gap-3">
+            <div className="glass-card rounded-2xl p-4 flex items-center gap-3">
               <div className="w-10 h-7 rounded bg-gradient-to-br from-sky-500 to-blue-700" />
               <div className="flex-1">
                 <div className="text-sm font-semibold">Visa •••• 4242</div>
@@ -145,7 +145,7 @@ export function CustomerProfile() {
               </div>
               <Button size="sm" variant="ghost" onClick={() => toast.success("Edit card")}>Edit</Button>
             </div>
-            <div className="glass-card rounded-xl p-4 flex items-center gap-3">
+            <div className="glass-card rounded-2xl p-4 flex items-center gap-3">
               <div className="w-10 h-7 rounded bg-gradient-to-br from-amber-500 to-orange-600" />
               <div className="flex-1">
                 <div className="text-sm font-semibold">Mastercard •••• 8888</div>
@@ -163,7 +163,7 @@ export function CustomerProfile() {
 
 function Stat({ icon: Icon, label, value, color }: { icon: any; label: string; value: string; color: string }) {
   return (
-    <div className="glass-card rounded-xl p-3 text-center">
+    <div className="glass-card rounded-2xl p-3 text-center">
       <Icon className={`w-5 h-5 mx-auto mb-1 ${color}`} />
       <div className="font-display font-bold text-lg">{value}</div>
       <div className="text-[10px] text-muted-foreground uppercase tracking-wide">{label}</div>

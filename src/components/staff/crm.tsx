@@ -289,7 +289,7 @@ export function CRMDashboard() {
             <div className="space-y-3">
               <div>
                 <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">Contact</h4>
-                <div className="glass-card rounded-lg p-3 text-xs space-y-1">
+                <div className="glass-card rounded-2xl p-3 text-xs space-y-1">
                   <div>📞 {selected.phone}</div>
                   <div>📍 {selected.address}, {selected.city}</div>
                   <div>🎂 Birthday: {selected.birthday}</div>
@@ -347,7 +347,7 @@ function KPI({ title, value, sub, icon: Icon, accent }: { title: string; value: 
 
 function MiniStat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="glass-card rounded-lg p-2 text-center">
+    <div className="glass-card rounded-2xl p-2 text-center">
       <div className="font-bold text-sm">{value}</div>
       <div className="text-[10px] text-muted-foreground">{label}</div>
     </div>

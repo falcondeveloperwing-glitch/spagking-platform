@@ -61,7 +61,7 @@ export function DeliveryDashboard() {
               {activeDeliveries.map(o => {
                 const rider = riders.find(r => r.name === o.rider) || riders[0];
                 return (
-                  <div key={o.id} className="glass-card rounded-xl p-3">
+                  <div key={o.id} className="glass-card rounded-2xl p-3">
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-semibold text-xs">{o.code}</span>
                       <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${
@@ -115,15 +115,15 @@ export function DeliveryDashboard() {
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-1.5 text-center mb-3">
-                <div className="glass-card rounded-lg p-1.5">
+                <div className="glass-card rounded-2xl p-1.5">
                   <div className="text-xs font-bold">{r.completedToday}</div>
                   <div className="text-[8px] text-muted-foreground">TODAY</div>
                 </div>
-                <div className="glass-card rounded-lg p-1.5">
+                <div className="glass-card rounded-2xl p-1.5">
                   <div className="text-xs font-bold">{r.completedTotal}</div>
                   <div className="text-[8px] text-muted-foreground">TOTAL</div>
                 </div>
-                <div className="glass-card rounded-lg p-1.5">
+                <div className="glass-card rounded-2xl p-1.5">
                   <div className="text-xs font-bold text-[var(--gold)]">{formatNaira(r.earningsToday).replace("₦", "₦")}</div>
                   <div className="text-[8px] text-muted-foreground">EARNED</div>
                 </div>
