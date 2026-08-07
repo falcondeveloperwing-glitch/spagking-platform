@@ -23,8 +23,8 @@ import { Button } from "@/components/ui/button";
 
 const NAV: { id: string; label: string; icon: any; roles: Role[] }[] = [
   { id: "executive", label: "Executive", icon: LayoutDashboard, roles: ["ceo", "manager", "admin"] },
-  { id: "pos", label: "POS Terminal", icon: ShoppingCart, roles: ["cashier", "manager", "admin"] },
-  { id: "inventory", label: "Inventory", icon: Boxes, roles: ["inventory", "manager", "admin"] },
+  { id: "pos", label: "POS Terminal", icon: ShoppingCart, roles: ["cashier", "kitchen", "manager", "admin"] },
+  { id: "inventory", label: "Inventory", icon: Boxes, roles: ["inventory", "kitchen", "manager", "admin"] },
   { id: "staff", label: "Staff & HR", icon: Users, roles: ["hr", "manager", "admin"] },
   { id: "reports", label: "Reports", icon: BarChart3, roles: ["manager", "admin", "ceo"] },
   { id: "crm", label: "CRM", icon: Heart, roles: ["manager", "admin", "ceo"] },

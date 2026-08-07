@@ -88,6 +88,7 @@ export function StaffDashboard() {
           { id: "payroll", label: "Payroll", icon: DollarSign },
           { id: "training", label: "Training", icon: GraduationCap },
           { id: "performance", label: "Performance", icon: TrendingUp },
+          { id: "disciplinary", label: "Disciplinary", icon: AlertCircle },
         ].map(t => (
           <button key={t.id} onClick={() => setTab(t.id as any)}
             className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${tab === t.id ? "btn-gold" : "glass text-muted-foreground"}`}>
@@ -357,6 +358,53 @@ export function StaffDashboard() {
               </div>
             </motion.div>
           ))}
+        </div>
+      )}
+
+      {/* Disciplinary records */}
+      {tab === "disciplinary" && (
+        <div className="glass-card rounded-2xl overflow-hidden">
+          <div className="p-3 flex items-center justify-between border-b border-border/50">
+            <h3 className="font-semibold text-sm">Disciplinary Records</h3>
+            <Button size="sm" className="btn-gold" onClick={() => toast.success("New disciplinary record form opened")}><Plus className="w-3.5 h-3.5" /> Log Incident</Button>
+          </div>
+          <table className="w-full text-sm">
+            <thead className="bg-muted/30 text-xs text-muted-foreground">
+              <tr>
+                <th className="text-left p-3 font-medium">Employee</th>
+                <th className="text-left p-3 font-medium hidden sm:table-cell">Incident</th>
+                <th className="text-left p-3 font-medium">Date</th>
+                <th className="text-left p-3 font-medium">Severity</th>
+                <th className="text-left p-3 font-medium hidden md:table-cell">Action</th>
+                <th className="text-right p-3 font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { name: "Tunde Sani", incident: "Late arrival (3rd time)", date: "Aug 5", severity: "warning", action: "Verbal warning", status: "resolved" },
+                { name: "Bisi Adewale", incident: "Improper food handling", date: "Aug 3", severity: "serious", action: "Written warning + retraining", status: "in-progress" },
+                { name: "Hassan Aliyu", incident: "No-show without notice", date: "Jul 28", severity: "serious", action: "1-day suspension", status: "resolved" },
+                { name: "Grace Eze", incident: "Customer complaint (rude behaviour)", date: "Jul 22", severity: "warning", action: "Verbal warning", status: "resolved" },
+              ].map((r, i) => (
+                <tr key={i} className="border-t border-border/30 hover:bg-muted/20">
+                  <td className="p-3 text-xs font-medium">{r.name}</td>
+                  <td className="p-3 hidden sm:table-cell text-xs text-muted-foreground">{r.incident}</td>
+                  <td className="p-3 text-xs">{r.date}</td>
+                  <td className="p-3">
+                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${r.severity === "serious" ? "bg-[var(--error)]/15 text-[var(--error)]" : "bg-[var(--warning)]/15 text-[var(--warning)]"}`}>
+                      {r.severity.toUpperCase()}
+                    </span>
+                  </td>
+                  <td className="p-3 hidden md:table-cell text-xs text-muted-foreground">{r.action}</td>
+                  <td className="p-3 text-right">
+                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${r.status === "resolved" ? "bg-[var(--success)]/15 text-[var(--success)]" : "bg-[var(--warning)]/15 text-[var(--warning)]"}`}>
+                      {r.status === "resolved" ? "RESOLVED" : "IN PROGRESS"}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

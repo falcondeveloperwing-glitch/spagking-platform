@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { toast } from "sonner";
 import {
-  Crown, User, ShoppingCart, Boxes, Users, Bike, ShieldCheck, BarChart3,
+  Crown, User, ShoppingCart, Boxes, Users, Bike, ShieldCheck, BarChart3, ChefHat,
   Mail, Phone, Lock, Eye, EyeOff, ArrowRight, ArrowLeft, Sparkles, Star, CheckCircle2,
   UtensilsCrossed,
 } from "lucide-react";
@@ -16,6 +16,7 @@ import {
 const roles: { role: Role; name: string; desc: string; icon: any; tag: string }[] = [
   { role: "customer", name: "Customer", desc: "Order, track & earn rewards", icon: User, tag: "Guest experience" },
   { role: "cashier", name: "Cashier", desc: "POS terminal & walk-in orders", icon: ShoppingCart, tag: "Front of house" },
+  { role: "kitchen", name: "Kitchen", desc: "Kitchen tickets & order prep", icon: ChefHat, tag: "Kitchen" },
   { role: "manager", name: "Manager", desc: "Branch ops & performance", icon: BarChart3, tag: "Operations" },
   { role: "inventory", name: "Inventory", desc: "Stock, suppliers, POs", icon: Boxes, tag: "Supply chain" },
   { role: "hr", name: "HR Officer", desc: "Staff, payroll, leaves", icon: Users, tag: "People" },

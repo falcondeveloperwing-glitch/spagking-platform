@@ -4,6 +4,7 @@
 export type Role =
   | "customer"
   | "cashier"
+  | "kitchen"
   | "manager"
   | "inventory"
   | "hr"
@@ -562,6 +563,7 @@ export const orders: Order[] = Array.from({ length: 700 }, (_, i) => {
 export const demoUsers: Record<Role, User> = {
   customer: { id: "U-CUST", role: "customer", name: "Chidi Okafor", email: "chidi@gmail.com", phone: "+234 802 111 2222", avatar: avatarFor("Chidi Okafor") },
   cashier: { id: "U-CASH", role: "cashier", name: "Folake Adeyemi", email: "folake@spagking.ng", phone: "+234 803 222 3333", avatar: avatarFor("Folake Adeyemi"), branch: branches[0].name },
+  kitchen: { id: "U-KIT", role: "kitchen", name: "Chef Ibrahim", email: "ibrahim@spagking.ng", phone: "+234 808 777 8888", avatar: avatarFor("Chef Ibrahim"), branch: branches[0].name },
   manager: { id: "U-MGR", role: "manager", name: "Emeka Okoro", email: "emeka@spagking.ng", phone: "+234 802 345 6789", avatar: avatarFor("Emeka Okoro"), branch: branches[0].name },
   inventory: { id: "U-INV", role: "inventory", name: "Bashir Sani", email: "bashir@spagking.ng", phone: "+234 804 333 4444", avatar: avatarFor("Bashir Sani"), branch: branches[0].name },
   hr: { id: "U-HR", role: "hr", name: "Aisha Bello", email: "aisha@spagking.ng", phone: "+234 803 456 7890", avatar: avatarFor("Aisha Bello") },
