@@ -18,7 +18,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const currentIcon = themeMode === "light" ? Sun : themeMode === "system" ? Monitor : Moon;
+  const CurrentIcon = themeMode === "light" ? Sun : themeMode === "system" ? Monitor : Moon;
 
   if (compact) {
     // Single-click toggle button for tight spaces (cycles light → dark → system)
@@ -51,7 +51,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
         aria-label="Theme options"
         aria-expanded={open}
       >
-        <currentIcon className="w-4.5 h-4.5" />
+        <CurrentIcon className="w-4.5 h-4.5" />
       </button>
       <AnimatePresence>
         {open && (

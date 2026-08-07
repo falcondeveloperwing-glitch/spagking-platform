@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Star, Clock, Flame, Leaf, Heart, Plus, Minus, ShoppingCart, Check, AlertTriangle, Play } from "lucide-react";
 import { useStore } from "@/lib/store";
-import { meals, formatNaira, branches } from "@/lib/data";
+import { meals, formatNaira } from "@/lib/data";
 import { MealImage } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -390,7 +390,7 @@ export function CustomerMealDetails() {
           <Button onClick={handleAddToCart} variant="outline" className="h-11 hidden sm:flex">
             <ShoppingCart className="w-4 h-4" /> Add
           </Button>
-          <Button onClick={handleBuyNow} className="btn-gold h-11 px-5">
+          <Button onClick={handleBuyNow} className="btn-gold h-12 px-5">
             Buy now
           </Button>
         </motion.div>

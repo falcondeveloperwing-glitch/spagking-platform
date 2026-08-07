@@ -255,7 +255,7 @@ export function DemoLogin() {
                                 </InputOTPGroup>
                               </InputOTP>
                               <p className="text-[10px] text-muted-foreground">Demo hint: enter any 6 digits</p>
-                              <Button type="submit" className="btn-gold w-full h-11" disabled={loading}>
+                              <Button type="submit" className="btn-gold w-full h-12" disabled={loading}>
                                 {loading ? "Verifying…" : <>Verify & continue <ArrowRight className="w-4 h-4" /></>}
                               </Button>
                             </div>
@@ -288,7 +288,7 @@ export function DemoLogin() {
                                 </div>
                               )}
 
-                              <Button type="submit" className="btn-gold w-full h-11" disabled={loading}>
+                              <Button type="submit" className="btn-gold w-full h-12" disabled={loading}>
                                 {loading ? "Please wait…" : (
                                   <>
                                     {authStep === "login" && "Sign in"}

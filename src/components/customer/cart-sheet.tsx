@@ -153,7 +153,7 @@ export function CartSheet() {
                 </div>
               </div>
 
-              <Button onClick={handleCheckout} className="btn-gold w-full h-11">
+              <Button onClick={handleCheckout} className="btn-gold w-full h-12">
                 Checkout · {formatNaira(totals.total + tip)} <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
