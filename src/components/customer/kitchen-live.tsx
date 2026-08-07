@@ -173,7 +173,8 @@ export function CustomerKitchenLive() {
         <h3 className="font-display font-semibold text-lg mb-3 flex items-center gap-2"><Flame className="w-4 h-4 text-[var(--warning)]" /> Cooking hot right now</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {meals.slice(0, 6).map((m, i) => {
-            const cooking = Math.floor(Math.random() * 4) + 1;
+            // Deterministic "cooking now" count from meal id (avoids hydration mismatch)
+            const cooking = (m.id.split("").reduce((s, c) => s + c.charCodeAt(0), 0) % 4) + 1;
             return (
               <motion.div key={m.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                 onClick={() => { useStore.getState().setSelectedMeal(m.id); }}

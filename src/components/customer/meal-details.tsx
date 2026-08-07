@@ -224,12 +224,16 @@ export function CustomerMealDetails() {
           </span>
           <span className="text-xs font-semibold">Kitchen activity for this meal</span>
         </div>
-        {[
-          { icon: "🔥", text: `${Math.floor(Math.random() * 20) + 12} people ordered this meal today`, color: "text-foreground" },
-          { icon: "👨‍🍳", text: `Chef Ibrahim is preparing fresh bowls right now`, color: "text-foreground" },
-          { icon: "🛵", text: `Riders are delivering this around Lagos`, color: "text-foreground" },
-          { icon: "✨", text: `Fresh ingredients arrived this morning`, color: "text-foreground" },
-        ].map((a, i) => (
+        {(() => {
+          // Deterministic "people ordered" count from meal id (avoids hydration mismatch)
+          const ordered = ((meal.id.split("").reduce((s, c) => s + c.charCodeAt(0), 0) % 20) + 12);
+          return [
+            { icon: "🔥", text: `${ordered} people ordered this meal today`, color: "text-foreground" },
+            { icon: "👨‍🍳", text: `Chef Ibrahim is preparing fresh bowls right now`, color: "text-foreground" },
+            { icon: "🛵", text: `Riders are delivering this around Lagos`, color: "text-foreground" },
+            { icon: "✨", text: `Fresh ingredients arrived this morning`, color: "text-foreground" },
+          ];
+        })().map((a, i) => (
           <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
             className="flex items-center gap-2.5 text-xs">
             <span className="text-base">{a.icon}</span>

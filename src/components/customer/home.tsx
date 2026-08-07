@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, ChevronRight, Flame, TrendingUp, Sparkles, Tag, Clock, MapPin, Star, Crown, ArrowRight, Heart, MessageCircle, Play, Instagram, Facebook, Youtube, Music2, Gift, Zap, Trophy, ChefHat } from "lucide-react";
 import { useStore } from "@/lib/store";
@@ -17,8 +17,11 @@ export function CustomerHome() {
   const loyaltyPoints = useStore(s => s.loyaltyPoints);
   const loyaltyTier = useStore(s => s.loyaltyTier);
   const [query, setQuery] = useState("");
+  const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setMounted(true), []);
 
-  const hour = new Date().getHours();
+  const hour = mounted ? new Date().getHours() : 17;
   const greeting = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
   const firstName = user?.name?.split(" ")[0] || "Foodie";
 

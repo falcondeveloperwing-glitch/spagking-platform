@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { ExecutiveDashboard } from "@/components/staff/executive";
@@ -40,6 +40,9 @@ export function StaffApp() {
   const setAiOpen = useStore(s => s.setAiOpen);
   const logout = useStore(s => s.logout);
   const [mobileNav, setMobileNav] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => setMounted(true), []);
 
   const allowed = NAV.filter(n => n.roles.includes(user.role));
 
@@ -122,7 +125,7 @@ export function StaffApp() {
                   {NAV.find(n => n.id === view)?.label || "Dashboard"}
                 </h1>
                 <p className="text-[10px] text-muted-foreground hidden sm:block capitalize">
-                  {new Date().toLocaleDateString("en-NG", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+                  {mounted ? new Date().toLocaleDateString("en-NG", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""}
                 </p>
               </div>
             </div>
