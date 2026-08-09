@@ -489,7 +489,7 @@ export const employees: Employee[] = Array.from({ length: 35 }, (_, i) => {
 export const suppliers: Supplier[] = Array.from({ length: 18 }, (_, i) => {
   const cats = ["Produce", "Meat & Poultry", "Seafood", "Dairy", "Spices & Dry Goods", "Beverages", "Packaging", "Cleaning"];
   const name = pick([
-    "Lagos Fresh Farms", "Hassan Meat Supply", "Atlantic Seafoods", "Prime Dairy Co", "GoldSpice Merchants",
+    "Lagos Fresh Farms", "Hassan Meat Supply", "Atlantic Seafoods", "Pinnacle Dairy Co", "GoldSpice Merchants",
     "Beverage Hub NG", "EcoPack Solutions", "CleanPro Supplies", "Ibadan Produce", "Kano Grain Co",
     "NigerDelta Fisheries", "Royal Poultry", "SpiceRoute NG", "FreshMark Logistics", "AgroBest Distributors",
     "PastaWorks", "VeggieSource", "PureWater Co",
