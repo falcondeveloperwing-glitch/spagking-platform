@@ -583,13 +583,15 @@ const NAV_LINKS = [
 // =====================================================
 
 const SCROLL_SCENES = [
-  { id: 1, title: "Walk In", subtitle: "Warm. Welcoming. unmistakably SpagKing.", image: "/spagking-assets/branches/lekki-branch.jpg", emoji: "🏪" },
-  { id: 2, title: "Choose Your Table", subtitle: "Find your spot. Relax. We've got the rest.", image: "/spagking-assets/branches/lokoja-branch.jpg", emoji: "🪑" },
-  { id: 3, title: "Order Your Way", subtitle: "Signature stir-fry, jollof, shawarma — your craving, our craft.", image: "/spagking-assets/food/spagking-stir-fry-spaghetti.jpg", emoji: "📱" },
-  { id: 4, title: "Straight to the Kitchen", subtitle: "Every order goes directly to our chefs in real time.", image: "/spagking-assets/community/post-5.jpg", emoji: "👨‍🍳" },
-  { id: 5, title: "Made Fresh", subtitle: "Premium ingredients, prepared to order, never pre-made.", image: "/spagking-assets/food/jollof-rice-special.jpg", emoji: "🔥" },
-  { id: 6, title: "Served Right", subtitle: "Hot, fresh, and delivered to your table or your door.", image: "/spagking-assets/food/special-shawarma.jpg", emoji: "🍽️" },
-  { id: 7, title: "Experience SpagKing", subtitle: "More than a meal. It's the SpagKing experience.", image: "/spagking-assets/food/spagking-bolognese.jpg", emoji: "👑" },
+  { id: 1, title: "The Arrival", subtitle: "Welcome to SpagKing. Where food, people and technology come together.", image: "/spagking-assets/branches/lekki-branch.jpg", emoji: "🏪" },
+  { id: 2, title: "The Customer", subtitle: "Walk in. Choose your experience.", image: "/spagking-assets/community/post-1.jpg", emoji: "🚶" },
+  { id: 3, title: "Your Table", subtitle: "Your table is ready. Relax — we've got the rest.", image: "/spagking-assets/branches/lokoja-branch.jpg", emoji: "🪑" },
+  { id: 4, title: "Order Your Way", subtitle: "QR, mobile, POS, delivery, pickup — your craving, our craft.", image: "/spagking-assets/food/spagking-stir-fry-spaghetti.jpg", emoji: "📱" },
+  { id: 5, title: "Straight to the Kitchen", subtitle: "From screen to kitchen. Every order arrives in real time.", image: "/spagking-assets/community/post-5.jpg", emoji: "👨‍🍳" },
+  { id: 6, title: "Made Fresh", subtitle: "Premium ingredients, prepared to order, never pre-made.", image: "/spagking-assets/food/jollof-rice-special.jpg", emoji: "🔥" },
+  { id: 7, title: "Served Right", subtitle: "Tracked. Prepared. Served. Hot, fresh, on time.", image: "/spagking-assets/food/special-shawarma.jpg", emoji: "🍽️" },
+  { id: 8, title: "Every Order Tells a Story", subtitle: "Every number tells you what to do next.", image: "/spagking-assets/community/post-3.jpg", emoji: "📊" },
+  { id: 9, title: "One Restaurant. One OS.", subtitle: "Customer. POS. Kitchen. Inventory. Staff. Delivery. Management.", image: "/spagking-assets/food/spagking-bolognese.jpg", emoji: "👑" },
 ];
 
 function CinematicScrollSection() {

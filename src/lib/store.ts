@@ -135,6 +135,9 @@ interface AppState {
   triggerCelebration: (c: { title: string; subtitle: string; emoji: string }) => void;
   clearCelebration: () => void;
 
+  // Demo reset
+  resetDemoData: () => void;
+
   // Dine-in table management
   restaurantTables: RestaurantTable[];
   openTable: (tableId: string, customerName: string, serverName: string) => void;
@@ -456,6 +459,39 @@ export const useStore = create<AppState>()(
       celebration: null,
       triggerCelebration: (c) => set({ celebration: c }),
       clearCelebration: () => set({ celebration: null }),
+
+      resetDemoData: () => set({
+        restaurantTables: Array.from({ length: 12 }, (_, i) => ({
+          id: `T-${String(i + 1).padStart(2, "0")}`,
+          number: `T-${String(i + 1).padStart(2, "0")}`,
+          capacity: (i % 3) + 2,
+          status: "available" as TableStatus,
+          orderItems: [],
+          orderTotal: 0,
+          section: i < 6 ? "Main Hall" : "Garden",
+        })),
+        kitchenTickets: [],
+        cart: [],
+        myOrders: [],
+        loyaltyPoints: 1250,
+        loyaltyTier: "Gold",
+        checkInStreak: 4,
+        lastCheckIn: null,
+        spinAvailable: true,
+        scratchAvailable: true,
+        coupon: null,
+        favorites: [],
+        votedMealOfWeek: null,
+        mealOfWeekVotes: { "M-001": 342, "M-011": 218, "M-021": 156, "M-031": 89 },
+        communityPosts: [
+          { id: "P1", platform: "instagram", author: "Adaobi N.", avatar: "AN", caption: "Just had the Royal Bolognese and I'm in heaven! The gold garnish is everything ✨", image: "https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=600&q=80", emoji: "🍝", postedAt: "2h ago", likes: 248, comments: 32, liked: false, saved: false, tag: "5★ review" },
+          { id: "P2", platform: "instagram", author: "Tunde A.", avatar: "TA", caption: "Suya Shawarma hits different at 2am 🔥 SpagKing never misses", image: "https://images.unsplash.com/photo-1633321088355-d0f81134ca3a?w=600&q=80", emoji: "🌯", postedAt: "5h ago", likes: 412, comments: 58, liked: true, saved: false, tag: "Trending" },
+          { id: "P3", platform: "facebook", author: "Fatima B.", avatar: "FB", caption: "Family dinner sorted! Jollof + plantain + chicken. The kids approved 🥰", image: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=600&q=80", emoji: "🍛", postedAt: "8h ago", likes: 189, comments: 24, liked: false, saved: true, tag: "Family" },
+          { id: "P4", platform: "instagram", author: "Emeka O.", avatar: "EO", caption: "Date night at SpagKing VI. The ambience + this seafood pasta = perfection 💕", image: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&q=80", emoji: "🍝", postedAt: "1d ago", likes: 367, comments: 41, liked: false, saved: false, tag: "Date night" },
+          { id: "P5", platform: "instagram", author: "Grace S.", avatar: "GS", caption: "Molten centre cake with ice cream. Best dessert in Lagos, hands down 🤤", image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&q=80", emoji: "🍫", postedAt: "1d ago", likes: 524, comments: 67, liked: true, saved: true, tag: "Dessert" },
+        ],
+        notifications: seedNotifications,
+      }),
 
       // === Dine-in table management ===
       restaurantTables: Array.from({ length: 12 }, (_, i) => ({

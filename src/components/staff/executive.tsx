@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, DollarSign, ShoppingBag, Users, Star, AlertTriangle, Crown, Activity, ArrowUpRight, Flame } from "lucide-react";
+import { TrendingUp, TrendingDown, DollarSign, ShoppingBag, Users, Star, AlertTriangle, Crown, Activity, ArrowUpRight, Flame, Sparkles } from "lucide-react";
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from "recharts";
 import { branches, meals, orders, formatNaira } from "@/lib/data";
 import { useStore } from "@/lib/store";
@@ -269,6 +269,45 @@ export function ExecutiveDashboard() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Management Insights */}
+      <div className="glass-card rounded-2xl p-5 border-l-2 border-l-[var(--gold)]/30">
+        <div className="flex items-center gap-2 mb-4">
+          <Sparkles className="w-4 h-4 text-[var(--gold)]" />
+          <h3 className="font-display font-semibold text-sm">Management Insights</h3>
+          <span className="ml-auto text-[9px] px-1.5 py-0.5 rounded-full bg-foreground/[0.06] text-muted-foreground">Demo</span>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {[
+            { icon: "📈", title: "Food Cost Increased 4.2%", body: "Chicken and cooking oil are responsible for 68% of the increase.", action: "Review supplier pricing and portion costs." },
+            { icon: "🔥", title: "Peak Hour: 1PM-2PM", body: "42% of today's orders concentrated in one hour. Consider adding staff.", action: "Schedule extra cashier for lunch peak." },
+            { icon: "⏱️", title: "Delivery Delay Detected", body: "Average delivery time increased 12% this week (32→36 min).", action: "Review rider assignments and zone coverage." },
+            { icon: "📦", title: "Waste Reduction Opportunity", body: "Egusi soup has 8.2% waste rate — above 5% target.", action: "Reduce prep batch size for egusi." },
+            { icon: "⭐", title: "Best Performer: VI Branch", body: "Victoria Island leads with ₦1.85M revenue and 4.8★ rating.", action: "Document VI's processes for other branches." },
+            { icon: "💰", title: "Top Margin Item", body: "Fresh Zobo has 72% gross margin — highest on the menu.", action: "Feature Zobo in combo deals and promotions." },
+          ].map((insight, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className="glass-card rounded-xl p-3 border border-border/30"
+            >
+              <div className="flex items-start gap-2 mb-2">
+                <span className="text-lg">{insight.icon}</span>
+                <div className="flex-1">
+                  <div className="text-xs font-semibold">{insight.title}</div>
+                  <div className="text-[10px] text-muted-foreground mt-0.5 leading-relaxed">{insight.body}</div>
+                </div>
+              </div>
+              <div className="text-[10px] text-[var(--gold)] font-medium pt-2 border-t border-border/30">
+                → {insight.action}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>

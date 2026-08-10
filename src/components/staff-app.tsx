@@ -18,7 +18,7 @@ import { AIAssistant } from "@/components/shared/ai-assistant";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import {
   LayoutDashboard, ShoppingCart, Boxes, Users, BarChart3, Heart,
-  Truck, ShieldCheck, Search, Sparkles, LogOut, Menu as MenuIcon, X, Bell, RefreshCw, Utensils, ChefHat,
+  Truck, ShieldCheck, Search, Sparkles, LogOut, Menu as MenuIcon, X, Bell, RefreshCw, RotateCcw, Utensils, ChefHat,
 } from "lucide-react";
 import type { Role } from "@/lib/data";
 import { Button } from "@/components/ui/button";
@@ -72,6 +72,9 @@ export function StaffApp() {
           </button>
           <button onClick={() => useStore.getState().switchRole()} className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-foreground/[0.04] hover:bg-foreground/[0.08] text-muted-foreground hover:text-foreground text-xs font-medium transition-colors">
             <RefreshCw className="w-3.5 h-3.5" /> Switch Demo Role
+          </button>
+          <button onClick={() => { useStore.getState().resetDemoData(); toast.success("Demo data reset to initial state"); }} className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-foreground/[0.04] hover:bg-foreground/[0.08] text-muted-foreground hover:text-foreground text-xs font-medium transition-colors">
+            <RotateCcw className="w-3.5 h-3.5" /> Reset Demo Data
           </button>
           <div className="flex items-center gap-2.5 px-2 py-1.5">
             <img src={user.avatar} alt={user.name} className="w-9 h-9 rounded-lg bg-foreground/10" />
