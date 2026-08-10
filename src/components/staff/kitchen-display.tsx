@@ -76,72 +76,58 @@ export function KitchenDisplay() {
         </div>
       </div>
 
-      {/* Active tickets */}
-      <section>
-        <h2 className="font-display font-semibold text-lg mb-3 flex items-center gap-2">
-          <Flame className="w-4 h-4 text-[var(--warning)]" /> Active Orders
-        </h2>
-        {activeTickets.length === 0 ? (
-          <div className="glass-card rounded-2xl p-10 text-center">
-            <ChefHat className="w-10 h-10 mx-auto mb-3 text-muted-foreground/40" />
-            <p className="text-sm text-muted-foreground">No active orders. Send an order from the Tables screen.</p>
-          </div>
-        ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {/* Column layout — real kitchen display feel */}
+      <div className="grid lg:grid-cols-4 gap-3">
+        {/* NEW column */}
+        <KanbanColumn title="New" icon={Flame} color="text-[var(--gold)]" count={tickets.filter(t => t.status === "new").length}>
+          {tickets.filter(t => t.status === "new").length === 0 ? (
+            <EmptyColumn text="No new tickets" />
+          ) : (
             <AnimatePresence>
-              {activeTickets.map(ticket => (
-                <TicketCard
-                  key={ticket.id}
-                  ticket={ticket}
-                  onStart={handleStart}
-                  onReady={handleReady}
-                  onServe={handleServed}
-                  onCancel={handleCancel}
-                />
+              {tickets.filter(t => t.status === "new").map(ticket => (
+                <TicketCard key={ticket.id} ticket={ticket} onStart={handleStart} onReady={handleReady} onServe={handleServed} onCancel={handleCancel} />
               ))}
             </AnimatePresence>
-          </div>
-        )}
-      </section>
+          )}
+        </KanbanColumn>
 
-      {/* Ready tickets */}
-      {readyTickets.length > 0 && (
-        <section>
-          <h2 className="font-display font-semibold text-lg mb-3 flex items-center gap-2">
-            <Check className="w-4 h-4 text-[var(--success)]" /> Ready to Serve
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {readyTickets.map(ticket => (
-              <TicketCard
-                key={ticket.id}
-                ticket={ticket}
-                onStart={handleStart}
-                onReady={handleReady}
-                onServe={handleServed}
-                onCancel={handleCancel}
-              />
-            ))}
-          </div>
-        </section>
-      )}
+        {/* PREPARING column */}
+        <KanbanColumn title="Preparing" icon={Clock} color="text-[var(--warning)]" count={tickets.filter(t => t.status === "preparing").length}>
+          {tickets.filter(t => t.status === "preparing").length === 0 ? (
+            <EmptyColumn text="Nothing cooking" />
+          ) : (
+            <AnimatePresence>
+              {tickets.filter(t => t.status === "preparing").map(ticket => (
+                <TicketCard key={ticket.id} ticket={ticket} onStart={handleStart} onReady={handleReady} onServe={handleServed} onCancel={handleCancel} />
+              ))}
+            </AnimatePresence>
+          )}
+        </KanbanColumn>
 
-      {/* Completed */}
-      {completedTickets.length > 0 && (
-        <section>
-          <h2 className="font-display font-semibold text-sm mb-2 text-muted-foreground">Completed ({completedTickets.length})</h2>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
-            {completedTickets.slice(0, 10).map(ticket => (
-              <div key={ticket.id} className="shrink-0 w-40 glass-card rounded-xl p-2 opacity-60">
-                <div className="text-[10px] font-bold">{ticket.tableNumber}</div>
-                <div className="text-[9px] text-muted-foreground">{ticket.items.length} items · {elapsedMin(ticket.createdAt)}</div>
-                <div className={`text-[8px] font-bold mt-1 ${STATUS_CONFIG[ticket.status].cls} px-1.5 py-0.5 rounded-full inline-block`}>
-                  {STATUS_CONFIG[ticket.status].label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+        {/* READY column */}
+        <KanbanColumn title="Ready" icon={Check} color="text-[var(--success)]" count={readyTickets.length}>
+          {readyTickets.length === 0 ? (
+            <EmptyColumn text="Nothing ready" />
+          ) : (
+            <AnimatePresence>
+              {readyTickets.map(ticket => (
+                <TicketCard key={ticket.id} ticket={ticket} onStart={handleStart} onReady={handleReady} onServe={handleServed} onCancel={handleCancel} />
+              ))}
+            </AnimatePresence>
+          )}
+        </KanbanColumn>
+
+        {/* COMPLETED column */}
+        <KanbanColumn title="Completed" icon={Check} color="text-muted-foreground" count={completedTickets.length}>
+          {completedTickets.length === 0 ? (
+            <EmptyColumn text="No completed orders" />
+          ) : (
+            completedTickets.slice(0, 5).map(ticket => (
+              <TicketCard key={ticket.id} ticket={ticket} onStart={handleStart} onReady={handleReady} onServe={handleServed} onCancel={handleCancel} />
+            ))
+          )}
+        </KanbanColumn>
+      </div>
     </div>
   );
 }
@@ -212,5 +198,34 @@ function TicketCard({
         </div>
       </div>
     </motion.div>
+  );
+}
+
+function KanbanColumn({ title, icon: Icon, color, count, children }: {
+  title: string;
+  icon: any;
+  color: string;
+  count: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center gap-2 px-1 pb-2 sticky top-0 z-10 bg-[var(--bg-0)]/80 backdrop-blur-sm">
+        <Icon className={`w-3.5 h-3.5 ${color}`} />
+        <span className="text-xs font-semibold uppercase tracking-wide">{title}</span>
+        <span className={`ml-auto text-[10px] font-bold ${color} num`}>{count}</span>
+      </div>
+      <div className="space-y-2 min-h-[100px]">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function EmptyColumn({ text }: { text: string }) {
+  return (
+    <div className="glass-card rounded-xl p-4 text-center">
+      <p className="text-[11px] text-muted-foreground/50">{text}</p>
+    </div>
   );
 }

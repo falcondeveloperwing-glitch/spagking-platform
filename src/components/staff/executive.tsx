@@ -32,8 +32,17 @@ const hourlyOrders = Array.from({ length: 12 }, (_, i) => ({
 }));
 
 export function ExecutiveDashboard() {
+  const setStaffView = useStore(s => s.setStaffView);
   const topMeals = [...meals].sort((a, b) => b.sold - a.sold).slice(0, 5);
   const lowStock = meals.filter(m => m.stock < 20).slice(0, 5);
+
+  const managementAlerts = [
+    { icon: "⚠️", text: "Food cost above target (28.4%)", level: "warning" as const, action: () => setStaffView("reports") },
+    { icon: "📦", text: `${lowStock.length} items running low`, level: "warning" as const, action: () => setStaffView("inventory") },
+    { icon: "⏱️", text: "3 POs awaiting approval", level: "warning" as const, action: () => setStaffView("inventory") },
+    { icon: "📈", text: "Waste increased 14% this week", level: "error" as const, action: () => setStaffView("reports") },
+    { icon: "✓", text: "Sales target achieved (102%)", level: "success" as const },
+  ];
   const recentActivities = [
     { icon: ShoppingBag, color: "text-blue-400 bg-blue-500/15", text: "New order SK48291 placed", time: "2 min ago" },
     { icon: Users, color: "text-emerald-400 bg-emerald-500/15", text: "Folake Adeyemi clocked in at VI branch", time: "12 min ago" },
@@ -45,6 +54,35 @@ export function ExecutiveDashboard() {
 
   return (
     <div className="space-y-5">
+      {/* Management Alerts */}
+      <div className="glass-card rounded-2xl p-4 border-l-2 border-l-[var(--warning)]/40">
+        <div className="flex items-center gap-2 mb-3">
+          <AlertTriangle className="w-4 h-4 text-[var(--warning)]" />
+          <h3 className="font-display font-semibold text-sm">Management Alerts</h3>
+          <span className="ml-auto text-[10px] text-muted-foreground">{managementAlerts.filter(a => a.level !== "success").length} need attention</span>
+        </div>
+        <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+          {managementAlerts.map((alert, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.06 }}
+              onClick={() => alert.action && alert.action()}
+              className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-xl cursor-pointer transition-colors ${
+                alert.level === "error" ? "bg-[var(--error)]/8 border border-[var(--error)]/20 hover:bg-[var(--error)]/12" :
+                alert.level === "warning" ? "bg-[var(--warning)]/8 border border-[var(--warning)]/20 hover:bg-[var(--warning)]/12" :
+                "bg-[var(--success)]/8 border border-[var(--success)]/20 hover:bg-[var(--success)]/12"
+              }`}
+            >
+              <span className="text-sm">{alert.icon}</span>
+              <span className="text-xs whitespace-nowrap">{alert.text}</span>
+              {alert.action && <ArrowUpRight className="w-3 h-3 text-muted-foreground" />}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
       {/* Hero KPI row — Bloomberg meets Apple */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <KPICard title="Today's Sales" value={formatNaira(1_845_000)} change="+12.4%" up icon={DollarSign} accent="from-[var(--gold)]/15" />

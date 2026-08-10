@@ -1,9 +1,10 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 import { useStore } from "@/lib/store";
 import { LandingNav } from "./landing-nav";
 import { MealImage } from "@/components/brand";
+import { FadeIn, TextReveal, Stagger, StaggerItem, NumberCount } from "@/components/shared/anim";
 import { meals, formatNaira } from "@/lib/data";
 import { reviews } from "@/content/reviews";
 import { socialPosts } from "@/content/social";
@@ -135,6 +136,9 @@ export function LandingPage() {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* ============ CINEMATIC SCROLL EXPERIENCE ============ */}
+      <CinematicScrollSection />
 
       {/* ============ THE SPAGKING EXPERIENCE ============ */}
       <section id="story" className="py-20 sm:py-32 px-4 sm:px-6">
@@ -569,3 +573,173 @@ const NAV_LINKS = [
   { label: "Community", target: "community" },
   { label: "Branches", target: "branches" },
 ];
+
+// =====================================================
+// CINEMATIC SCROLL EXPERIENCE
+// A scroll-driven visual story through the SpagKing experience.
+// Architecture supports swapping the poster images for real video.
+// To add production video: replace <MealImage> with <video> and set
+// the `videoSrc` prop. The scroll-driven parallax will still work.
+// =====================================================
+
+const SCROLL_SCENES = [
+  { id: 1, title: "Walk In", subtitle: "Warm. Welcoming. unmistakably SpagKing.", image: "/spagking-assets/branches/lekki-branch.jpg", emoji: "🏪" },
+  { id: 2, title: "Choose Your Table", subtitle: "Find your spot. Relax. We've got the rest.", image: "/spagking-assets/branches/lokoja-branch.jpg", emoji: "🪑" },
+  { id: 3, title: "Order Your Way", subtitle: "Signature stir-fry, jollof, shawarma — your craving, our craft.", image: "/spagking-assets/food/spagking-stir-fry-spaghetti.jpg", emoji: "📱" },
+  { id: 4, title: "Straight to the Kitchen", subtitle: "Every order goes directly to our chefs in real time.", image: "/spagking-assets/community/post-5.jpg", emoji: "👨‍🍳" },
+  { id: 5, title: "Made Fresh", subtitle: "Premium ingredients, prepared to order, never pre-made.", image: "/spagking-assets/food/jollof-rice-special.jpg", emoji: "🔥" },
+  { id: 6, title: "Served Right", subtitle: "Hot, fresh, and delivered to your table or your door.", image: "/spagking-assets/food/special-shawarma.jpg", emoji: "🍽️" },
+  { id: 7, title: "Experience SpagKing", subtitle: "More than a meal. It's the SpagKing experience.", image: "/spagking-assets/food/spagking-bolognese.jpg", emoji: "👑" },
+];
+
+function CinematicScrollSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeScene, setActiveScene] = useState(0);
+  const setAppView = useStore(s => s.setAppView);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const sectionHeight = rect.height;
+      const viewportHeight = window.innerHeight;
+      const scrolled = Math.max(0, -rect.top);
+      const progress = scrolled / (sectionHeight - viewportHeight);
+      const sceneIndex = Math.min(
+        Math.floor(progress * SCROLL_SCENES.length),
+        SCROLL_SCENES.length - 1
+      );
+      setActiveScene(sceneIndex);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <section ref={containerRef} className="relative" style={{ height: `${SCROLL_SCENES.length * 80}vh` }}>
+      {/* Sticky viewport */}
+      <div className="sticky top-0 h-screen overflow-hidden">
+        {/* Background media — swap MealImage for <video> in production */}
+        <AnimatePresence mode="popLayout">
+          {SCROLL_SCENES.map((scene, i) => (
+            activeScene === i && (
+              <motion.div
+                key={scene.id}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 z-0"
+              >
+                <MealImage src={scene.image} emoji={scene.emoji} alt={scene.title} className="w-full h-full" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/90" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+              </motion.div>
+            )
+          ))}
+        </AnimatePresence>
+
+        {/* Scene content */}
+        <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-16 max-w-4xl">
+          {/* Scene counter */}
+          <div className="flex items-center gap-2 mb-6">
+            <span className="text-xs font-bold text-[var(--gold)] num">
+              {String(activeScene + 1).padStart(2, "0")}
+            </span>
+            <span className="text-xs text-muted-foreground/50">/ {String(SCROLL_SCENES.length).padStart(2, "0")}</span>
+            <div className="w-12 h-px bg-[var(--gold)]/30 ml-2" />
+          </div>
+
+          {/* Scene title — word-by-word reveal */}
+          <AnimatePresence mode="wait">
+            {SCROLL_SCENES.map((scene, i) => (
+              activeScene === i && (
+                <motion.div key={scene.id}>
+                  <motion.h2
+                    initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    className="font-display text-4xl sm:text-7xl font-bold tracking-tight leading-[1.05] mb-4"
+                  >
+                    {scene.title.split(" ").map((word, wi) => (
+                      <motion.span
+                        key={wi}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: wi * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                        className="inline-block"
+                        style={{ marginRight: "0.25em" }}
+                      >
+                        {word === "SpagKing" ? <span className="text-gold-gradient">SpagKing</span> : word}
+                      </motion.span>
+                    ))}
+                  </motion.h2>
+                  <motion.p
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.6 }}
+                    className="text-base sm:text-xl text-muted-foreground max-w-md leading-relaxed"
+                  >
+                    {scene.subtitle}
+                  </motion.p>
+                </motion.div>
+              )
+            ))}
+          </AnimatePresence>
+
+          {/* Final CTA on last scene */}
+          {activeScene === SCROLL_SCENES.length - 1 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="mt-8"
+            >
+              <button onClick={() => setAppView("auth")} className="btn-gold px-7 py-3.5 rounded-xl text-sm font-semibold inline-flex items-center gap-2">
+                Start Your Order <ArrowRight className="w-4 h-4" />
+              </button>
+            </motion.div>
+          )}
+
+          {/* Progress bar */}
+          <div className="absolute bottom-12 left-6 right-6 sm:left-16 sm:right-16 max-w-md">
+            <div className="h-0.5 bg-foreground/10 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gold-gradient"
+                animate={{ width: `${((activeScene + 1) / SCROLL_SCENES.length) * 100}%` }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </div>
+            <div className="flex justify-between mt-2 text-[9px] text-muted-foreground/50">
+              {SCROLL_SCENES.map((s, i) => (
+                <span key={s.id} className={activeScene === i ? "text-[var(--gold)] font-medium" : ""}>
+                  {s.title.split(" ")[0]}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll hint on first scene */}
+        {activeScene === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+          >
+            <span className="text-[10px] text-muted-foreground uppercase tracking-widest">Scroll to explore</span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-5 h-8 rounded-full border border-foreground/20 flex items-start justify-center p-1.5"
+            >
+              <div className="w-1 h-1.5 rounded-full bg-foreground/40" />
+            </motion.div>
+          </motion.div>
+        )}
+      </div>
+    </section>
+  );
+}
