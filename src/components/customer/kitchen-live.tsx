@@ -19,13 +19,13 @@ const LIVE_EVENTS = [
   { icon: "🔥", text: "Current kitchen wait time: 8 minutes", color: "text-[var(--warning)]" },
   { icon: "🥬", text: "Fresh vegetables delivered at 7:15 AM", color: "text-[var(--success)]" },
   { icon: "⭐", text: "98% of customers rated today's meals 5 stars", color: "text-[var(--gold)]" },
-  { icon: "🛵", text: "12 riders currently on delivery across Lagos", color: "text-[#4FC3F7]" },
+  { icon: "🛵", text: "12 riders currently on delivery across Lagos", color: "text-[var(--chart-3)]" },
   { icon: "👨‍🍳", text: "Chef Bisi just plated the SpagKing Royal Bolognese", color: "text-[var(--gold)]" },
   { icon: "🔥", text: "Kitchen fired up 6 Suya Shawarmas in the last 10 min", color: "text-[var(--warning)]" },
   { icon: "🥘", text: "Fresh batch of Egusi soup just finished cooking", color: "text-[var(--success)]" },
   { icon: "✨", text: "Gold garnish restocked — every plate gets the royal touch", color: "text-[var(--gold)]" },
-  { icon: "📦", text: "Premium seafood delivery arrived from Atlantic Seafoods", color: "text-[#4FC3F7]" },
-  { icon: "👨‍👩‍👧", text: "Family of 5 just ordered the Weekend Combo in VI", color: "text-[#FF80AB]" },
+  { icon: "📦", text: "Premium seafood delivery arrived from Atlantic Seafoods", color: "text-[var(--chart-3)]" },
+  { icon: "👨‍👩‍👧", text: "Family of 5 just ordered the Weekend Combo in VI", color: "text-[var(--chart-4)]" },
 ];
 
 const CHEFS = [
@@ -85,7 +85,7 @@ export function CustomerKitchenLive() {
             <LiveCounter icon="🍜" label="Bowls served today" value={bowlsServed} color="text-[var(--gold)]" />
             <LiveCounter icon="⭐" label="Satisfaction today" value={`${satisfaction}%`} color="text-[var(--success)]" />
             <LiveCounter icon="🔥" label="Kitchen wait" value="8 min" color="text-[var(--warning)]" />
-            <LiveCounter icon="🛵" label="Riders on delivery" value="12" color="text-[#4FC3F7]" />
+            <LiveCounter icon="🛵" label="Riders on delivery" value="12" color="text-[var(--chart-3)]" />
           </div>
         </div>
       </motion.div>
@@ -214,7 +214,7 @@ function LiveCounter({ icon, label, value, color }: { icon: string; label: strin
   return (
     <div className="rounded-xl bg-foreground/[0.04] border border-border/30 p-3">
       <div className="text-2xl mb-1">{icon}</div>
-      <motion.div key={String(value)} initial={{ scale: 1.15, color: "#FFD700" }} animate={{ scale: 1, color: "currentColor" }}
+      <motion.div key={String(value)} initial={{ scale: 1.15, color: "var(--gold)" }} animate={{ scale: 1, color: "currentColor" }}
         transition={{ duration: 0.4 }} className={`font-display font-bold text-xl num ${color}`}>{value}</motion.div>
       <div className="text-[10px] text-muted-foreground mt-0.5">{label}</div>
     </div>

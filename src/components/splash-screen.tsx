@@ -49,8 +49,8 @@ export function SplashScreen() {
                 <path className="animate-steam-3" d="M 80 60 Q 74 40 80 22 Q 86 8 80 0" stroke="url(#steamG)" strokeWidth="3" strokeLinecap="round" fill="none" opacity="0"/>
                 <defs>
                   <linearGradient id="steamG" x1="0%" y1="100%" x2="0%" y2="0%">
-                    <stop offset="0%" stopColor="#FFD700" stopOpacity="0.9"/>
-                    <stop offset="100%" stopColor="#FFD700" stopOpacity="0"/>
+                    <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.9"/>
+                    <stop offset="100%" stopColor="var(--gold)" stopOpacity="0"/>
                   </linearGradient>
                 </defs>
               </svg>

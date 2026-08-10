@@ -292,9 +292,9 @@ export function CustomerHome() {
           </div>
           <div className="grid grid-cols-4 gap-2">
             {[
-              { icon: Music2, label: "TikTok", count: "48 videos", color: "text-[#FF80AB]" },
-              { icon: Instagram, label: "Instagram", count: "312 posts", color: "text-[#FF80AB]" },
-              { icon: Facebook, label: "Facebook", count: "8.4k likes", color: "text-[#4FC3F7]" },
+              { icon: Music2, label: "TikTok", count: "48 videos", color: "text-[var(--chart-4)]" },
+              { icon: Instagram, label: "Instagram", count: "312 posts", color: "text-[var(--chart-4)]" },
+              { icon: Facebook, label: "Facebook", count: "8.4k likes", color: "text-[var(--chart-3)]" },
               { icon: Youtube, label: "YouTube", count: "24 videos", color: "text-[var(--error)]" },
             ].map(s => (
               <div key={s.label} className="rounded-xl bg-foreground/[0.04] p-3 text-center">
@@ -343,10 +343,10 @@ export function CustomerHome() {
 
 function HeroPromoCarousel() {
   const promos = [
-    { title: "Buy 2 Get 1 Free", desc: "On all spaghetti dishes this weekend", cta: "Order now", emoji: "🍝", bg: "from-[#FFD700]/20 via-[#050505] to-[#050505]", glow: "rgba(255,215,0,0.4)" },
-    { title: "Weekend Family Combo", desc: "Feed 4 for just ₦18,500 — save ₦6,000", cta: "View combos", emoji: "👨‍👩‍👧‍👦", bg: "from-[#00E676]/15 via-[#050505] to-[#050505]", glow: "rgba(0,230,118,0.3)" },
-    { title: "Free Delivery", desc: "On all orders above ₦10,000 in Lagos", cta: "Start order", emoji: "🛵", bg: "from-[#4FC3F7]/15 via-[#050505] to-[#050505]", glow: "rgba(79,195,247,0.3)" },
-    { title: "Flash Sale — 25% Off", desc: "Spicy Arrabbiata & Suya Shawarma · 2hrs only", cta: "Grab deal", emoji: "🔥", bg: "from-[#FF4D6A]/15 via-[#050505] to-[#050505]", glow: "rgba(255,77,106,0.3)" },
+    { title: "Buy 2 Get 1 Free", desc: "On all spaghetti dishes this weekend", cta: "Order now", emoji: "🍝", bg: "from-[var(--gold)]/20 via-[#050505] to-[#050505]", glow: "rgba(255,215,0,0.4)" },
+    { title: "Weekend Family Combo", desc: "Feed 4 for just ₦18,500 — save ₦6,000", cta: "View combos", emoji: "👨‍👩‍👧‍👦", bg: "from-[var(--success)]/15 via-[#050505] to-[#050505]", glow: "rgba(0,230,118,0.3)" },
+    { title: "Free Delivery", desc: "On all orders above ₦10,000 in Lagos", cta: "Start order", emoji: "🛵", bg: "from-[var(--chart-3)]/15 via-[#050505] to-[#050505]", glow: "rgba(79,195,247,0.3)" },
+    { title: "Flash Sale — 25% Off", desc: "Spicy Arrabbiata & Suya Shawarma · 2hrs only", cta: "Grab deal", emoji: "🔥", bg: "from-[var(--error)]/15 via-[#050505] to-[#050505]", glow: "rgba(255,77,106,0.3)" },
   ];
   const [idx, setIdx] = useState(0);
   const promo = promos[idx];

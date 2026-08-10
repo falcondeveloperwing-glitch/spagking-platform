@@ -185,7 +185,7 @@ export function CustomerLoyalty() {
             desc="Surprise discount"
             cta="Reveal"
             onClick={() => toast.success("You got 15% off your next order! Code: LUCKY15")}
-            accent="from-[#FF80AB]/15"
+            accent="from-[var(--chart-4)]/15"
             badge="Random"
           />
           {/* Birthday reward */}
@@ -205,7 +205,7 @@ export function CustomerLoyalty() {
             desc={`${referralsCount} friends referred`}
             cta="Share code"
             onClick={() => toast.success("Share your code — earn 500 pts per friend who orders!")}
-            accent="from-[#4FC3F7]/15"
+            accent="from-[var(--chart-3)]/15"
             badge="500 pts/friend"
           />
         </div>
@@ -371,7 +371,7 @@ export function CustomerLoyalty() {
             <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden glass-gold mx-auto max-w-xs">
               {!scratchModal.revealed ? (
                 <motion.div initial={{ opacity: 1 }} animate={{ opacity: [1, 0.7, 1] }} transition={{ duration: 0.6, repeat: 3 }}
-                  className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#FFD700]/30 to-[#D4A017]/30 backdrop-blur-sm">
+                  className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[var(--gold)]/30 to-[var(--gold-deep)]/30 backdrop-blur-sm">
                   <Sparkles className="w-8 h-8 text-[var(--gold)] mb-2" />
                   <p className="text-xs font-medium">Tap to scratch...</p>
                 </motion.div>
@@ -423,7 +423,7 @@ function ArrowRight() {
 
 function WheelSegments() {
   // 6 segments alternating gold/dark
-  const colors = ["#FFD700", "#1C1C1C", "#FFD700", "#1C1C1C", "#FFD700", "#1C1C1C"];
+  const colors = ["var(--gold)", "#1C1C1C", "var(--gold)", "#1C1C1C", "var(--gold)", "#1C1C1C"];
   const labels = ["50", "100", "200", "COUPON", "10% OFF", "TRY AGAIN"];
   return (
     <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -441,7 +441,7 @@ function WheelSegments() {
         return (
           <g key={i}>
             <path d={`M 50 50 L ${x1} ${y1} A 45 45 0 0 1 ${x2} ${y2} Z`} fill={colors[i]} stroke="#050505" strokeWidth="0.5" />
-            <text x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fontSize="6" fontWeight="bold" fill={colors[i] === "#FFD700" ? "#050505" : "#FFD700"}>
+            <text x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" fontSize="6" fontWeight="bold" fill={colors[i] === "var(--gold)" ? "#050505" : "var(--gold)"}>
               {labels[i]}
             </text>
           </g>

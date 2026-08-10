@@ -75,9 +75,9 @@ export function CustomerCommunity() {
           <p className="text-sm text-muted-foreground max-w-lg">Behind the scenes, kitchen moments, chef specials, customer reactions, food challenges, and more. Follow us across all platforms.</p>
           <div className="flex gap-4 mt-4">
             {[
-              { icon: Music2, label: "TikTok", handle: "@spagking", count: "284K", color: "text-[#FF80AB]" },
-              { icon: Instagram, label: "Instagram", handle: "@spagking.ng", count: "156K", color: "text-[#FF80AB]" },
-              { icon: Facebook, label: "Facebook", handle: "SpagKing Foods", count: "8.4K", color: "text-[#4FC3F7]" },
+              { icon: Music2, label: "TikTok", handle: "@spagking", count: "284K", color: "text-[var(--chart-4)]" },
+              { icon: Instagram, label: "Instagram", handle: "@spagking.ng", count: "156K", color: "text-[var(--chart-4)]" },
+              { icon: Facebook, label: "Facebook", handle: "SpagKing Foods", count: "8.4K", color: "text-[var(--chart-3)]" },
               { icon: Youtube, label: "YouTube", handle: "SpagKing TV", count: "42K", color: "text-[var(--error)]" },
             ].map(s => (
               <div key={s.label} className="flex-1">
@@ -280,7 +280,7 @@ export function CustomerCommunity() {
           <div className="flex gap-3 overflow-x-auto no-scrollbar pb-3 mb-4">
             {["👑", "🔥", "🍜", "🎂", "🥤", "🌶️", "👨‍🍳", "🎉"].map((s, i) => (
               <button key={i} onClick={() => toast.success("Opening story…")} className="shrink-0 flex flex-col items-center gap-1.5">
-                <div className="relative w-16 h-16 rounded-full p-0.5 bg-gradient-to-br from-[#FF80AB] via-[#FFD700] to-[#A78BFA]">
+                <div className="relative w-16 h-16 rounded-full p-0.5 bg-gradient-to-br from-[var(--chart-4)] via-[var(--gold)] to-[#A78BFA]">
                   <div className="w-full h-full rounded-full bg-card flex items-center justify-center text-2xl">{s}</div>
                 </div>
                 <span className="text-[10px] text-muted-foreground">{i === 0 ? "You" : `Story ${i}`}</span>
@@ -303,7 +303,7 @@ export function CustomerCommunity() {
                       <span className="flex items-center gap-1"><Heart className={`w-3.5 h-3.5 ${isLiked ? "fill-[var(--error)] text-[var(--error)]" : ""}`} /> <span className="num">{(p.likes + (isLiked ? 1 : 0)).toLocaleString()}</span></span>
                     </div>
                   </div>
-                  {i === 0 && <div className="absolute top-1.5 right-1.5"><div className="w-4 h-4 rounded bg-gradient-to-br from-[#FF80AB] to-[#A78BFA] flex items-center justify-center"><span className="text-[8px] font-bold text-white">LIVE</span></div></div>}
+                  {i === 0 && <div className="absolute top-1.5 right-1.5"><div className="w-4 h-4 rounded bg-gradient-to-br from-[var(--chart-4)] to-[#A78BFA] flex items-center justify-center"><span className="text-[8px] font-bold text-white">LIVE</span></div></div>}
                 </motion.div>
               );
             })}
@@ -326,17 +326,17 @@ export function CustomerCommunity() {
                   <div className="text-[10px] text-muted-foreground">{p.date}</div>
                 </div>
                 <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold ${
-                  p.type === "event" ? "bg-[#4FC3F7]/15 text-[#4FC3F7]" :
+                  p.type === "event" ? "bg-[var(--chart-3)]/15 text-[var(--chart-3)]" :
                   p.type === "promo" ? "bg-[var(--gold)]/15 text-[var(--gold)]" : "bg-[var(--success)]/15 text-[var(--success)]"
                 }`}>{p.type.toUpperCase()}</span>
               </div>
               <h3 className="font-display font-semibold text-base mb-1">{p.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed mb-3">{p.desc}</p>
               {p.type === "event" && (
-                <div className="rounded-xl bg-gradient-to-br from-[#4FC3F7]/10 to-transparent border border-[#4FC3F7]/20 p-3 mb-3">
+                <div className="rounded-xl bg-gradient-to-br from-[var(--chart-3)]/10 to-transparent border border-[var(--chart-3)]/20 p-3 mb-3">
                   <div className="flex items-center justify-between text-xs">
                     <div>
-                      <div className="font-semibold text-[#4FC3F7]">📅 {p.date}</div>
+                      <div className="font-semibold text-[var(--chart-3)]">📅 {p.date}</div>
                       <div className="text-muted-foreground mt-0.5">SpagKing VI Branch, Lagos</div>
                     </div>
                     <div className="text-right">
@@ -347,8 +347,8 @@ export function CustomerCommunity() {
                 </div>
               )}
               <div className="flex items-center gap-4 pt-3 border-t border-border/40 text-xs">
-                <button onClick={() => toggleLike(`fb-${i}`)} className="flex items-center gap-1.5 text-muted-foreground hover:text-[#4FC3F7] transition-colors">
-                  <ThumbsUp className={`w-3.5 h-3.5 ${liked.has(`fb-${i}`) ? "fill-[#4FC3F7] text-[#4FC3F7]" : ""}`} /> Like
+                <button onClick={() => toggleLike(`fb-${i}`)} className="flex items-center gap-1.5 text-muted-foreground hover:text-[var(--chart-3)] transition-colors">
+                  <ThumbsUp className={`w-3.5 h-3.5 ${liked.has(`fb-${i}`) ? "fill-[var(--chart-3)] text-[var(--chart-3)]" : ""}`} /> Like
                 </button>
                 <button onClick={() => toast.success("Comments opened")} className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors">
                   <MessageCircle className="w-3.5 h-3.5" /> Comment

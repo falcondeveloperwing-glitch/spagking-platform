@@ -39,7 +39,7 @@ export function Celebration() {
             const distance = 200 + Math.random() * 150;
             const x = Math.cos(angle) * distance;
             const y = Math.sin(angle) * distance;
-            const colors = ["#FFD700", "#00E676", "#FF80AB", "#4FC3F7", "#A78BFA", "#FFF099"];
+            const colors = ["var(--gold)", "var(--success)", "var(--chart-4)", "var(--chart-3)", "var(--chart-5)", "var(--gold-bright)"];
             const color = colors[i % colors.length];
             return (
               <motion.div

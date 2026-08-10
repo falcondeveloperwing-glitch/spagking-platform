@@ -5,7 +5,7 @@ import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, X
 import { branches, meals, orders, formatNaira } from "@/lib/data";
 import { useStore } from "@/lib/store";
 
-const COLORS = ["#D4A017", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#06B6D4"];
+const COLORS = ["var(--gold-deep)", "var(--success)", "var(--warning)", "var(--error)", "var(--chart-5)", "var(--chart-3)"];
 
 const salesTrend = [
   { day: "Mon", today: 1.84, yesterday: 1.62 },
@@ -18,12 +18,12 @@ const salesTrend = [
 ];
 
 const categorySplit = [
-  { name: "Spaghetti", value: 35, color: "#D4A017" },
-  { name: "Rice", value: 22, color: "#10B981" },
-  { name: "Shawarma", value: 15, color: "#F59E0B" },
-  { name: "Burgers", value: 12, color: "#EF4444" },
-  { name: "Drinks", value: 9, color: "#8B5CF6" },
-  { name: "Others", value: 7, color: "#06B6D4" },
+  { name: "Spaghetti", value: 35, color: "var(--gold-deep)" },
+  { name: "Rice", value: 22, color: "var(--success)" },
+  { name: "Shawarma", value: 15, color: "var(--warning)" },
+  { name: "Burgers", value: 12, color: "var(--error)" },
+  { name: "Drinks", value: 9, color: "var(--chart-5)" },
+  { name: "Others", value: 7, color: "var(--chart-3)" },
 ];
 
 const hourlyOrders = Array.from({ length: 12 }, (_, i) => ({
@@ -50,7 +50,7 @@ export function ExecutiveDashboard() {
         <KPICard title="Today's Sales" value={formatNaira(1_845_000)} change="+12.4%" up icon={DollarSign} accent="from-[var(--gold)]/15" />
         <KPICard title="Orders Today" value="187" change="+8.2%" up icon={ShoppingBag} accent="from-[var(--success)]/15" />
         <KPICard title="Avg Order Value" value={formatNaira(9_866)} change="+3.8%" up icon={TrendingUp} accent="from-[#60A5FA]/15" />
-        <KPICard title="Satisfaction" value="4.8★" change="+0.2" up icon={Star} accent="from-[#A78BFA]/15" />
+        <KPICard title="Satisfaction" value="4.8★" change="+0.2" up icon={Star} accent="from-[var(--chart-5)]/15" />
       </div>
 
       {/* Yesterday vs Today chart */}
@@ -74,15 +74,15 @@ export function ExecutiveDashboard() {
                   <stop offset="100%" stopColor="#E8B84A" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="gray" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#6b7280" stopOpacity={0.22} />
-                  <stop offset="100%" stopColor="#6b7280" stopOpacity={0} />
+                  <stop offset="0%" stopColor="var(--muted-foreground)" stopOpacity={0.22} />
+                  <stop offset="100%" stopColor="var(--muted-foreground)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(245,239,230,0.05)" />
-              <XAxis dataKey="day" stroke="rgba(245,239,230,0.4)" fontSize={11} tickLine={false} axisLine={false} />
-              <YAxis stroke="rgba(245,239,230,0.4)" fontSize={11} tickLine={false} axisLine={false} />
-              <Tooltip contentStyle={{ background: "rgba(28,24,20,0.96)", border: "1px solid rgba(232,184,74,0.25)", borderRadius: 12, color: "#F5EFE6", fontSize: 12 }} />
-              <Area type="monotone" dataKey="yesterday" stroke="#6b7280" strokeWidth={2} fill="url(#gray)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
+              <XAxis dataKey="day" stroke="rgba(255,255,255,0.3)" fontSize={11} tickLine={false} axisLine={false} />
+              <YAxis stroke="rgba(255,255,255,0.3)" fontSize={11} tickLine={false} axisLine={false} />
+              <Tooltip contentStyle={{ background: "rgba(28,24,20,0.96)", border: "1px solid rgba(232,184,74,0.25)", borderRadius: 12, color: "#ECECEC", fontSize: 12 }} />
+              <Area type="monotone" dataKey="yesterday" stroke="var(--muted-foreground)" strokeWidth={2} fill="url(#gray)" />
               <Area type="monotone" dataKey="today" stroke="#E8B84A" strokeWidth={2.5} fill="url(#gold)" />
             </AreaChart>
           </ResponsiveContainer>
@@ -97,7 +97,7 @@ export function ExecutiveDashboard() {
               <Pie data={categorySplit} dataKey="value" nameKey="name" innerRadius={45} outerRadius={75} paddingAngle={3}>
                 {categorySplit.map((e, i) => <Cell key={i} fill={e.color} stroke="none" />)}
               </Pie>
-              <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
+              <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
             </PieChart>
           </ResponsiveContainer>
           <div className="grid grid-cols-2 gap-1.5 mt-2">
@@ -117,21 +117,21 @@ export function ExecutiveDashboard() {
           <p className="text-xs text-muted-foreground mb-2">Today · 9am – 9pm</p>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={hourlyOrders} margin={{ left: -20, right: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
               <XAxis dataKey="hour" stroke="rgba(255,255,255,0.4)" fontSize={11} />
               <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-              <Tooltip cursor={{ fill: "rgba(212,160,23,0.08)" }} contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
-              <Bar dataKey="orders" fill="#D4A017" radius={[6, 6, 0, 0]} />
+              <Tooltip cursor={{ fill: "rgba(232,184,74,0.06)" }} contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
+              <Bar dataKey="orders" fill="var(--gold-deep)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         <div className="glass-card rounded-2xl p-5 space-y-3">
           <h3 className="font-display font-bold">Cost metrics</h3>
-          <CostBar label="Food Cost %" value={28.4} target={30} color="#D4A017" />
-          <CostBar label="Labour Cost %" value={22.1} target={25} color="#10B981" />
-          <CostBar label="Overhead %" value={11.8} target={15} color="#8B5CF6" />
-          <CostBar label="Waste %" value={3.2} target={5} color="#EF4444" />
+          <CostBar label="Food Cost %" value={28.4} target={30} color="var(--gold-deep)" />
+          <CostBar label="Labour Cost %" value={22.1} target={25} color="var(--success)" />
+          <CostBar label="Overhead %" value={11.8} target={15} color="var(--chart-5)" />
+          <CostBar label="Waste %" value={3.2} target={5} color="var(--error)" />
           <div className="pt-2 border-t border-border/50 flex justify-between text-sm">
             <span className="text-muted-foreground">Net Profit Margin</span>
             <span className="font-bold text-emerald-400">34.5%</span>

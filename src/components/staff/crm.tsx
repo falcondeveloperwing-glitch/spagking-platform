@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
-const COLORS = ["#D4A017", "#10B981", "#F59E0B", "#EF4444"];
+const COLORS = ["var(--gold-deep)", "var(--success)", "var(--warning)", "var(--error)"];
 
 const segmentSplit = [
-  { name: "VIP", value: 47, color: "#D4A017" },
-  { name: "Regular", value: 142, color: "#10B981" },
-  { name: "At-Risk", value: 38, color: "#EF4444" },
-  { name: "New", value: 23, color: "#06B6D4" },
+  { name: "VIP", value: 47, color: "var(--gold-deep)" },
+  { name: "Regular", value: 142, color: "var(--success)" },
+  { name: "At-Risk", value: 38, color: "var(--error)" },
+  { name: "New", value: 23, color: "var(--chart-3)" },
 ];
 
 const campaignPerf = [
@@ -52,7 +52,7 @@ export function CRMDashboard() {
               <Pie data={segmentSplit} dataKey="value" nameKey="name" innerRadius={45} outerRadius={75} paddingAngle={3}>
                 {segmentSplit.map((e, i) => <Cell key={i} fill={e.color} stroke="none" />)}
               </Pie>
-              <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
+              <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
             </PieChart>
           </ResponsiveContainer>
           <div className="grid grid-cols-2 gap-1.5 mt-2">
@@ -69,13 +69,13 @@ export function CRMDashboard() {
           <p className="text-xs text-muted-foreground mb-3">Last 30 days · sent vs opened vs clicked</p>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={campaignPerf} margin={{ left: -10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
               <XAxis dataKey="name" stroke="rgba(255,255,255,0.4)" fontSize={11} />
               <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-              <Tooltip cursor={{ fill: "rgba(212,160,23,0.08)" }} contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
-              <Bar dataKey="sent" fill="#6b7280" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="opened" fill="#D4A017" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="clicked" fill="#10B981" radius={[4, 4, 0, 0]} />
+              <Tooltip cursor={{ fill: "rgba(232,184,74,0.06)" }} contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
+              <Bar dataKey="sent" fill="var(--muted-foreground)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="opened" fill="var(--gold-deep)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="clicked" fill="var(--success)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

@@ -5,7 +5,7 @@ import { TrendingUp, DollarSign, ShoppingBag, Utensils, Trash2, Users, MessageSq
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, RadialBarChart, RadialBar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from "recharts";
 import { meals, branches, employees, orders, formatNaira } from "@/lib/data";
 
-const COLORS = ["#D4A017", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#06B6D4"];
+const COLORS = ["var(--gold-deep)", "var(--success)", "var(--warning)", "var(--error)", "var(--chart-5)", "var(--chart-3)"];
 
 const dailySales = Array.from({ length: 30 }, (_, i) => ({
   day: `${i + 1}`,
@@ -24,11 +24,11 @@ const monthlyPnL = [
 ];
 
 const complaintTypes = [
-  { name: "Late delivery", value: 38, color: "#EF4444" },
-  { name: "Cold food", value: 24, color: "#F59E0B" },
-  { name: "Wrong order", value: 18, color: "#8B5CF6" },
-  { name: "Rude staff", value: 12, color: "#06B6D4" },
-  { name: "Other", value: 8, color: "#6b7280" },
+  { name: "Late delivery", value: 38, color: "var(--error)" },
+  { name: "Cold food", value: 24, color: "var(--warning)" },
+  { name: "Wrong order", value: 18, color: "var(--chart-5)" },
+  { name: "Rude staff", value: 12, color: "var(--chart-3)" },
+  { name: "Other", value: 8, color: "var(--muted-foreground)" },
 ];
 
 export function ReportsDashboard() {
@@ -70,23 +70,23 @@ export function ReportsDashboard() {
             <ChartCard title="Sales trend" subtitle="Last 30 days · ₦">
               <ResponsiveContainer width="100%" height={240}>
                 <AreaChart data={dailySales} margin={{ left: -10 }}>
-                  <defs><linearGradient id="sales" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#D4A017" stopOpacity={0.4} /><stop offset="100%" stopColor="#D4A017" stopOpacity={0} /></linearGradient></defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                  <defs><linearGradient id="sales" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--gold-deep)" stopOpacity={0.4} /><stop offset="100%" stopColor="var(--gold-deep)" stopOpacity={0} /></linearGradient></defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
                   <XAxis dataKey="day" stroke="rgba(255,255,255,0.4)" fontSize={10} />
                   <YAxis stroke="rgba(255,255,255,0.4)" fontSize={10} tickFormatter={(v) => `${(v / 1_000_000).toFixed(1)}M`} />
-                  <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} formatter={(v: any) => formatNaira(v)} />
-                  <Area type="monotone" dataKey="sales" stroke="#D4A017" strokeWidth={2.5} fill="url(#sales)" />
+                  <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} formatter={(v: any) => formatNaira(v)} />
+                  <Area type="monotone" dataKey="sales" stroke="var(--gold-deep)" strokeWidth={2.5} fill="url(#sales)" />
                 </AreaChart>
               </ResponsiveContainer>
             </ChartCard>
             <ChartCard title="Orders volume" subtitle="Last 30 days">
               <ResponsiveContainer width="100%" height={240}>
                 <BarChart data={dailySales} margin={{ left: -10 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
                   <XAxis dataKey="day" stroke="rgba(255,255,255,0.4)" fontSize={10} />
                   <YAxis stroke="rgba(255,255,255,0.4)" fontSize={10} />
-                  <Tooltip cursor={{ fill: "rgba(212,160,23,0.08)" }} contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
-                  <Bar dataKey="orders" fill="#10B981" radius={[4, 4, 0, 0]} />
+                  <Tooltip cursor={{ fill: "rgba(232,184,74,0.06)" }} contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
+                  <Bar dataKey="orders" fill="var(--success)" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </ChartCard>
@@ -100,7 +100,7 @@ export function ReportsDashboard() {
                   <Pie data={complaintTypes} dataKey="value" nameKey="name" innerRadius={50} outerRadius={80} paddingAngle={3}>
                     {complaintTypes.map((e, i) => <Cell key={i} fill={e.color} stroke="none" />)}
                   </Pie>
-                  <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
+                  <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
                   <Legend iconType="circle" wrapperStyle={{ fontSize: 11 }} />
                 </PieChart>
               </ResponsiveContainer>
@@ -249,14 +249,14 @@ export function ReportsDashboard() {
           <ChartCard title="Profit & Loss · 7 month trend" subtitle="₦ millions · revenue vs cost vs profit">
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={monthlyPnL} margin={{ left: -10 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
                 <XAxis dataKey="month" stroke="rgba(255,255,255,0.4)" fontSize={11} />
                 <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-                <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} formatter={(v: any) => `₦${v}M`} />
+                <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} formatter={(v: any) => `₦${v}M`} />
                 <Legend iconType="circle" wrapperStyle={{ fontSize: 11 }} />
-                <Bar dataKey="revenue" fill="#D4A017" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="cost" fill="#EF4444" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="profit" fill="#10B981" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="revenue" fill="var(--gold-deep)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="cost" fill="var(--error)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="profit" fill="var(--success)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </ChartCard>
@@ -285,12 +285,12 @@ export function ReportsDashboard() {
               <h3 className="font-display font-bold mb-3">Customer growth</h3>
               <ResponsiveContainer width="100%" height={180}>
                 <AreaChart data={Array.from({ length: 7 }, (_, i) => ({ m: monthlyPnL[i].month, customers: 180 + i * 22 + Math.floor(Math.random() * 10) }))} margin={{ left: -20 }}>
-                  <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#10B981" stopOpacity={0.4} /><stop offset="100%" stopColor="#10B981" stopOpacity={0} /></linearGradient></defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                  <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--success)" stopOpacity={0.4} /><stop offset="100%" stopColor="var(--success)" stopOpacity={0} /></linearGradient></defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
                   <XAxis dataKey="m" stroke="rgba(255,255,255,0.4)" fontSize={11} />
                   <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-                  <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
-                  <Area type="monotone" dataKey="customers" stroke="#10B981" strokeWidth={2.5} fill="url(#cg)" />
+                  <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
+                  <Area type="monotone" dataKey="customers" stroke="var(--success)" strokeWidth={2.5} fill="url(#cg)" />
                 </AreaChart>
               </ResponsiveContainer>
               <div className="grid grid-cols-3 gap-2 mt-3 text-center">
@@ -306,15 +306,15 @@ export function ReportsDashboard() {
             <h3 className="font-display font-bold mb-3">Department performance radar</h3>
             <ResponsiveContainer width="100%" height={260}>
               <RadialBarChart innerRadius="20%" outerRadius="100%" data={[
-                { name: "Kitchen", value: 88, fill: "#D4A017" },
-                { name: "Front of House", value: 92, fill: "#10B981" },
-                { name: "Delivery", value: 76, fill: "#06B6D4" },
-                { name: "Management", value: 85, fill: "#8B5CF6" },
-                { name: "Inventory", value: 71, fill: "#F59E0B" },
+                { name: "Kitchen", value: 88, fill: "var(--gold-deep)" },
+                { name: "Front of House", value: 92, fill: "var(--success)" },
+                { name: "Delivery", value: 76, fill: "var(--chart-3)" },
+                { name: "Management", value: 85, fill: "var(--chart-5)" },
+                { name: "Inventory", value: 71, fill: "var(--warning)" },
               ]}>
-                <RadialBar dataKey="value" background={{ fill: "rgba(255,255,255,0.05)" }} cornerRadius={8} />
+                <RadialBar dataKey="value" background={{ fill: "rgba(255,255,255,0.04)" }} cornerRadius={8} />
                 <Legend iconType="circle" wrapperStyle={{ fontSize: 11 }} layout="vertical" verticalAlign="middle" align="right" />
-                <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
+                <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
               </RadialBarChart>
             </ResponsiveContainer>
           </div>

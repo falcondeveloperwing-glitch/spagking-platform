@@ -52,12 +52,12 @@ export function InventoryDashboard() {
           <p className="text-xs text-muted-foreground mb-3">Last 14 days · aggregate units</p>
           <ResponsiveContainer width="100%" height={200}>
             <AreaChart data={stockTrend} margin={{ left: -20 }}>
-              <defs><linearGradient id="inv" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#10B981" stopOpacity={0.4} /><stop offset="100%" stopColor="#10B981" stopOpacity={0} /></linearGradient></defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <defs><linearGradient id="inv" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="var(--success)" stopOpacity={0.4} /><stop offset="100%" stopColor="var(--success)" stopOpacity={0} /></linearGradient></defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
               <XAxis dataKey="day" stroke="rgba(255,255,255,0.4)" fontSize={10} />
               <YAxis stroke="rgba(255,255,255,0.4)" fontSize={10} />
-              <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
-              <Area type="monotone" dataKey="value" stroke="#10B981" strokeWidth={2.5} fill="url(#inv)" />
+              <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
+              <Area type="monotone" dataKey="value" stroke="var(--success)" strokeWidth={2.5} fill="url(#inv)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -66,11 +66,11 @@ export function InventoryDashboard() {
           <p className="text-xs text-muted-foreground mb-3">This week</p>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={wasteByCat} margin={{ left: -20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
               <XAxis dataKey="cat" stroke="rgba(255,255,255,0.4)" fontSize={10} />
               <YAxis stroke="rgba(255,255,255,0.4)" fontSize={10} />
-              <Tooltip cursor={{ fill: "rgba(212,160,23,0.08)" }} contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
-              <Bar dataKey="waste" fill="#EF4444" radius={[6, 6, 0, 0]} />
+              <Tooltip cursor={{ fill: "rgba(232,184,74,0.06)" }} contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
+              <Bar dataKey="waste" fill="var(--error)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

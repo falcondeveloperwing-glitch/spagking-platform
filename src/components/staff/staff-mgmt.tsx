@@ -54,12 +54,12 @@ export function StaffDashboard() {
           <p className="text-xs text-muted-foreground mb-3">Present vs absent</p>
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={attendanceTrend} margin={{ left: -20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
               <XAxis dataKey="day" stroke="rgba(255,255,255,0.4)" fontSize={11} />
               <YAxis stroke="rgba(255,255,255,0.4)" fontSize={11} />
-              <Tooltip contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
-              <Line type="monotone" dataKey="present" stroke="#10B981" strokeWidth={2.5} dot={{ fill: "#10B981", r: 3 }} />
-              <Line type="monotone" dataKey="absent" stroke="#EF4444" strokeWidth={2} dot={{ fill: "#EF4444", r: 3 }} />
+              <Tooltip contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
+              <Line type="monotone" dataKey="present" stroke="var(--success)" strokeWidth={2.5} dot={{ fill: "var(--success)", r: 3 }} />
+              <Line type="monotone" dataKey="absent" stroke="var(--error)" strokeWidth={2} dot={{ fill: "var(--error)", r: 3 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -68,11 +68,11 @@ export function StaffDashboard() {
           <p className="text-xs text-muted-foreground mb-3">Monthly · ₦</p>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={payrollByDept} margin={{ left: -10 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
               <XAxis dataKey="dept" stroke="rgba(255,255,255,0.4)" fontSize={10} />
               <YAxis stroke="rgba(255,255,255,0.4)" fontSize={10} />
-              <Tooltip cursor={{ fill: "rgba(212,160,23,0.08)" }} contentStyle={{ background: "rgba(20,20,20,0.95)", border: "1px solid rgba(212,160,23,0.3)", borderRadius: 12, color: "#fff" }} />
-              <Bar dataKey="amount" fill="#D4A017" radius={[6, 6, 0, 0]} />
+              <Tooltip cursor={{ fill: "rgba(232,184,74,0.06)" }} contentStyle={{ background: "rgba(13,13,13,0.95)", border: "1px solid rgba(232,184,74,0.2)", borderRadius: 12, color: "#ECECEC" }} />
+              <Bar dataKey="amount" fill="var(--gold-deep)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

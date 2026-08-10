@@ -248,21 +248,21 @@ function DeliveryMap({ riders, selectedRider, setSelectedRider }: { riders: type
         <path d="M 0 320 Q 150 290 300 310 T 600 300 L 600 480 L 0 480 Z" fill="rgba(6,182,212,0.06)" stroke="rgba(6,182,212,0.15)" />
         <text x="450" y="380" fill="rgba(6,182,212,0.4)" fontSize="11" fontStyle="italic">Atlantic Ocean</text>
         {/* Roads */}
-        <path d="M 0 180 L 600 180" stroke="rgba(255,255,255,0.05)" strokeWidth="20" />
-        <path d="M 0 260 L 600 260" stroke="rgba(255,255,255,0.05)" strokeWidth="16" />
-        <path d="M 150 0 L 150 480" stroke="rgba(255,255,255,0.05)" strokeWidth="18" />
-        <path d="M 350 0 L 350 480" stroke="rgba(255,255,255,0.05)" strokeWidth="16" />
-        <path d="M 480 0 L 480 320" stroke="rgba(255,255,255,0.05)" strokeWidth="14" />
+        <path d="M 0 180 L 600 180" stroke="rgba(255,255,255,0.04)" strokeWidth="20" />
+        <path d="M 0 260 L 600 260" stroke="rgba(255,255,255,0.04)" strokeWidth="16" />
+        <path d="M 150 0 L 150 480" stroke="rgba(255,255,255,0.04)" strokeWidth="18" />
+        <path d="M 350 0 L 350 480" stroke="rgba(255,255,255,0.04)" strokeWidth="16" />
+        <path d="M 480 0 L 480 320" stroke="rgba(255,255,255,0.04)" strokeWidth="14" />
         {/* SpagKing branch markers */}
         <g>
-          <circle cx="180" cy="200" r="16" fill="#D4A017" opacity="0.2" />
-          <circle cx="180" cy="200" r="9" fill="#D4A017" stroke="#0B0B0B" strokeWidth="2" />
-          <text x="180" y="178" textAnchor="middle" fill="#D4A017" fontSize="10" fontWeight="bold">SpagKing VI</text>
+          <circle cx="180" cy="200" r="16" fill="var(--gold-deep)" opacity="0.2" />
+          <circle cx="180" cy="200" r="9" fill="var(--gold-deep)" stroke="#0B0B0B" strokeWidth="2" />
+          <text x="180" y="178" textAnchor="middle" fill="var(--gold-deep)" fontSize="10" fontWeight="bold">SpagKing VI</text>
         </g>
         <g>
-          <circle cx="380" cy="240" r="14" fill="#D4A017" opacity="0.2" />
-          <circle cx="380" cy="240" r="8" fill="#D4A017" stroke="#0B0B0B" strokeWidth="2" />
-          <text x="380" y="220" textAnchor="middle" fill="#D4A017" fontSize="10" fontWeight="bold">SpagKing Lekki</text>
+          <circle cx="380" cy="240" r="14" fill="var(--gold-deep)" opacity="0.2" />
+          <circle cx="380" cy="240" r="8" fill="var(--gold-deep)" stroke="#0B0B0B" strokeWidth="2" />
+          <text x="380" y="220" textAnchor="middle" fill="var(--gold-deep)" fontSize="10" fontWeight="bold">SpagKing Lekki</text>
         </g>
         {/* Rider markers (animated) */}
         {riders.slice(0, 10).map((r, i) => {
@@ -273,9 +273,9 @@ function DeliveryMap({ riders, selectedRider, setSelectedRider }: { riders: type
           const isOnline = r.status === "online";
           return (
             <g key={r.id} onClick={() => setSelectedRider(active ? null : r.id)} style={{ cursor: "pointer" }}>
-              {active && <circle cx={x} cy={y} r="22" fill="#D4A017" opacity="0.15"><animate attributeName="r" values="18;26;18" dur="2s" repeatCount="indefinite" /></circle>}
-              <circle cx={x} cy={y} r="11" fill={isOnDelivery ? "#F59E0B" : isOnline ? "#10B981" : "#6b7280"} opacity="0.25" />
-              <circle cx={x} cy={y} r="7" fill={isOnDelivery ? "#F59E0B" : isOnline ? "#10B981" : "#6b7280"} stroke="#0B0B0B" strokeWidth="1.5" />
+              {active && <circle cx={x} cy={y} r="22" fill="var(--gold-deep)" opacity="0.15"><animate attributeName="r" values="18;26;18" dur="2s" repeatCount="indefinite" /></circle>}
+              <circle cx={x} cy={y} r="11" fill={isOnDelivery ? "var(--warning)" : isOnline ? "var(--success)" : "var(--muted-foreground)"} opacity="0.25" />
+              <circle cx={x} cy={y} r="7" fill={isOnDelivery ? "var(--warning)" : isOnline ? "var(--success)" : "var(--muted-foreground)"} stroke="#0B0B0B" strokeWidth="1.5" />
               <text x={x} y={y + 2.5} textAnchor="middle" fontSize="7" fill="#0B0B0B" fontWeight="bold">{r.name.split(" ").map(n => n[0]).join("")}</text>
             </g>
           );

@@ -224,8 +224,8 @@ function LiveMap({ progress, riderName }: { progress: number; riderName: string 
             <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(212,160,23,0.08)" strokeWidth="0.5" />
           </pattern>
           <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#D4A017" />
-            <stop offset="100%" stopColor="#10B981" />
+            <stop offset="0%" stopColor="var(--gold-deep)" />
+            <stop offset="100%" stopColor="var(--success)" />
           </linearGradient>
         </defs>
         <rect width="400" height="256" fill="url(#grid)" />
@@ -244,15 +244,15 @@ function LiveMap({ progress, riderName }: { progress: number; riderName: string 
         />
         {/* Restaurant marker */}
         <g transform="translate(60,200)">
-          <circle r="10" fill="#D4A017" opacity="0.3" />
-          <circle r="6" fill="#D4A017" />
-          <text x="0" y="-14" textAnchor="middle" fill="#D4A017" fontSize="9" fontWeight="bold">SpagKing</text>
+          <circle r="10" fill="var(--gold-deep)" opacity="0.3" />
+          <circle r="6" fill="var(--gold-deep)" />
+          <text x="0" y="-14" textAnchor="middle" fill="var(--gold-deep)" fontSize="9" fontWeight="bold">SpagKing</text>
         </g>
         {/* Customer marker */}
         <g transform="translate(340,60)">
-          <circle r="10" fill="#10B981" opacity="0.3" />
-          <circle r="6" fill="#10B981" />
-          <text x="0" y="-14" textAnchor="middle" fill="#10B981" fontSize="9" fontWeight="bold">You</text>
+          <circle r="10" fill="var(--success)" opacity="0.3" />
+          <circle r="6" fill="var(--success)" />
+          <text x="0" y="-14" textAnchor="middle" fill="var(--success)" fontSize="9" fontWeight="bold">You</text>
         </g>
         {/* Rider marker (animated) */}
         <motion.g
@@ -262,10 +262,10 @@ function LiveMap({ progress, riderName }: { progress: number; riderName: string 
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
         >
-          <circle cx="60" cy="200" r="12" fill="#D4A017" opacity="0.25">
+          <circle cx="60" cy="200" r="12" fill="var(--gold-deep)" opacity="0.25">
             <animate attributeName="r" values="12;16;12" dur="1.5s" repeatCount="indefinite" />
           </circle>
-          <circle cx="60" cy="200" r="7" fill="#F5D061" stroke="#0B0B0B" strokeWidth="1.5" />
+          <circle cx="60" cy="200" r="7" fill="var(--gold-light)" stroke="#0B0B0B" strokeWidth="1.5" />
         </motion.g>
       </svg>
       <div className="absolute bottom-3 left-3 glass rounded-lg px-2.5 py-1.5 text-[10px] text-muted-foreground">
