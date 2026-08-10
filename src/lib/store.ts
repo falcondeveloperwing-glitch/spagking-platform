@@ -20,7 +20,7 @@ export type CustomerView =
 
 export type StaffView =
   | "executive" | "pos" | "inventory" | "staff" | "reports" | "crm"
-  | "delivery" | "admin" | "notifications" | "search";
+  | "delivery" | "admin" | "tables" | "kitchen" | "notifications" | "search";
 
 interface AppState {
   // Splash
@@ -134,6 +134,19 @@ interface AppState {
   celebration: { title: string; subtitle: string; emoji: string } | null;
   triggerCelebration: (c: { title: string; subtitle: string; emoji: string }) => void;
   clearCelebration: () => void;
+
+  // Dine-in table management
+  restaurantTables: RestaurantTable[];
+  openTable: (tableId: string, customerName: string, serverName: string) => void;
+  addTableOrder: (tableId: string, items: { mealId: string; name: string; emoji: string; price: number; qty: number; notes?: string }[]) => void;
+  updateTableStatus: (tableId: string, status: TableStatus) => void;
+  closeTable: (tableId: string) => void;
+  resetTables: () => void;
+
+  // Kitchen display tickets
+  kitchenTickets: KitchenTicket[];
+  sendToKitchen: (tableId: string) => void;
+  updateKitchenTicket: (ticketId: string, status: KitchenTicketStatus) => void;
 }
 
 export interface CommunityPost {
@@ -150,6 +163,48 @@ export interface CommunityPost {
   liked: boolean;
   saved: boolean;
   tag?: string;
+}
+
+export type TableStatus =
+  | "available" | "occupied" | "reserved" | "ordering"
+  | "preparing" | "ready" | "bill_requested" | "payment_pending"
+  | "cleaning" | "maintenance";
+
+export interface TableOrderItem {
+  mealId: string;
+  name: string;
+  emoji: string;
+  price: number;
+  qty: number;
+  notes?: string;
+  status?: "ordered" | "preparing" | "ready" | "served";
+}
+
+export interface RestaurantTable {
+  id: string;
+  number: string;
+  capacity: number;
+  status: TableStatus;
+  customerName?: string;
+  serverName?: string;
+  orderItems: TableOrderItem[];
+  orderTotal: number;
+  openedAt?: number; // timestamp
+  section: string;
+}
+
+export type KitchenTicketStatus = "new" | "preparing" | "ready" | "served" | "cancelled";
+
+export interface KitchenTicket {
+  id: string;
+  tableId: string;
+  tableNumber: string;
+  orderType: "dine-in" | "takeaway" | "pickup" | "delivery";
+  items: TableOrderItem[];
+  createdAt: number;
+  status: KitchenTicketStatus;
+  priority: "normal" | "high" | "urgent";
+  station: string;
 }
 
 export const useStore = create<AppState>()(
@@ -401,6 +456,86 @@ export const useStore = create<AppState>()(
       celebration: null,
       triggerCelebration: (c) => set({ celebration: c }),
       clearCelebration: () => set({ celebration: null }),
+
+      // === Dine-in table management ===
+      restaurantTables: Array.from({ length: 12 }, (_, i) => ({
+        id: `T-${String(i + 1).padStart(2, "0")}`,
+        number: `T-${String(i + 1).padStart(2, "0")}`,
+        capacity: (i % 3) + 2,
+        status: "available" as TableStatus,
+        orderItems: [],
+        orderTotal: 0,
+        section: i < 6 ? "Main Hall" : "Garden",
+      })),
+      openTable: (tableId, customerName, serverName) => set(s => ({
+        restaurantTables: s.restaurantTables.map(t =>
+          t.id === tableId ? { ...t, status: "ordering", customerName, serverName, openedAt: Date.now(), orderItems: [], orderTotal: 0 } : t
+        ),
+      })),
+      addTableOrder: (tableId, items) => set(s => ({
+        restaurantTables: s.restaurantTables.map(t => {
+          if (t.id !== tableId) return t;
+          const allItems = [...t.orderItems, ...items];
+          return { ...t, orderItems: allItems, orderTotal: allItems.reduce((sum, it) => sum + it.price * it.qty, 0) };
+        }),
+      })),
+      updateTableStatus: (tableId, status) => set(s => ({
+        restaurantTables: s.restaurantTables.map(t => t.id === tableId ? { ...t, status } : t),
+      })),
+      closeTable: (tableId) => set(s => ({
+        restaurantTables: s.restaurantTables.map(t =>
+          t.id === tableId ? { ...t, status: "cleaning", customerName: undefined, serverName: undefined, orderItems: [], orderTotal: 0, openedAt: undefined } : t
+        ),
+        kitchenTickets: s.kitchenTickets.filter(k => k.tableId !== tableId),
+      })),
+      resetTables: () => set({
+        restaurantTables: Array.from({ length: 12 }, (_, i) => ({
+          id: `T-${String(i + 1).padStart(2, "0")}`,
+          number: `T-${String(i + 1).padStart(2, "0")}`,
+          capacity: (i % 3) + 2,
+          status: "available" as TableStatus,
+          orderItems: [],
+          orderTotal: 0,
+          section: i < 6 ? "Main Hall" : "Garden",
+        })),
+        kitchenTickets: [],
+      }),
+
+      // === Kitchen display tickets ===
+      kitchenTickets: [],
+      sendToKitchen: (tableId) => {
+        const table = get().restaurantTables.find(t => t.id === tableId);
+        if (!table || table.orderItems.length === 0) return;
+        const ticket: KitchenTicket = {
+          id: `KT-${Date.now()}`,
+          tableId: table.id,
+          tableNumber: table.number,
+          orderType: "dine-in",
+          items: table.orderItems.map(it => ({ ...it, status: "ordered" as const })),
+          createdAt: Date.now(),
+          status: "new",
+          priority: "normal",
+          station: "Main",
+        };
+        set(s => ({
+          kitchenTickets: [...s.kitchenTickets, ticket],
+          restaurantTables: s.restaurantTables.map(t => t.id === tableId ? { ...t, status: "preparing" } : t),
+        }));
+        get().pushNotification({ type: "system", title: "🍗 Order sent to kitchen", body: `${table.number} — ${table.orderItems.length} items`, level: "info" });
+      },
+      updateKitchenTicket: (ticketId, status) => set(s => {
+        const tickets = s.kitchenTickets.map(k => k.id === ticketId ? { ...k, status } : k);
+        const ticket = tickets.find(k => k.id === ticketId);
+        let tables = s.restaurantTables;
+        if (ticket) {
+          if (status === "ready") {
+            tables = tables.map(t => t.id === ticket.tableId ? { ...t, status: "ready" } : t);
+          } else if (status === "served") {
+            tables = tables.map(t => t.id === ticket.tableId ? { ...t, status: "occupied" } : t);
+          }
+        }
+        return { kitchenTickets: tickets, restaurantTables: tables };
+      }),
     }),
     {
       name: "spagking-store",
@@ -424,6 +559,8 @@ export const useStore = create<AppState>()(
         votedMealOfWeek: s.votedMealOfWeek,
         recentSearches: s.recentSearches,
         unlockedBadges: s.unlockedBadges,
+        restaurantTables: s.restaurantTables,
+        kitchenTickets: s.kitchenTickets,
       }),
     }
   )

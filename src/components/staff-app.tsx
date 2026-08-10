@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "@/lib/store";
 import { ExecutiveDashboard } from "@/components/staff/executive";
 import { POSDashboard } from "@/components/staff/pos";
+import { TablesDashboard } from "@/components/staff/tables";
+import { KitchenDisplay } from "@/components/staff/kitchen-display";
 import { InventoryDashboard } from "@/components/staff/inventory";
 import { StaffDashboard } from "@/components/staff/staff-mgmt";
 import { ReportsDashboard } from "@/components/staff/reports";
@@ -16,7 +18,7 @@ import { AIAssistant } from "@/components/shared/ai-assistant";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import {
   LayoutDashboard, ShoppingCart, Boxes, Users, BarChart3, Heart,
-  Truck, ShieldCheck, Search, Sparkles, LogOut, Menu as MenuIcon, X, Bell, RefreshCw,
+  Truck, ShieldCheck, Search, Sparkles, LogOut, Menu as MenuIcon, X, Bell, RefreshCw, Utensils, ChefHat,
 } from "lucide-react";
 import type { Role } from "@/lib/data";
 import { Button } from "@/components/ui/button";
@@ -24,6 +26,8 @@ import { Button } from "@/components/ui/button";
 const NAV: { id: string; label: string; icon: any; roles: Role[] }[] = [
   { id: "executive", label: "Executive", icon: LayoutDashboard, roles: ["ceo", "manager", "admin"] },
   { id: "pos", label: "POS Terminal", icon: ShoppingCart, roles: ["cashier", "kitchen", "manager", "admin"] },
+  { id: "tables", label: "Tables", icon: Utensils, roles: ["cashier", "manager", "admin"] },
+  { id: "kitchen", label: "Kitchen Display", icon: ChefHat, roles: ["kitchen", "manager", "admin"] },
   { id: "inventory", label: "Inventory", icon: Boxes, roles: ["inventory", "kitchen", "manager", "admin"] },
   { id: "staff", label: "Staff & HR", icon: Users, roles: ["hr", "manager", "admin"] },
   { id: "reports", label: "Reports", icon: BarChart3, roles: ["manager", "admin", "ceo"] },
@@ -159,6 +163,8 @@ export function StaffApp() {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
               {view === "executive" && <ExecutiveDashboard />}
               {view === "pos" && <POSDashboard />}
+              {view === "tables" && <TablesDashboard />}
+              {view === "kitchen" && <KitchenDisplay />}
               {view === "inventory" && <InventoryDashboard />}
               {view === "staff" && <StaffDashboard />}
               {view === "reports" && <ReportsDashboard />}
